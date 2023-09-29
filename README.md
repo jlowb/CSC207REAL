@@ -2,6 +2,8 @@
 
 1. Project Description:
 
+Our group is currently considering the development of a music player application as part of our computer science project. Our preliminary concept for this application involves the implementation of several key features, including the ability to create playlists, establish a friends system, and provide users with the capability to upload their music to the platform.
+
 2. Link to API documentation:
 https://developer.musixmatch.com/documentation
 
