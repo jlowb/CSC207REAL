@@ -8,7 +8,20 @@ ensuring that the project would be interesting for every single group member.
 
 ## 1. Project Description
 
-We hypothesized that the key features
+We hypothesize that the key features of a music player (that would need to be implemented) are:
+1. Login System
+   1. User creation/management (probably via an API like Oauth)
+   2. Login screen (needs a frontend)
+   3. Routing/auth flow (probably via an API like Oauth)
+2. User Customization System
+   1. Friends list (optional)
+   2. Profile customization (optional)
+   3. Personal music collection, i.e. playlists etc. (essential)
+3. Music Database
+4. Music Player
+   1.  Music Player Component
+   2.  Music Queue/Recommender/Shuffle/History
+5. Front End
 
 
 
