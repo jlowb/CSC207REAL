@@ -24,5 +24,8 @@ as not only can he listen to the Swifter, but he can also discuss her with fello
 the discussions on each song.
 
 
+Bob wants to create an account on Swiftify, he enters his unique username (example: BobLovesSwift) and it’s checked for uniqueness. He proceeds to enter his personal name “Bob” and his optional last name in the respective text fields. He then adds his email and the program checks to be valid and a unique entry in the system. If all the previous entries are successful he can create an account on Swiftify.
+
+
 
 
