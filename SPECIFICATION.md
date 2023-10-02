@@ -20,7 +20,8 @@ embraced Taylor's greatness. However, down on his luck, he finally decided to bi
 shake, shake, shake," which is a commentary on late stage capitalism and its impact on the flexibility of modern man in 
 life. Larry seeks a place where he can freely express his love for the goddess that is the Swift, without being shunned
 by society. Swiftify, as an anonymous music player and discussion board for her Swiftness, is just the place for Larry, 
-as not only can he listen to the Swifter, but he can also discuss her with fellow Swifties.
+as not only can he listen to the Swifter, but he can also discuss her with fellow Swifties. Larry's main use case would be
+the discussions on each song.
 
 
 
