@@ -27,6 +27,9 @@ song" feature of Swiftify to add behind the scenes knowledge to every song.
   by society. Swiftify, as an anonymous music player and discussion board for her Swiftness, is just the place for Larry,
   as not only can he listen to the Swifter, but he can also discuss her with fellow Swifties. Larry's main use case would be
   the discussions on each song.
+- Taylor wants to add her bestie Swiftie Swift on Swiftify, she searches up Swift’s alleged username “DieHardSwiftie123”
+  on the Swiftify friend system, but to no avail. Turns out Swift doesn’t even have an account on the Swiftify app yet 
+  (fake swiftie hint hint), so she has to go create an account through the registration page.
 
 ## Proposed Entities 
 Songs:
@@ -60,11 +63,22 @@ Playlists:
 - Create_at datetime
 - Updated_at datetime
 
-Artists
+Artists:
 - Id int 
 - Name String
 - Image String
 - Create_date datetime
 - Update_date datetime
+
+Users:
+- Id int
+- Name String 
+- Email String 
+- Password String 
+- Is_admin boolean ?? (is_taylor)
+- Preference text??? 
+- Remember_token ??? 
+- Created_at datetime 
+- Updated_at datetime
 
 
