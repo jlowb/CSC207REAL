@@ -28,3 +28,28 @@ song" feature of Swiftify to add behind the scenes knowledge to every song.
   as not only can he listen to the Swifter, but he can also discuss her with fellow Swifties. Larry's main use case would be
   the discussions on each song.
 
+## Proposed Entities 
+Songs:
+- Id int
+- Album_id int
+- Artist_id int
+- Title String
+- Length float
+- Track int?
+- Disc int
+- Lyrics String
+- Path String ???
+- Mtime int ??? huh?
+- Created_at datetime
+- Updated_at datetime
+
+Albums:
+- Id int
+- Artist_id int
+- Name String
+- Cover String
+- Songs_ids list(Song)
+- Create_at datetime
+- Updated_at datetime
+
+
