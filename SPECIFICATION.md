@@ -52,4 +52,19 @@ Albums:
 - Create_at datetime
 - Updated_at datetime
 
+Playlists:
+-Id int
+-User_id int
+-Name String
+-Rules text???
+-Create_at datetime
+-Updated_at datetime
+
+Artists
+-Id int 
+-Name String
+-Image String
+-Create_date datetime
+-Update_date datetime
+
 
