@@ -22,6 +22,7 @@ We hypothesize that the key features of a music player (that would need to be im
    1. Music Player Component (essential)
    2. Music Lyrics (optional) 
    3. Music Queue/Recommender/Shuffle/History (essential)
+   4. Discussion feature
 5. Front End
 
 This is quite ambitious, so we may remove features depending on the rate of progress, but this is more or less the big picture.
