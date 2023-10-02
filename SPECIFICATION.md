@@ -81,4 +81,5 @@ Users:
 - Created_at datetime 
 - Updated_at datetime
 
-
+## Scheduled Meeting Times
+Wednesdays 8.00-8.30pm, Zoom
