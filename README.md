@@ -25,7 +25,7 @@ We hypothesize that the key features of a music player (that would need to be im
    4. Discussion feature
 5. Front End
 
-This is quite ambitious, so we may remove features depending on the rate of progress, but this is more or less the big picture.
+As this is quite ambitious, we may remove features depending on the rate of progress, but this is more or less the big picture.
 
 ## 2. Link to API documentation
 
