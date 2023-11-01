@@ -25,4 +25,3 @@ replay_pid*
 
 .DS_Store
 .idea/
-main/resources/aws-credentials.properties
