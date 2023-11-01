@@ -1,2 +1,3 @@
 com/group113/swiftify/DependencyFactory.class
-com/group113/swiftify/App.class
+com/group113/swiftify/FetchSongHandler.class
+com/group113/swiftify/FetchSongHandler$1.class

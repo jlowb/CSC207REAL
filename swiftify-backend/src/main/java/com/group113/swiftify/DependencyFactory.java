@@ -1,12 +1,12 @@
 package com.group113.swiftify;
 
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
-import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
 public class DependencyFactory {
 
     private static DynamoDbClient dynamoDbClient = null;
-    private static S3Client s3Client = null;
+    private static S3Presigner s3Presigner = null;
 
     public static DynamoDbClient dynamoDbClient() {
         if (dynamoDbClient == null) {
@@ -15,10 +15,10 @@ public class DependencyFactory {
         return dynamoDbClient;
     }
 
-    public static S3Client s3Client() {
-        if (s3Client == null) {
-            s3Client = S3Client.builder().build();
+    public static S3Presigner s3Presigner() {
+        if (s3Presigner == null) {
+            s3Presigner = S3Presigner.builder().build();
         }
-        return s3Client;
+        return s3Presigner;
     }
 }
