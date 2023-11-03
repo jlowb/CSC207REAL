@@ -1,4 +1,4 @@
-package com.group113.swiftify;
+package com.group113.swiftify.app;
 
 /**
  * Hello world!
