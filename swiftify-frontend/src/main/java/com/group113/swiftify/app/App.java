@@ -1,4 +1,4 @@
-package com.group113.swiftify.app;
+package main.java.com.group113.swiftify.app;
 
 import javax.swing.*;
 import java.awt.*;

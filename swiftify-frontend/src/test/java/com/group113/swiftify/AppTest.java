@@ -1,4 +1,4 @@
-package com.group113.swiftify;
+package test.java.com.group113.swiftify;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
