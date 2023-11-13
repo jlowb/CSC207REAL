@@ -8,7 +8,7 @@ public class Album {
     private final String name;
     private final List<Song> songs;
 
-    Album(String name, List<Song> songs) {
+    public Album(String name, List<Song> songs) {
         this.name = name;
         this.songs = songs;
     }

@@ -17,6 +17,30 @@ public class Song {
         this.s3Key = s3Key;
         this.title = title;
     }
-    // TODO: Methods
+
+    public int getSongID() {
+        return songID;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
+    public String getS3Key() {
+        return s3Key;
+    }
+
+    public String getTitle() {
+        return title;
+    }
 }
+
 
