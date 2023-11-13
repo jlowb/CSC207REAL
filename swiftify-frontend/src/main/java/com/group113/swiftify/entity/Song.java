@@ -1,12 +1,12 @@
 package com.group113.swiftify.entity;
 
 public class Song {
-    private int songID; // Now an integer
-    private String album;
-    private int duration; // in seconds
-    private int releaseYear;
-    private String s3Key;
-    private String title;
+    private final int songID; // Now an integer
+    private final String album;
+    private final int duration; // in seconds
+    private final int releaseYear;
+    private final String s3Key;
+    private final String title;
 
     // Constructor
     public Song(int songID, String album, int duration, int releaseYear, String s3Key, String title) {
