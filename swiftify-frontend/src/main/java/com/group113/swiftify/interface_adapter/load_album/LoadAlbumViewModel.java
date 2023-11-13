@@ -1,12 +1,15 @@
 package main.java.com.group113.swiftify.interface_adapter.load_album;
 
+import main.java.com.group113.swiftify.entity.Album;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.LinkedList;
+import java.util.List;
 
 public class LoadAlbumViewModel {
     private final PropertyChangeSupport propertyChangeSupport;
-    private LinkedList<String> albums;
+    private List<Album> albums;
     private String selectedAlbum;
 
 
@@ -15,7 +18,7 @@ public class LoadAlbumViewModel {
         albums = new LinkedList<>();
     }
 
-    public LinkedList<String> getAlbums() {
+    public List<Album> getAlbums() {
         return albums;
     }
 
@@ -30,94 +33,8 @@ public class LoadAlbumViewModel {
     }
 
 
-
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
 
-    public void loadAlbumDetails(String albumTitle) {
-        if ("Taylor Swift".equals(albumTitle)) {
-            LinkedList<String> songs = new LinkedList<>();
-            songs.add("Song 1");
-
-            setSelectedAlbum(albumTitle);
-            albums.clear();
-            albums.add(albumTitle);
-        }
-        if ("Fearless".equals(albumTitle)) {
-            LinkedList<String> songs = new LinkedList<>();
-            songs.add("Song 1");
-
-            setSelectedAlbum(albumTitle);
-            albums.clear();
-            albums.add(albumTitle);
-        }
-        if ("Speak Now".equals(albumTitle)) {
-            LinkedList<String> songs = new LinkedList<>();
-            songs.add("Song 1");
-
-            setSelectedAlbum(albumTitle);
-            albums.clear();
-            albums.add(albumTitle);
-        }
-        if ("Red".equals(albumTitle)) {
-            LinkedList<String> songs = new LinkedList<>();
-            songs.add("Song 1");
-
-            setSelectedAlbum(albumTitle);
-            albums.clear();
-            albums.add(albumTitle);
-        }
-        if ("1989".equals(albumTitle)) {
-            LinkedList<String> songs = new LinkedList<>();
-            songs.add("Song 1");
-
-            setSelectedAlbum(albumTitle);
-            albums.clear();
-            albums.add(albumTitle);
-        }
-        if ("Reputation".equals(albumTitle)) {
-            LinkedList<String> songs = new LinkedList<>();
-            songs.add("Song 1");
-
-            setSelectedAlbum(albumTitle);
-            albums.clear();
-            albums.add(albumTitle);
-        }
-        if ("Lover".equals(albumTitle)) {
-            LinkedList<String> songs = new LinkedList<>();
-            songs.add("Song 1");
-
-            setSelectedAlbum(albumTitle);
-            albums.clear();
-            albums.add(albumTitle);
-        }
-        if ("Folklore".equals(albumTitle)) {
-            LinkedList<String> songs = new LinkedList<>();
-            songs.add("Song 1");
-
-            setSelectedAlbum(albumTitle);
-            albums.clear();
-            albums.add(albumTitle);
-        }
-        if ("Evermore".equals(albumTitle)) {
-            LinkedList<String> songs = new LinkedList<>();
-            songs.add("Song 1");
-
-            setSelectedAlbum(albumTitle);
-            albums.clear();
-            albums.add(albumTitle);
-        }
-        if ("Midnights".equals(albumTitle)) {
-            LinkedList<String> songs = new LinkedList<>();
-            songs.add("Song 1");
-
-            setSelectedAlbum(albumTitle);
-            albums.clear();
-            albums.add(albumTitle);
-        }
-
-        propertyChangeSupport.firePropertyChange("selectedAlbum", null, selectedAlbum);
-        propertyChangeSupport.firePropertyChange("albums", null, albums);
-    }
 }

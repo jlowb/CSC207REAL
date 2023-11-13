@@ -118,6 +118,7 @@ public class LoadAlbumView extends JPanel implements ActionListener, PropertyCha
         }
     }
 
+
     private class AlbumLabelClickListener extends MouseAdapter {
         private final String albumTitle;
 
@@ -171,7 +172,7 @@ public class LoadAlbumView extends JPanel implements ActionListener, PropertyCha
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == LoadAlbumButton) {
             if (selectedAlbum != null) {
-                LinkedList<String> songsForAlbum = getSongs(selectedAlbum); // Replace with your logic to get the songs
+                LinkedList<String> songsForAlbum = getSongs(selectedAlbum);
                 showAlbumSongs(selectedAlbum, songsForAlbum);
             }
         }
