@@ -12,18 +12,19 @@ import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequ
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class FetchSongHandler {
 
     public Map<String, Object> handleRequest(Map<String, Object> input) {
-        // Initialize DynamoDB and S3 Presigner clients using DependencyFactory
         DynamoDbClient dynamoDb = DependencyFactory.dynamoDbClient();
         S3Presigner s3Presigner = DependencyFactory.s3Presigner();
 
-        // Fetch SongID from input
-        Integer songId = (Integer) input.get("SongID");
+        // Extract pathParameters from input and then the SongID
+        Map<String, String> pathParameters = (Map<String, String>) input.get("pathParameters");
+        String songIdStr = pathParameters.get("SongID");
+        Integer songId = Integer.valueOf(songIdStr);
 
-        // Prepare DynamoDB GetItem request with the correct AttributeValue
         GetItemRequest getItemRequest = GetItemRequest.builder()
                 .tableName("MusicMetadata")
                 .key(new HashMap<String, AttributeValue>() {{
@@ -31,17 +32,21 @@ public class FetchSongHandler {
                 }})
                 .build();
 
-        // Fetch item from DynamoDB
         GetItemResponse getItemResponse = dynamoDb.getItem(getItemRequest);
         Map<String, AttributeValue> item = getItemResponse.item();
 
-        // Prepare S3 GetObject request
+        // Convert DynamoDB attributes to a simple Map<String, Object>
+        Map<String, Object> metadata = item.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> convertAttributeValue(entry.getValue())
+                ));
+
         GetObjectRequest getObjectRequest = GetObjectRequest.builder()
                 .bucket("csc207swiftify")
-                .key(item.get("s3_key").s())
+                .key(metadata.get("s3_key").toString())
                 .build();
 
-        // Generate a pre-signed URL for the S3 object
         GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
                 .signatureDuration(Duration.ofHours(1))
                 .getObjectRequest(getObjectRequest)
@@ -51,11 +56,31 @@ public class FetchSongHandler {
 
         String url = presignedGetObjectRequest.url().toString();
 
-        // Prepare and return the response
         Map<String, Object> response = new HashMap<>();
-        response.put("metadata", item);
+        response.put("metadata", metadata);
         response.put("presignedUrl", url);
 
         return response;
+    }
+
+    private Object convertAttributeValue(AttributeValue value) {
+        if (value.s() != null) {
+            return value.s();
+        } else if (value.n() != null) {
+            return value.n();
+        } else if (value.bool() != null) {
+            return value.bool();
+        } else if (value.m() != null) {
+            return value.m().entrySet().stream()
+                    .collect(Collectors.toMap(
+                            Map.Entry::getKey,
+                            e -> convertAttributeValue(e.getValue())
+                    ));
+        } else if (value.l() != null) {
+            return value.l().stream()
+                    .map(this::convertAttributeValue)
+                    .collect(Collectors.toList());
+        }
+        return null;
     }
 }
