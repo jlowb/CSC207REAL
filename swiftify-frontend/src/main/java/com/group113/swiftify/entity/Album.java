@@ -1,7 +1,7 @@
-package src.main.java.com.group113.swiftify.entity;
+package com.group113.swiftify.entity;
 
 import java.util.List;
-import src.main.java.com.group113.swiftify.entity.Song;
+import com.group113.swiftify.entity.Song;
 
 public class Album {
 
