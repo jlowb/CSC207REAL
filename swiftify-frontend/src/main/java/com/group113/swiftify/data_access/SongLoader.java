@@ -5,10 +5,7 @@ import com.group113.swiftify.entity.Album;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SongLoader {
 
@@ -69,9 +66,16 @@ public class SongLoader {
 
     public static void main(String[] args) {
         List<Song> songs = loadSongsFromCSV("swiftify-frontend/src/MusicMetadataLocal.csv");
+        Collections.sort(songs);
+        // Print songs for testing
+        for (Song song : songs) {
+            System.out.println("SongID: " + song.getSongID() + ", Title: " + song.getTitle());
+        }
+
         List<Album> albums = createAlbumsFromSongs(songs);
 
-        // Print the albums for testing
+        // Print albums for testing
+
         for (Album album : albums) {
             System.out.println("Album: " + album.getName());
             for (Song song : album.getSongs()) {

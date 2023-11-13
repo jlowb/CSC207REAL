@@ -1,6 +1,6 @@
 package com.group113.swiftify.entity;
 
-public class Song {
+public class Song implements Comparable<Song> {
     private final int songID; // Now an integer
     private final String album;
     private final int duration; // in seconds
@@ -40,6 +40,11 @@ public class Song {
 
     public String getTitle() {
         return title;
+    }
+
+    @Override
+    public int compareTo(Song other) {
+        return Integer.compare(this.songID, other.songID);
     }
 }
 
