@@ -1,4 +1,4 @@
-package com.group113.swiftify.entity;
+package main.java.com.group113.swiftify.entity;
 
 public class Album {
 }
