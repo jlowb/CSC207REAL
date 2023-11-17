@@ -1,14 +1,14 @@
-package src.main.java.com.group113.swiftify.entity;
+package com.group113.swiftify.entity;
 
 import java.util.List;
-import src.main.java.com.group113.swiftify.entity.Song;
+import com.group113.swiftify.entity.Song;
 
 public class Album {
 
     private final String name;
     private final List<Song> songs;
 
-    Album(String name, List<Song> songs) {
+    public Album(String name, List<Song> songs) {
         this.name = name;
         this.songs = songs;
     }
