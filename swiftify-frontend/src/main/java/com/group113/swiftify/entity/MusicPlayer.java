@@ -2,6 +2,8 @@ package com.group113.swiftify.entity;
 
 import jdk.jshell.spi.ExecutionControl;
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Stack;
 
 public class MusicPlayer {
@@ -21,7 +23,11 @@ public class MusicPlayer {
         }
 
         public int top() {
-            return stack.peek();
+            if (!stack.isEmpty()) {
+                return stack.peek();
+            }
+
+            return -1;
         }
 
         public void add(int songId) {
@@ -29,19 +35,26 @@ public class MusicPlayer {
         }
 
         public void pop() {
-            stack.pop();
+            if (!stack.isEmpty()){
+                stack.pop();
+            }
         }
 
     }
 
+    private final Random random;
+    private MusicChain musicChain;
+    private ArrayList<Integer> alreadyPlayed;
     private boolean playing;
     private boolean shuffled;
-    private MusicChain musicChain;
+    private int lengthOfDiscography;
 
-    public MusicPlayer(boolean playing, boolean shuffled) {
+    public MusicPlayer(boolean playing, boolean shuffled, int lengthOfDiscography) {
+        this.random = new Random();
+        this.musicChain = new MusicChain();
         this.playing = playing;
         this.shuffled = shuffled;
-        this.musicChain = new MusicChain();
+        this.lengthOfDiscography = lengthOfDiscography;
     }
 
     public int getCurrentSong() {
@@ -57,15 +70,33 @@ public class MusicPlayer {
     }
 
     public void nextSong() {
+        int nextSongId;
+        if (shuffled) {
+            do {
+                nextSongId = random.nextInt(lengthOfDiscography);
+            } while (checkAlreadyPlayed(nextSongId));
+        } else {
+            nextSongId = musicChain.top() + 1;
+        }
 
+        musicChain.add(nextSongId);
     }
 
     public void prevSong() {
-
+        musicChain.pop();
     }
 
     public void toggleShuffle() {
         this.shuffled = !this.shuffled;
+    }
+
+    private boolean checkAlreadyPlayed(int songId) {
+        if (alreadyPlayed.size() == lengthOfDiscography){
+            alreadyPlayed.clear();
+            return false;
+        }
+
+        return alreadyPlayed.contains(songId);
     }
 
 }
