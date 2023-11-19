@@ -81,7 +81,7 @@ public class LoadAlbumView extends JPanel implements ActionListener, PropertyCha
         }
 
     }
-    private void showAlbumSongs(String albumTitle, LinkedList<String> songs) {
+    private void showAlbumSongs(String albumTitle, LinkedList<String> songs) { // usecase interactor
         JPanel albumSongsPanel = new AlbumSongs(albumTitle, songs);
 
         this.removeAll();
