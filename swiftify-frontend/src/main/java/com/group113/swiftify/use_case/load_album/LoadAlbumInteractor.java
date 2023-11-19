@@ -12,10 +12,9 @@ public class LoadAlbumInteractor implements LoadAlbumsInputBoundary {
     @Override
     public void execute(String album_name) { // write out
         ArrayList<String> songs = new ArrayList<String>();
-
-
-
-
+        // val = handleRequest(album_name);
+        // for (int i = 0; i < val.length; i++) {
+      //          songs.add(i);
 
     }
 

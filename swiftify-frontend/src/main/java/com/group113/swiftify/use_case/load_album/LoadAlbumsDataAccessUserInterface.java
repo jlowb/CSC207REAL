@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public interface LoadAlbumsDataAccessUserInterface {
     LinkedList<String> fetchAlbumTitles();
 
-    LinkedList<String> fetchSongsForAlbum(String albumTitle);
+    LinkedList<String> handleRequest(String album_name);
 
 
 }

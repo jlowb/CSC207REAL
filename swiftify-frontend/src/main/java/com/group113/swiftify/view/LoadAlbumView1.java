@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.LinkedList;
 
 public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyChangeListener {
 
@@ -135,6 +136,9 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 
+    }
+
+    public void updateAlbums(LinkedList<String> albums) {
     }
 
     private static class ImagePanel extends JPanel {
