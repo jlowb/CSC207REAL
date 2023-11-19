@@ -1,5 +1,6 @@
 package main.java.com.group113.swiftify.interface_adapter.load_album;
 
+<<<<<<< HEAD
 import main.java.com.group113.swiftify.use_case.load_album.LoadAlbumsDataAccessUserInterface;
 import main.java.com.group113.swiftify.use_case.load_album.LoadAlbumsOutputBoundary;
 import main.java.com.group113.swiftify.use_case.load_album.LoadAlbumsOutputData;
@@ -41,4 +42,7 @@ public class LoadAlbumPresenter extends LoadAlbumsOutputBoundary {
 
     }
 
+=======
+public class LoadAlbumPresenter {
+>>>>>>> main
 }

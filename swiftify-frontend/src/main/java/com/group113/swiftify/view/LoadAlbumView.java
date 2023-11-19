@@ -1,5 +1,6 @@
 package main.java.com.group113.swiftify.view;
 
+<<<<<<< HEAD
 import main.java.com.group113.swiftify.interface_adapter.load_album.LoadAlbumViewModel;
 
 import javax.swing.*;
@@ -184,3 +185,7 @@ public class LoadAlbumView extends JPanel implements ActionListener, PropertyCha
 
     }
 }
+=======
+public class LoadAlbumView {
+}
+>>>>>>> main

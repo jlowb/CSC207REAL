@@ -1,5 +1,6 @@
 package main.java.com.group113.swiftify.interface_adapter.load_album;
 
+<<<<<<< HEAD
 import main.java.com.group113.swiftify.entity.Album;
 
 import java.beans.PropertyChangeListener;
@@ -38,3 +39,7 @@ public class LoadAlbumViewModel {
     }
 
 }
+=======
+public class LoadAlbumViewModel {
+}
+>>>>>>> main

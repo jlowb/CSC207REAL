@@ -1,3 +1,5 @@
-com\group113\swiftify\FetchSongHandler$1.class
-com\group113\swiftify\FetchSongHandler.class
-com\group113\swiftify\DependencyFactory.class
+com/group113/swiftify/FetchSongHandler.class
+com/group113/swiftify/FetchAlbumTitlesHandler.class
+com/group113/swiftify/DependencyFactory.class
+com/group113/swiftify/FetchSongMetadataHandler.class
+com/group113/swiftify/FetchSongHandler$1.class
