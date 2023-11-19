@@ -7,7 +7,9 @@ public class LoadAlbumInteractor implements LoadAlbumsInputBoundary {
     }
 
     @Override
-    public void execute() {
+    public void execute(String album_name) {
 
     }
+
+
 }

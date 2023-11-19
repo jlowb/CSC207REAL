@@ -97,7 +97,7 @@
               </component>
             </children>
           </grid>
-          <grid id="e49af" layout-manager="GridLayoutManager" row-count="16" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="e49af" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -107,150 +107,19 @@
             </properties>
             <border type="none"/>
             <children>
-              <component id="2d256" class="javax.swing.JButton" binding="idStateOfGraceButton" default-binding="true">
+              <component id="b5157" class="javax.swing.JButton" binding="songButton" default-binding="true">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - State of Grace"/>
+                  <text value="song "/>
                 </properties>
               </component>
-              <component id="8b998" class="javax.swing.JButton" binding="idRedButton" default-binding="true">
+              <vspacer id="a9fb">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - Red"/>
-                </properties>
-              </component>
-              <component id="3f046" class="javax.swing.JButton" binding="idTreacherousButton" default-binding="true">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - Treacherous"/>
-                </properties>
-              </component>
-              <component id="61f62" class="javax.swing.JButton" binding="idStayStayStayButton" default-binding="true">
-                <constraints>
-                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - Stay Stay Stay"/>
-                </properties>
-              </component>
-              <component id="58421" class="javax.swing.JButton" binding="idWeAreNeverButton" default-binding="true">
-                <constraints>
-                  <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - We Are Never Ever Getting Back Together "/>
-                </properties>
-              </component>
-              <component id="4e4e9" class="javax.swing.JButton" binding="idIAlmostDoButton" default-binding="true">
-                <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - I Almost Do"/>
-                </properties>
-              </component>
-              <component id="90c43" class="javax.swing.JButton" binding="id22Button" default-binding="true">
-                <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - 22"/>
-                </properties>
-              </component>
-              <component id="ef714" class="javax.swing.JButton" binding="idAllTooWellButton" default-binding="true">
-                <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - All Too Well"/>
-                </properties>
-              </component>
-              <component id="e0fbc" class="javax.swing.JButton" binding="idIKnewYouButton" default-binding="true">
-                <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - I Knew You Were Trouble "/>
-                </properties>
-              </component>
-              <component id="cfde1" class="javax.swing.JButton" binding="idSadBeautifulTragicButton" default-binding="true">
-                <constraints>
-                  <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - Sad Beautiful Tragic"/>
-                </properties>
-              </component>
-              <component id="88149" class="javax.swing.JButton" binding="idTheLuckyOneButton" default-binding="true">
-                <constraints>
-                  <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - The Lucky One"/>
-                </properties>
-              </component>
-              <component id="1493e" class="javax.swing.JButton" binding="idEverythingHasChangedButton" default-binding="true">
-                <constraints>
-                  <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - Everything Has Changed"/>
-                </properties>
-              </component>
-              <component id="c1668" class="javax.swing.JButton" binding="idStarlightButton" default-binding="true">
-                <constraints>
-                  <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - Starlight"/>
-                </properties>
-              </component>
-              <component id="c4247" class="javax.swing.JButton" binding="idHolyGroundButton" default-binding="true">
-                <constraints>
-                  <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - Holy Ground"/>
-                </properties>
-              </component>
-              <component id="bbb0e" class="javax.swing.JButton" binding="idTheLastTimeButton" default-binding="true">
-                <constraints>
-                  <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - The Last Time"/>
-                </properties>
-              </component>
-              <component id="7ec6a" class="javax.swing.JButton" binding="idBeginAgainButton" default-binding="true">
-                <constraints>
-                  <grid row="15" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="2"/>
-                  <text value="id - Begin Again"/>
-                </properties>
-              </component>
+              </vspacer>
             </children>
           </grid>
           <component id="92d71" class="javax.swing.JScrollBar" binding="scrollBar1" default-binding="true">

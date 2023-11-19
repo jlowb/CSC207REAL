@@ -1,6 +1,9 @@
 package main.java.com.group113.swiftify.view;
 
+import main.java.com.group113.swiftify.interface_adapter.load_album.LoadAlbumController;
 import main.java.com.group113.swiftify.interface_adapter.load_album.LoadAlbumViewModel;
+import main.java.com.group113.swiftify.use_case.load_album.LoadAlbumInteractor;
+import main.java.com.group113.swiftify.use_case.load_album.LoadAlbumsInputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,73 +51,43 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
         setVisible(true);
 
 
-        midnightsButton.addActionListener(new ActionListener() {
+        ActionListener a = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (e.getSource() instanceof JButton) {
 
-            }
-        });
-        evermoreButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                 //   loading_album page = new loading_album(e.getActionCommand());
+                  //  page.setVisible(true);
+                  //  LoadAlbumController controller = new LoadAlbumController();
+                   // controller.execute(e.getActionCommand());
+                    String albumName = e.getActionCommand();
 
-            }
-        });
-        loverButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                    // Create an instance of LoadAlbumsInteractor (or your actual implementation)
+                    LoadAlbumsInputBoundary loadAlbumsInputBoundary = new LoadAlbumInteractor();
 
-            }
-        });
-        a1989Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                    // Create an instance of LoadAlbumController, passing the LoadAlbumsInputBoundary
+                    LoadAlbumController controller = new LoadAlbumController(loadAlbumsInputBoundary);
 
-            }
-        });
-        folkloreButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                    // Call the execute method in the controller, passing the album name
+                    controller.execute(albumName);
 
-            }
-        });
-        reputationButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        redButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedAlbum = loadAlbumViewModel.getSelectedAlbum();
-                loading_album redPage = new loading_album(selectedAlbum);
-                redPage.setVisible(true);
-
+                }
                 dispose();
-
             }
-        });
-        fearlessButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        };
 
-            }
-        });
-        speakNowButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        midnightsButton.addActionListener(a);
+        evermoreButton.addActionListener(a);
+        loverButton.addActionListener(a);
+        a1989Button.addActionListener(a);
+        folkloreButton.addActionListener(a);
+        reputationButton.addActionListener(a);
+        redButton.addActionListener(a);
+        fearlessButton.addActionListener(a);
+        speakNowButton.addActionListener(a);
+        taylorSwiftButton.addActionListener(a);
 
-            }
-        });
-        taylorSwiftButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
     }
-
 
     public static void main(String[] args) {
         new LoadAlbumView1();
@@ -151,8 +124,6 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
 
         reputationpanel = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/reputation.png");
         setContentPane(reputationpanel);
-
-
 
     }
 
@@ -193,7 +164,5 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
             g.drawImage(backgroundImage, x, y, scaledWidth, scaledHeight, this);
         }
     }
-
-
 
 }
