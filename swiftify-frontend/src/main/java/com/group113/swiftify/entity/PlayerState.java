@@ -1,4 +1,4 @@
-package java.com.group113.swiftify.entity;
+package com.group113.swiftify.entity;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
@@ -86,7 +86,8 @@ public class PlayerState {
 
     //This is simply a test:
     public static void main(String[] args) throws InterruptedException {
-        PlayerState player = new PlayerState("https://samplelib.com/lib/preview/mp3/sample-15s.mp3");
+        String url = "gg";
+        PlayerState player = new PlayerState("https://samplelib.com/lib/preview/mp3/sample-12s.mp3");
         // Example usage
         player.play();
         Thread.sleep(1000); // play for 1 seconds
