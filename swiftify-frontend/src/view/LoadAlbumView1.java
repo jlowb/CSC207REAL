@@ -185,3 +185,5 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
     }
 
 }
+
+//collections,adding another page to go to this
