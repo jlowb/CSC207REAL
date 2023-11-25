@@ -105,6 +105,9 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
 
     }
 
+    public JPanel getPanel() {
+            return panel;
+        }
     public static void main(String[] args) {
         new LoadAlbumView1();
     }
