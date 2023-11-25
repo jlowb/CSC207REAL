@@ -7,35 +7,37 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class DeluxeVersion extends JFrame implements ActionListener, PropertyChangeListener {
-    private JButton the1989Button;
-    private JButton speakNowButton;
-    private JPanel the1989Panel;
-    private JPanel speakNowPanel;
+public class TaylorVersion extends JFrame implements ActionListener, PropertyChangeListener {
+    private JButton FearlessButton;
+    private JButton RedButton;
+    private JButton BackButton;
+    private JPanel FearlessPanel;
+    private JPanel RedPanel;
 
-    public DeluxeVersion() {
+    public TaylorVersion() {
         createUIComponents();
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.BLACK);
 
-        speakNowPanel.setLayout(new BorderLayout());
-        the1989Panel.setLayout(new BorderLayout());
+        FearlessPanel.setLayout(new BorderLayout());
+        RedPanel.setLayout(new BorderLayout());
 
-        panel.add(speakNowPanel, BorderLayout.WEST);
-        panel.add(the1989Panel, BorderLayout.EAST);
+        panel.add(FearlessPanel, BorderLayout.WEST);
+        panel.add(RedPanel, BorderLayout.EAST);
 
 
-        speakNowPanel.add(speakNowButton, BorderLayout.SOUTH);
-        the1989Panel.add(the1989Button, BorderLayout.SOUTH);
+        FearlessPanel.add(FearlessButton, BorderLayout.SOUTH);
+        RedPanel.add(RedButton, BorderLayout.SOUTH);
 
 
         setContentPane(panel);
-        setTitle("Swiftify - Albums - Deluxe");
+        setTitle("Swiftify - Albums - Taylor's Version");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1080, 680);
         setLocationRelativeTo(null);
         setVisible(true);
+
 
 
         ActionListener actionListener = new ActionListener() {
@@ -47,40 +49,41 @@ public class DeluxeVersion extends JFrame implements ActionListener, PropertyCha
             }
         };
 
-        speakNowButton.addActionListener(actionListener);
-        the1989Button.addActionListener(actionListener);
+        FearlessButton.addActionListener(actionListener);
+        RedButton.addActionListener(actionListener);
     }
 
     public static void main(String[] args) {
-        new DeluxeVersion();
+        new TaylorVersion();
     }
+
 
     private void createUIComponents() {
-        speakNowPanel = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/speak_now.png");
-        the1989Panel = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/1989.png");
+        FearlessPanel = new TaylorVersion.ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/fearless.png");
+        RedPanel = new TaylorVersion.ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/red.png");
 
         // Initialize buttons
-        speakNowButton = new JButton("Speak Now (Deluxe Edition)");
-        the1989Button = new JButton("1989 (Deluxe)");
-        speakNowPanel.setPreferredSize(new Dimension(530, 340));
-        the1989Panel.setPreferredSize(new Dimension(530, 340));
+        FearlessButton = new JButton("Fearless (Taylor's Version)");
+        RedButton = new JButton("Red (Taylor's Version)");
+        FearlessPanel.setPreferredSize(new Dimension(530, 340));
+        RedPanel.setPreferredSize(new Dimension(530, 340));
 
 
-
-        speakNowButton.setPreferredSize(new Dimension(150, 50));
-        the1989Button.setPreferredSize(new Dimension(150, 50));
+        FearlessButton.setPreferredSize(new Dimension(150, 50));
+        RedButton.setPreferredSize(new Dimension(150, 50));
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-    }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
     static class ImagePanel extends JPanel {
         private Image backgroundImage;
 
@@ -112,3 +115,5 @@ public class DeluxeVersion extends JFrame implements ActionListener, PropertyCha
         }
     }
 }
+
+

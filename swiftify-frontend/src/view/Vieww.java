@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class Vieww {
     private static JPanel panel;
-    private static JComboBox<String> cb;
+    private static JComboBox<String> comb;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -30,11 +30,11 @@ public class Vieww {
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
             panel.add(label);
 
-            String[] choices = {"Deluxe / Deluxe Edition", "Taylor's Version", "Regular", "All"};
-            cb = new JComboBox<>(choices);
-            cb.setMaximumSize(cb.getPreferredSize());
-            cb.setAlignmentX(Component.CENTER_ALIGNMENT);
-            panel.add(cb);
+            String[] choices = {"Deluxe / Deluxe Edition", "Taylor's Version", "All"};
+            comb = new JComboBox<>(choices);
+            comb.setMaximumSize(comb.getPreferredSize());
+            comb.setAlignmentX(Component.CENTER_ALIGNMENT);
+            panel.add(comb);
 
             JButton b = new JButton("OK");
             b.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -49,7 +49,7 @@ public class Vieww {
                         LoadAlbumsInputBoundary loadAlbumsInputBoundary = new LoadAlbumInteractor();
                         LoadAlbumController controller = new LoadAlbumController(loadAlbumsInputBoundary);
 
-                        String selectedItem = (String) cb.getSelectedItem();
+                        String selectedItem = (String) comb.getSelectedItem();
                         controller.execute(selectedItem);
 
                         LoadAlbumView1 page = new LoadAlbumView1();
