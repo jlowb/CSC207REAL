@@ -1,3 +1,5 @@
+package entity;
+
 public class MusicPlayerFacade {
     private final MusicQueue musicQueue;
     private final MusicPlaybackControl playbackControl;

@@ -1,3 +1,5 @@
+package entity;
+
 public class MusicPlaybackControl {
     private boolean playing;
 
