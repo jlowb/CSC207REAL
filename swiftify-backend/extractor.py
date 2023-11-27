@@ -1,7 +1,7 @@
 import os
-import boto3
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3, TIT2, TALB, TDRC
+import csv
 
 def extract_metadata(file_path):
     audio = MP3(file_path, ID3=ID3)
@@ -20,49 +20,25 @@ def extract_metadata(file_path):
     duration = int(audio.info.length)
     return title, album, release_year, duration
 
-def insert_into_dynamodb(id, title, album, duration, release_year, s3_key):
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('MusicMetadata')
-    table.put_item(
-        Item={
-            'SongID': id,
-            'title': title,
-            'album': album,
-            'duration': duration,
-            'release_year': release_year,
-            's3_key': s3_key
-        }
-    )
-
-# Initialize a unique identifier for each song
-song_id = 1
-
-# List of albums in the order you want to process them
 album_order = [
     'Speak Now', '1989 (Deluxe)', 'Reputation', 'Lover',
     'Folklore', 'Evermore', 'Fearless', 'Red', 'Midnights (Deluxe)'
 ]
 
-# Loop through each album folder in the specific order
-for album_folder in album_order:
-    if os.path.isdir(album_folder):
-        # Loop through each song in the album folder
-        for song_file in os.listdir(album_folder):
-            if song_file.endswith('.mp3'):
-                # Generate the file path for metadata extraction
-                file_path = os.path.join(album_folder, song_file)
-                
-                # Extract metadata
-                title, album, release_year, duration = extract_metadata(file_path)
-                
-                # Generate the S3 key
-                s3_key = f"s3://csc207swiftify/discography/{album_folder}/{song_file}"
-                
-                # Insert metadata into DynamoDB
-                insert_into_dynamodb(song_id, title, album, duration, release_year, s3_key)
-                
-                # Increment the song_id for the next song
-                song_id += 1
+with open('MusicMetadata2.csv', mode='w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(["SongID", "title", "album", "duration", "release_year", "s3_key"])
 
-# Print completion message
-print("Metadata extraction and DynamoDB population completed.")
+    song_id = 1
+    for album in album_order:
+        album_path = os.path.join('discography', album)
+        if os.path.exists(album_path):
+            for song_file in sorted(os.listdir(album_path)):
+                if song_file.endswith('.mp3'):
+                    file_path = os.path.join(album_path, song_file)
+                    title, album_name, release_year, duration = extract_metadata(file_path)
+                    s3_key = f"{song_id}.mp3"  # s3_key is song_id + ".mp3"
+                    writer.writerow([song_id, title, album_name, duration, release_year, s3_key])
+                    song_id += 1
+        else:
+            print(f"Album folder not found: {album}")

@@ -1,6 +1,7 @@
-package data_access;
-import entity.Song;
-import entity.Album;
+package src.data_access;
+
+import src.entity.Song;
+import src.entity.Album;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -65,7 +66,7 @@ public class SongLoader {
     }
 
     public static void main(String[] args) {
-        List<Song> songs = loadSongsFromCSV("swiftify-frontend/src/MusicMetadataLocal.csv");
+        List<Song> songs = loadSongsFromCSV("swiftify-frontend/MusicMetadataLocal.csv");
         Collections.sort(songs);
         // Print songs for testing
         for (Song song : songs) {

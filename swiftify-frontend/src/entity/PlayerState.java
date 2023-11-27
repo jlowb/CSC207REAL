@@ -1,4 +1,4 @@
-package entity;
+package src.entity;
 
 public class PlayerState {
     // core logic of "song being played".

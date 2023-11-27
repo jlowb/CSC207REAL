@@ -1,4 +1,4 @@
-package use_case.display_albums;
+package src.use_case.display_albums;
 
 import java.util.List;
 

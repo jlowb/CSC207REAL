@@ -1,29 +1,4 @@
-package view;
+package main.java.com.group113.swiftify.view;
 
-import interface_adapter.load_album.ViewManagerModel;
-
-import javax.swing.*;
-import java.awt.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-public class ViewManager implements PropertyChangeListener {
-    private final CardLayout cardLayout;
-    private final JPanel views;
-    private ViewManagerModel viewManagerModel;
-
-    public ViewManager(JPanel views, CardLayout cardLayout, ViewManagerModel viewManagerModel) {
-        this.views = views;
-        this.cardLayout = cardLayout;
-        this.viewManagerModel = viewManagerModel;
-        this.viewManagerModel.addPropertyChangeListener(this);
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("view")) {
-            String viewModelName = (String) evt.getNewValue();
-            cardLayout.show(views, viewModelName);
-        }
-    }
+public class ViewManager {
 }
