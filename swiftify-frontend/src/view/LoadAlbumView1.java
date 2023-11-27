@@ -1,9 +1,6 @@
 package view;
 
-import interface_adapter.load_album.LoadAlbumController;
 import interface_adapter.load_album.LoadAlbumViewModel;
-import use_case.load_album.LoadAlbumInteractor;
-import use_case.load_album.LoadAlbumsInputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -65,13 +62,13 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
                     String albumName = convertFunc(album);
 
                     // Create an instance of LoadAlbumsInteractor (or your actual implementation)
-                    LoadAlbumsInputBoundary loadAlbumsInputBoundary = new LoadAlbumInteractor();
+                  //  LoadAlbumsInputBoundary loadAlbumsInputBoundary = new LoadAlbumInteractor();
 
                     // Create an instance of LoadAlbumController, passing the LoadAlbumsInputBoundary
-                    LoadAlbumController controller = new LoadAlbumController(loadAlbumsInputBoundary);
+                 //   LoadAlbumController controller = new LoadAlbumController(loadAlbumsInputBoundary);
 
                     // Call the execute method in the controller, passing the album name
-                    controller.execute(albumName);
+                 //   controller.execute(albumName);
 
                     loading_album page = new loading_album(e.getActionCommand());
                     page.setVisible(true);
@@ -189,4 +186,3 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
 
 }
 
-//collections,adding another page to go to this

@@ -11,9 +11,9 @@ public class LoadAlbumController {
         this.loadAlbumsInputBoundary = loadAlbumsInputBoundary;
     }
 
-    public void execute(String albumName) {
+    public void execute(String albumType) {
         // Pass the albumName to the LoadAlbumsInputBoundary or perform any necessary logic
-        LoadAlbumsInputData inputData = new LoadAlbumsInputData(albumName);
+        LoadAlbumsInputData inputData = new LoadAlbumsInputData(albumType);
         loadAlbumsInputBoundary.execute(inputData);
     }
 }

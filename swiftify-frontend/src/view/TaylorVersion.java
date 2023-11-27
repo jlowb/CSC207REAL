@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Objects;
 
 public class TaylorVersion extends JFrame implements ActionListener, PropertyChangeListener {
     private JButton FearlessButton;
@@ -44,7 +45,12 @@ public class TaylorVersion extends JFrame implements ActionListener, PropertyCha
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() instanceof JButton) {
-                    System.out.println("Button clicked");
+                    if (Objects.equals(e.getActionCommand(), "Fearless (Taylor's Version)")) {
+                        System.out.println("fearless");
+                    }
+                    if (Objects.equals(e.getActionCommand(), "Red (Taylor's Version)")) {
+                        System.out.println("red");
+                    }
                 }
             }
         };

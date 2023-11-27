@@ -1,11 +1,13 @@
 package use_case.load_album;
 
-import java.util.LinkedList;
+import entity.Album;
+
+import java.util.List;
 
 public interface LoadAlbumsDataAccessUserInterface {
-    LinkedList<String> fetchAlbumTitles();
 
-    LinkedList<String> handleRequest(String album_name);
+
+    List<Album> getAlbumsByType(String albumType);
 
     //get album names , and build the view
 
