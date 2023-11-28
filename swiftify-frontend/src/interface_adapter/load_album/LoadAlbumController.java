@@ -1,4 +1,19 @@
-package src.interface_adapter.load_album;
+package interface_adapter.load_album;
 
+import use_case.load_album.LoadAlbumsInputBoundary;
+import use_case.load_album.LoadAlbumsInputData;
+
+// controller
 public class LoadAlbumController {
+    final LoadAlbumsInputBoundary loadAlbumsInputBoundary;
+
+    public LoadAlbumController(LoadAlbumsInputBoundary loadAlbumsInputBoundary) {
+        this.loadAlbumsInputBoundary = loadAlbumsInputBoundary;
+    }
+
+    public void execute(String albumType) {
+        // Pass the albumName to the LoadAlbumsInputBoundary or perform any necessary logic
+        LoadAlbumsInputData inputData = new LoadAlbumsInputData(albumType);
+        loadAlbumsInputBoundary.execute(inputData);
+    }
 }

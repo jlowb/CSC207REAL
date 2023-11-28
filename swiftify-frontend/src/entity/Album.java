@@ -1,11 +1,11 @@
-package src.entity;
+package entity;
 
 import java.util.List;
-import src.entity.Song;
 
 public class Album {
 
     private final String name;
+    private String albumType;
     private final List<Song> songs;
 
     public Album(String name, List<Song> songs) {
@@ -16,4 +16,8 @@ public class Album {
     public String getName() { return name; }
 
     public List<Song> getSongs() {return songs; }
+
+    public String getAlbumType() {
+        return albumType;
+    }
 }

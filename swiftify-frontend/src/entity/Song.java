@@ -1,4 +1,4 @@
-package src.entity;
+package entity;
 
 public class Song implements Comparable<Song> {
     private final int songID; // Now an integer

@@ -1,7 +1,7 @@
-package src.data_access;
+package data_access;
 
-import src.entity.Song;
-import src.entity.Album;
+import entity.Album;
+import entity.Song;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
