@@ -1,4 +1,4 @@
-package src.use_case.previous_song;
+package use_case.previous_song;
 
 import java.util.Stack;
 public class PreviousInputData {
