@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class loading_album extends JFrame {
+public class LoadSongsView extends JFrame {
     private JPanel loadSongsPanel;
     private JButton backButton;
     private JProgressBar progressBar;
@@ -19,7 +19,7 @@ public class loading_album extends JFrame {
     private JPanel mainPanel;
 
 
-    public loading_album(String selectedAlbum) {
+    public LoadSongsView(String selectedAlbum) {
         setContentPane(loadSongsPanel);
         setTitle("Swiftify Album- Red");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -44,7 +44,7 @@ public class loading_album extends JFrame {
     }
 
     public static void main(String[] args) {
-        new loading_album(args[0]);
+        new LoadSongsView(args[0]);
     }
 }
 

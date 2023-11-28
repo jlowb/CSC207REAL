@@ -90,7 +90,7 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
                     LoadSongsController controller = new LoadSongsController(loadSongsInputBoundary);
                     controller.execute(inputData);
                     LoadSongsViewModel loadSongsViewModel = controller.loadSongsInputBoundary.getOutputBoundary().getModel();
-                    loading_album page = new loading_album("testAlbum");
+                    LoadSongsView page = new LoadSongsView("testAlbum");
                     for (Song song : loadSongsViewModel.getState().getSongs()) {
                         page.addSong(song.getTitle());
                     }
