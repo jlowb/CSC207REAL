@@ -5,19 +5,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class loading_album extends JFrame {
-    private JPanel panel1;
-    private JButton button1;
-    private JProgressBar progressBar1;
+    private JPanel loadSongsPanel;
+    private JButton backButton;
+    private JProgressBar progressBar;
     private JPanel panel2;
-    private JButton button2;
-    private JButton button3;
-    private JButton button12;
-    private JScrollBar scrollBar1;
-    private JButton songButton;
+    private JButton previousSongButton;
+    private JButton nextSongButton;
+    private JButton playPauseButton;
+    private JScrollBar scrollBar;
+    private JPanel songPanel;
+    private JPanel playerPanel;
+    private JPanel controlsPanel;
+    private JPanel mainPanel;
 
 
     public loading_album(String selectedAlbum) {
-        setContentPane(panel1);
+        setContentPane(loadSongsPanel);
         setTitle("Swiftify Album- Red");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1080, 680);
@@ -34,13 +37,15 @@ public class loading_album extends JFrame {
                 dispose();
             }
         };
-
     }
+
+    public void addSong(String songName) {
+        songPanel.add(new JButton(songName));
+    }
+
     public static void main(String[] args) {
         new loading_album(args[0]);
     }
-
-
 }
 
 
