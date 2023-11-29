@@ -1,4 +1,4 @@
-package main.java.com.group113.swiftify.view;
+package view;
 
 public class PlayingView {
 }

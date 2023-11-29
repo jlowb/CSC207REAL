@@ -1,4 +1,4 @@
-package src.entity;
+package entity;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;

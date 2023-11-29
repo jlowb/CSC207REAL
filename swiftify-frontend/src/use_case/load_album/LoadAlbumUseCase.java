@@ -1,4 +1,4 @@
-package src.use_case.load_album;
+package use_case.load_album;
 
 public class LoadAlbumUseCase {
 }
