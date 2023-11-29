@@ -2,10 +2,10 @@ package use_case.play_song;
 
 import entity.Song;
 
-public class PlaySongInputData {
+public class SongInputData {
     private Song song;
 
-    public PlaySongInputData(Song song) {
+    public SongInputData(Song song) {
         this.song = song;
     }
 

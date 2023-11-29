@@ -1,15 +1,12 @@
 package view;
 
-import data_access.SongLoader;
 import data_access.URLSongLoader;
 import entity.PlayerState;
 import entity.Song;
 import javazoom.jl.decoder.JavaLayerException;
-import use_case.pause_song.PauseSongInputData;
 import use_case.pause_song.PauseSongInteractor;
-import use_case.play_song.PlaySongInputData;
+import use_case.play_song.SongInputData;
 import use_case.play_song.PlaySongInteractor;
-import use_case.play_song.PlaySongOutputBoundary;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -53,7 +50,7 @@ public class LoadSongsView extends JFrame {
         //
         Song song1 = new Song(24, "S", 11, 11, "sss", "ss");
         //CAll interactor
-        PlaySongInputData song = new PlaySongInputData(song1);
+        SongInputData song = new SongInputData(song1);
         URLSongLoader songLoader = new URLSongLoader();
         String songURL;
         try {
@@ -66,15 +63,6 @@ public class LoadSongsView extends JFrame {
         PlayerState music;
         try {
             music = new PlayerState(songURL);
-        } catch (JavaLayerException ex) {
-            throw new RuntimeException(ex);
-        }
-        try {
-            new PlaySongInteractor(song, songLoader, music).execute(song);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        } catch (InterruptedException ex) {
-            throw new RuntimeException(ex);
         } catch (JavaLayerException ex) {
             throw new RuntimeException(ex);
         }

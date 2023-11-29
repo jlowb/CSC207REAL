@@ -6,5 +6,5 @@ import java.io.IOException;
 
 public interface PlaySongInputBoundary {
 
-    void execute(PlaySongInputData playSongInputData) throws IOException, InterruptedException, JavaLayerException;
+    void execute(SongInputData songInputData) throws IOException, InterruptedException, JavaLayerException;
 }
