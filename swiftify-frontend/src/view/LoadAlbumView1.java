@@ -34,6 +34,9 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
     private JPanel redpanel;
     private JPanel reputationpanel;
     private JPanel folklorepanel;
+    private JButton button1;
+    private JButton button2;
+    private JButton button3;
 
 
     public LoadAlbumView1() {
