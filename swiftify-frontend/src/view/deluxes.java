@@ -19,7 +19,7 @@ public class deluxes extends JFrame implements ActionListener, PropertyChangeLis
     public deluxes(){
         createUIComponents();
         setContentPane(panel1);
-        setTitle("Swiftify - Albums");
+        setTitle("Swiftify - Albums - Deluxe");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1080, 680);
         setLocationRelativeTo(null);
@@ -44,10 +44,6 @@ public class deluxes extends JFrame implements ActionListener, PropertyChangeLis
         a1989button = new JButton("1989");
 
 
-
-
-
-        // Add action listeners if needed
         speakbutton.addActionListener(this);
         a1989button.addActionListener(this);
     }
