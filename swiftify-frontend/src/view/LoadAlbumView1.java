@@ -1,6 +1,15 @@
 package view;
 
+import data_access.SongLoader;
+import entity.Album;
+import entity.Song;
 import interface_adapter.load_album.LoadAlbumViewModel;
+import interface_adapter.load_songs.LoadSongsController;
+import interface_adapter.load_songs.LoadSongsPresenter;
+import interface_adapter.load_songs.LoadSongsViewModel;
+import use_case.load_songs.LoadSongsInputBoundary;
+import use_case.load_songs.LoadSongsInputData;
+import use_case.load_songs.LoadSongsInteractor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyChangeListener {
@@ -70,7 +80,21 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
                     // Call the execute method in the controller, passing the album name
                  //   controller.execute(albumName);
 
-                    loading_album page = new loading_album(e.getActionCommand());
+                    // hagen code here
+                    LoadSongsInputBoundary loadSongsInputBoundary = new LoadSongsInteractor(
+                            new SongLoader(), new LoadSongsPresenter(new LoadSongsViewModel())
+                    );
+                    LoadSongsInputData inputData = new LoadSongsInputData(
+                            new Album(albumName, new ArrayList<Song>())
+                    );
+                    LoadSongsController controller = new LoadSongsController(loadSongsInputBoundary);
+                    controller.execute(inputData);
+                    LoadSongsViewModel loadSongsViewModel = controller.loadSongsInputBoundary.getOutputBoundary().getModel();
+                    LoadSongsView page = new LoadSongsView("testAlbum");
+                    for (Song song : loadSongsViewModel.getState().getSongs()) {
+                        page.addSong(song.getTitle());
+                    }
+                    // loading_album page = new loading_album(e.getActionCommand());
                     page.setVisible(true);
 
                 }
