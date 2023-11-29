@@ -1,7 +1,5 @@
 package src.entity;
 
-import src.entity;
-
 public class MusicPlayerFacade {
     private final MusicQueue musicQueue;
     private final MusicPlaybackControl playbackControl;
