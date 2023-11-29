@@ -2,6 +2,8 @@ package use_case.play_song;
 
 import data_access.URLSongLoader;
 import entity.MusicPlaybackControl;
+import entity.PlayerState;
+import javazoom.jl.decoder.JavaLayerException;
 
 import java.io.IOException;
 
@@ -11,27 +13,24 @@ public class PlaySongInteractor implements PlaySongInputBoundary {
     //Might only need song input data?
     final PlaySongInputData songInputData;
     final URLSongLoader songLoader;
-    final PlaySongOutputBoundary songOutputBoundary;
-
-    final MusicPlaybackControl musicPlaybackControl;
+    final PlayerState musicPlaybackControl;
 
 
     public PlaySongInteractor(PlaySongInputData songInputData,
                               URLSongLoader songLoader,
-                              PlaySongOutputBoundary songOutputBoundary,
-                              MusicPlaybackControl musicPlaybackControl) {
+                              PlayerState musicPlaybackControl) {
 
         this.songInputData = songInputData;
         this.songLoader = songLoader;
-        this.songOutputBoundary = songOutputBoundary;
+        //this.songOutputBoundary = songOutputBoundary;
         this.musicPlaybackControl = musicPlaybackControl;
     }
 
 
     @Override
-    public void execute(PlaySongInputData playSongInputData) throws IOException, InterruptedException {
+    public void execute(PlaySongInputData playSongInputData) throws IOException, InterruptedException, JavaLayerException {
         String songURL = songLoader.fetchPresignedURL(songInputData.getSongID());
-        MusicPlaybackControl player = musicPlaybackControl;
+        PlayerState player = musicPlaybackControl;
         player.play();
 
         //PlaySongOutputData songOutputData = new PlaySongOutputData(songInputData);

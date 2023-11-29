@@ -12,14 +12,8 @@ public class PlayerState {
     private final static int PLAYING = 1;
     private final static int PAUSED = 2;
     private final static int FINISHED = 3;
-
-    // the player actually doing all the work
     private final Player player;
-
-    // locking object used to communicate with player thread
     private final Object playerLock = new Object();
-
-    // status variable what player thread is doing/supposed to do
     private int playerStatus = NOTSTARTED;
 
     public PlayerState(final InputStream inputStream) throws JavaLayerException {
