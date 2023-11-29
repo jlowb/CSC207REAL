@@ -3,6 +3,7 @@ package view;
 import data_access.SongLoader;
 import entity.Album;
 import entity.Song;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.load_album.LoadAlbumViewModel;
 import interface_adapter.load_songs.LoadSongsController;
 import interface_adapter.load_songs.LoadSongsPresenter;
@@ -12,6 +13,7 @@ import use_case.load_songs.LoadSongsInputData;
 import use_case.load_songs.LoadSongsInteractor;
 
 import javax.swing.*;
+import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -81,14 +83,17 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
                  //   controller.execute(albumName);
 
                     // hagen code here
+                    ViewManagerModel viewManagerModel = new ViewManagerModel();
                     LoadSongsInputBoundary loadSongsInputBoundary = new LoadSongsInteractor(
-                            new SongLoader(), new LoadSongsPresenter(new LoadSongsViewModel())
+                            new SongLoader(), new LoadSongsPresenter(new LoadSongsViewModel(), viewManagerModel)
                     );
+                    new ViewManager(viewManagerModel);
                     LoadSongsInputData inputData = new LoadSongsInputData(
                             new Album(albumName, new ArrayList<Song>())
                     );
                     LoadSongsController controller = new LoadSongsController(loadSongsInputBoundary);
                     controller.execute(inputData);
+                    /*
                     LoadSongsViewModel loadSongsViewModel = controller.loadSongsInputBoundary.getOutputBoundary().getModel();
                     LoadSongsView page = new LoadSongsView("testAlbum");
                     for (Song song : loadSongsViewModel.getState().getSongs()) {
@@ -97,6 +102,7 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
                     // loading_album page = new loading_album(e.getActionCommand());
                     page.setVisible(true);
 
+                     */
                 }
                 dispose();
             }

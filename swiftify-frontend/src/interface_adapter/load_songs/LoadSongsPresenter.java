@@ -1,14 +1,17 @@
 package interface_adapter.load_songs;
 
+import interface_adapter.ViewManagerModel;
 import use_case.load_songs.LoadSongsOutputBoundary;
 import use_case.load_songs.LoadSongsOutputData;
 
 public class LoadSongsPresenter implements LoadSongsOutputBoundary {
 
     public final LoadSongsViewModel loadSongsViewModel;
+    public final ViewManagerModel viewManagerModel;
 
-    public LoadSongsPresenter(LoadSongsViewModel loadSongsViewModel) {
+    public LoadSongsPresenter(LoadSongsViewModel loadSongsViewModel, ViewManagerModel viewManagerModel) {
         this.loadSongsViewModel = loadSongsViewModel;
+        this.viewManagerModel = viewManagerModel;
     }
 
     public void loadSongs(LoadSongsOutputData loadSongsOutputData) {
@@ -17,8 +20,8 @@ public class LoadSongsPresenter implements LoadSongsOutputBoundary {
             loadSongsViewModel.setState(new LoadSongsState(loadSongsOutputData.getSongs()));
             loadSongsViewModel.firePropertyChanged();
         }
-        loadSongsViewModel.setActiveView("loading_album");
-        loadSongsViewModel.firePropertyChanged();
+        viewManagerModel.setActiveView(loadSongsViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 
     public LoadSongsViewModel getModel() {

@@ -10,7 +10,7 @@ public class LoadSongsViewModel extends ViewModel {
     private LoadSongsState state;
 
     public LoadSongsViewModel() {
-        super("Songs View");
+        super("LoadSongsView");
     }
 
     public void setState(LoadSongsState state) {

@@ -23,6 +23,7 @@ public class LoadSongsInteractor implements LoadSongsInputBoundary {
         List<Song> songList = new ArrayList<Song>();
         songList.add(new Song(1, "test", 1, 1, "test", "testSong1"));
         songList.add(new Song(2, "test", 2, 2, "test", "testSong2"));
+        songList.add(new Song(3, "test", 3, 3, "test", "testSong3"));
         LoadSongsOutputData loadSongsOutputData = new LoadSongsOutputData(songList, false);
         loadSongsOutputBoundary.loadSongs(loadSongsOutputData);
     }
