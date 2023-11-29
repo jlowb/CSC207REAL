@@ -1,9 +1,13 @@
+package src.entity;
+
+import src.entity;
+
 public class MusicPlayerFacade {
     private final MusicQueue musicQueue;
     private final MusicPlaybackControl playbackControl;
 
-    public MusicPlayerFacade(boolean playing, boolean shuffled, int lengthOfDiscography) {
-        this.musicQueue = new MusicQueue(shuffled, lengthOfDiscography);
+    public MusicPlayerFacade(boolean playing, boolean shuffled, int lengthOfDiscography, String url) {
+        this.musicQueue = new MusicQueue(shuffled, lengthOfDiscography, url);
         this.playbackControl = new MusicPlaybackControl(playing);
     }
 

@@ -7,8 +7,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Scanner;
 
-import com.group113.swiftify.entity.Song;
-
 public class PlayerState {
     // core logic of "song being played".
     //
