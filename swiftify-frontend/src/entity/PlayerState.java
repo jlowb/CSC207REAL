@@ -1,96 +1,161 @@
 package entity;
 
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
-
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Scanner;
+import javazoom.jl.player.Player;
+import javazoom.jl.player.AudioDevice;
+import javazoom.jl.decoder.JavaLayerException;
 
 public class PlayerState {
-    // core logic of "song being played".
-    //
-    // play/pause button pressed -> clean architecture stuff -> usecase executes corresponding method in
-    // MusicPlayer executes play/pause method, which calls this.
-    // ...
 
-    // current Song currentSong
-    // current int currentTime
+    private final static int NOTSTARTED = 0;
+    private final static int PLAYING = 1;
+    private final static int PAUSED = 2;
+    private final static int FINISHED = 3;
 
-    // play (process command issued by MusicPlayer)
-        // if play command is issued, should unfreeze current time and resume song playing. if no resume
-        // feature exists within java sound, we can do this by passing currentTime.
-    // pause (process command issued by MusicPlayer)
-        // if pause command is issued, should somehow freeze currentTime and freeze song playing.
+    // the player actually doing all the work
+    private final Player player;
 
-    private String url;
-    private Player player;
-    private boolean isPaused;
-    private Thread playerThread;
+    // locking object used to communicate with player thread
+    private final Object playerLock = new Object();
 
-    public PlayerState(String url) {
-        this.url = url;
-        this.isPaused = false;
+    // status variable what player thread is doing/supposed to do
+    private int playerStatus = NOTSTARTED;
+
+    public PlayerState(final InputStream inputStream) throws JavaLayerException {
+        this.player = new Player(inputStream);
     }
 
-    public void play() {
+    public PlayerState(final InputStream inputStream, final AudioDevice audioDevice) throws JavaLayerException {
+        this.player = new Player(inputStream, audioDevice);
+    }
+
+    // Constructor for URL input
+    public PlayerState(final String url) throws JavaLayerException {
         try {
-            if (isPaused) {
-                resume();
-            } else {
-                InputStream is = new URL(url).openStream();
-                player = new Player(is);
-                playerThread = new Thread(() -> {
-                    try {
-                        player.play();
-                    } catch (JavaLayerException e) {
-                        e.printStackTrace();
-                    }
-                });
-                playerThread.start();
-            }
+            InputStream inputStream = new URL(url).openStream();
+            this.player = new Player(inputStream);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new JavaLayerException("Problem playing MP3 from URL", e);
         }
     }
 
-    public void pause() {
-        if (player != null && !isPaused) {
-            player.close();
-            isPaused = true;
+    public void play() throws JavaLayerException {
+        synchronized (playerLock) {
+            switch (playerStatus) {
+                case NOTSTARTED:
+                    final Runnable r = new Runnable() {
+                        public void run() {
+                            playInternal();
+                        }
+                    };
+                    final Thread t = new Thread(r);
+                    t.setDaemon(true);
+                    t.setPriority(Thread.MAX_PRIORITY);
+                    playerStatus = PLAYING;
+                    t.start();
+                    break;
+                case PAUSED:
+                    resume();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-    public void resume() {
-        isPaused = false;
-        play();
+    public boolean pause() {
+        synchronized (playerLock) {
+            if (playerStatus == PLAYING) {
+                playerStatus = PAUSED;
+            }
+            return playerStatus == PAUSED;
+        }
+    }
+
+    public boolean resume() {
+        synchronized (playerLock) {
+            if (playerStatus == PAUSED) {
+                playerStatus = PLAYING;
+                playerLock.notifyAll();
+            }
+            return playerStatus == PLAYING;
+        }
     }
 
     public void stop() {
-        if (player != null) {
-            player.close();
-            isPaused = false;
+        synchronized (playerLock) {
+            playerStatus = FINISHED;
+            playerLock.notifyAll();
         }
     }
 
-
-    //This is simply a test:
-    public static void main(String[] args) throws InterruptedException {
-        String url = "https://csc207swiftify.s3.amazonaws.com/100.mp3?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHEaCXVzLWVhc3QtMSJHMEUCIE94w4blUCK2lO7cY%2BnNbfCpicMd61dsTze2l0An%2BpEaAiEAzz2VEE2ZvXyHPqB%2FB8IWDM7scD1WZV7Sto1gTwxQrDUq%2FQIIyv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw4NzM4NDY2MTcxNzkiDFd6m81Aef4j340KzSrRAlyBtu6xgSJgZf08Oz7ebSk4LS0JNm04kJ2Go%2BcUr5oQe%2BuXKW0EraOaHMLlaBKZCp02nWNzbiDSdBvvFTBgd0KvwSEpeMDai%2FCuDyqcQ4BaCjtZythTyZK5nyoliUq5VriK38MzWBhsjnk0f5MC6pCgXWjklpvTMN8SdwYgeOdAYfNtvbOZvokLtQhKmvTVDRjHv%2FSkuo0zWc72pQQ1mMqjxVZkvQGrdmGbF6eaJixpovlMd7tpRiBrE%2BRKj51jcne4yH%2BFVypqv5oIWNTsitKq5PbLS%2FRLMdP%2BX0cjymOdOPf%2BQA%2Bm%2B5YcPdoI9rs%2FrwAtCgguciojtZ73JNTNnWpbB87wMfFbcN1gBT9%2FFfUeSfE7CKYQHfGf0pwXqnjeeKL9JldDEC0mqIgUV5BdQ6HRD7k%2F3in9WDZ23q5xvakjOu0s0tMge2nQSPlCtsIvBkcw%2FpmaqwY6ngFPdU7vywSVVvT7K4LrBltkC4n3SbNeJyj1IGNADwm6P8si6xRUpUHS35Vau7NbkQ%2FtJQ2LUJ0Dea7rWdYJv1pq%2BgCQ%2BLbykDM6qLiLbq5paKCS6AB8AmpdFMleNwygKI9GuXpmLu03HUBgVHMBMUocDorWYALlIoBwxg%2BdEQa78xdi8J0gV0PnUMlrk2xiLbIqdt0RXri%2B2xGj4Ebtrw%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20231129T005946Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIA4W5KRGRNU7NMMVM6%2F20231129%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=441f614ff773706e4e51861f70fabe67238ff8327ca2555056e1fba07b6c8537";
-
-        //String url = "https://csc207swiftify.s3.amazonaws.com/100.mp3?X-Amz-Security-Token=IQoJb3JpZ2luX2VjECYaCXVzLWVhc3QtMSJHMEUCIFUl7HmGcNU2tb%2BgQGa6HKMTpQv829v1QtRCJn9oTtJYAiEAtLXmhw7vWxqzrDn%2Fs9XKOtdLwfZos9r76e9u97ROqLwq9AIIfhAAGgw4NzM4NDY2MTcxNzkiDLBQ%2BpvWx%2FgY9OozKyrRAkqV1%2Fu07lxc9AJh%2F8M%2FMaJ%2ByQPVnrZE7Qt5zSrQIJKilz0QELdCz24vOED8t3ZozU%2BERM1m6NCQZZh6KL4u1MSb5JKO4rTJtzZfbx4TvZ0uJ%2Bld1xjX7BU5uL%2BHlEAGT0%2BF07w%2Bn0pDTG37G8Eb0svVlMQAmRvSDl98qZiORgQIK7DQVVK4%2BjJnSY9HMvGiFLBIKXBofB0x2PicXcNiJlHrg8NF49Z18rUff8IAjQm%2FflnwHY%2FDTHmhUpcfS4LRxv5MJp7kY3b0n8keQecuCvZ68WqOO3R9XV5PQ7TqtM3NmYUGKxVWpN9uHhz9r7xGqRGHPZqUOh0dELb3zZNvVnKvO8pQnxELETQK3HFdrChkKONxmEKvx4PxmuQ1RF0WFZQ%2Bf8DIgolMU4FgiM%2BjKBYbpqsogZwsR%2B2nUZ%2BDCH4TN3ha3nISz9Sra44nzMuAzzwwksWJqwY6ngEEeo2TEUzMrt9NTWd%2Bfoag53zkF2v013fihKLhxducYrccj0y4f5NWZ%2BKGX1d250XEzZkaUX%2BhFyJcgCwzkleJoBoPJZw0gN44khZGyVDKgoWHeqV1u%2Bg%2BhFWp7YOxtQM6stAr3nkfQIPRZvmmK3Zsa5N163wS8lhImsO8OWz0moePTpowsbJuoGj5uIE49i53dnDD9wsmq7RYW%2BJTZQ%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20231125T211350Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIA4W5KRGRNSW6FUHVB%2F20231125%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=fc67e55e2ae30a7d3535358d5924afce8d034d27b131259eb4ce4585e2d22cbd";
-        MusicPlaybackControl player = new MusicPlaybackControl(false,url);
-        // Example usage
-        player.play();
-        Thread.sleep(5000); // play for 1 seconds
-        player.pause();
-        Thread.sleep(5000);
-        player.resume();
-
-
-
-        //Keeps it running, otherwise it will stop.
-        Scanner scanner = new Scanner(System.in);
-        String response = scanner.next();
+    private void playInternal() {
+        while (playerStatus != FINISHED) {
+            try {
+                if (!player.play(1)) {
+                    break;
+                }
+            } catch (final JavaLayerException e) {
+                break;
+            }
+            synchronized (playerLock) {
+                while (playerStatus == PAUSED) {
+                    try {
+                        playerLock.wait();
+                    } catch (final InterruptedException e) {
+                        break;
+                    }
+                }
+            }
+        }
+        close();
     }
+
+    public void close() {
+        synchronized (playerLock) {
+            playerStatus = FINISHED;
+        }
+        try {
+            player.close();
+        } catch (final Exception e) {
+            // ignore, we are terminating anyway
+        }
+    }
+
+    public boolean isFinished() {
+        return playerStatus == FINISHED;
+    }
+
+
+    // demo how to use with URL
+    public static void main(String[] argv) {
+        try {
+            String mp3Url = "https://csc207swiftify.s3.amazonaws.com/120.mp3?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHUaCXVzLWVhc3QtMSJHMEUCIQDNA4T5OUWVjFF0%2Bwr7r7PDIZ5PjtUoHftDud%2BeSVrUBAIgXUvwMibTqOA%2FchfhG%2FGsnoKyBg9uW%2Bea3sMvyEKzIcoq%2FQIIzv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw4NzM4NDY2MTcxNzkiDJf36wsoF0Mq7%2BBJMSrRAo%2Fkw4rBt5clqfPqKqYRrlkWYmK10LCs3JUjAZkMdUBtxNslRYUsr%2B0zZmAF6uYgsVQiFjHuKd3zsSHi%2Bgk1i9SIZT5QHHtMATysf2%2BACe8ED3jGjdiT0T6OzMb89Tn0ncb9NxJXzMxI%2BsFNM0AsE1hJEwk7jYU4son6c8cjy0Vc83%2Fb6fEuB%2Fzx6cyYrC%2FWmnqti94rRAavgdPwyw20YIEwf5TPjuEqw9EsbQZK1jh6jNbdGxqpHC88Cy3j8ffY8OyBsr1Dg7cXsb%2Bvf8SuzvslGILrspM1lLzIDf0eMVZ556SpWq0jlnVb6%2BBOGxg7QlES6oxU6h9T6671sIR%2FWgRpipIbj8WGBu7AWqIPjdTCaPwIEkIK4GHusJYmGH33pZtGv5ZLy6AmYB64Em8veD5QdUgF22s7b7urz%2FyQvlWISWyje9EJLjWG%2BunHXNknC30wpoCbqwY6ngG285F%2BqL0bGJw8u86Acx4NUto%2BEHAsp68n4YdQj9Tl1kRfU2bEIcOkiN08TJIZmHZhh3EAr4rh%2B0AmCbAC8QoRuJr2K1wAqlcKx1lB8hjTMgCsi5Hv06jeAxcUtU0l4Beu2d0Z6WKN3ktIrAhm6ivgXXylhBgeZv50T6zCz4y4gX%2F81obWK2Y9WL27hOjnWD0%2BsaNAZkp91s%2FbNelrBg%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20231129T043958Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIA4W5KRGRNUV5SJPNI%2F20231129%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f49fc8cc981cffbf3be7c559dc6738e701c5ea036f606141ca651a37de61e3f3"; // Replace with your MP3 URL
+            PlayerState player = new PlayerState(mp3Url);
+
+            player.play();
+            System.out.println("Playing Audio...");
+            Thread.sleep(15000); // Let the audio play for 15 seconds
+
+            // Test pause functionality
+            player.pause();
+            System.out.println("Audio Paused...");
+            Thread.sleep(3000); // Wait for 3 seconds
+
+            // Test resume functionality
+            player.resume();
+            System.out.println("Audio Resumed...");
+            Thread.sleep(5000); // Let the audio play for another 5 seconds
+
+            // Loop until the song is finished
+            while (!player.isFinished()) {
+                Thread.sleep(1000); // Sleep for a short period (e.g., one second)
+            }
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
+
