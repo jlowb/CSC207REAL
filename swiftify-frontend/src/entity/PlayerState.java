@@ -1,4 +1,4 @@
-package com.group113.swiftify.entity;
+package src.entity;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;

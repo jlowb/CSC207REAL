@@ -1,4 +1,4 @@
-package com.group113.swiftify.data_access;
+package src.data_access;
 
 import java.io.IOException;
 import java.net.URI;
