@@ -51,7 +51,7 @@ public class LoadSongsView extends JFrame {
         };
 
         //
-        Song song1 = new Song(100, "S", 11, 11, "sss", "ss");
+        Song song1 = new Song(24, "S", 11, 11, "sss", "ss");
         //CAll interactor
         PlaySongInputData song = new PlaySongInputData(song1);
         URLSongLoader songLoader = new URLSongLoader();
