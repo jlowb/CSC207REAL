@@ -5,8 +5,8 @@ public class MusicPlayerFacade {
     private final MusicPlaybackControl playbackControl;
 
     public MusicPlayerFacade(boolean playing, boolean shuffled, int lengthOfDiscography, String url) {
-        this.musicQueue = new MusicQueue(shuffled, lengthOfDiscography, url);
-        this.playbackControl = new MusicPlaybackControl(playing);
+        this.musicQueue = new MusicQueue(shuffled, lengthOfDiscography);
+        this.playbackControl = new MusicPlaybackControl(playing, url);
     }
 
     public void play() {
