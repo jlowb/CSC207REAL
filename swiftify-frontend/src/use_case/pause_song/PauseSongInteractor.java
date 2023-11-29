@@ -2,12 +2,12 @@ package use_case.pause_song;
 
 import data_access.URLSongLoader;
 import entity.PlayerState;
-import use_case.play_song.PlaySongInputBoundary;
+import use_case.play_song.SongInputBoundary;
 import use_case.play_song.SongInputData;
 
 import java.io.IOException;
 
-public class PauseSongInteractor implements PlaySongInputBoundary {
+public class PauseSongInteractor implements SongInputBoundary {
 
 
     //Might only need song input data?

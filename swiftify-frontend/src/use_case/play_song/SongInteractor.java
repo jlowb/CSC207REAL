@@ -6,7 +6,7 @@ import javazoom.jl.decoder.JavaLayerException;
 
 import java.io.IOException;
 
-public class PlaySongInteractor implements PlaySongInputBoundary {
+public class SongInteractor implements SongInputBoundary {
 
 
     //Might only need song input data?
@@ -15,9 +15,9 @@ public class PlaySongInteractor implements PlaySongInputBoundary {
     final PlayerState musicPlaybackControl;
 
 
-    public PlaySongInteractor(SongInputData songInputData,
-                              URLSongLoader songLoader,
-                              PlayerState musicPlaybackControl) {
+    public SongInteractor(SongInputData songInputData,
+                          URLSongLoader songLoader,
+                          PlayerState musicPlaybackControl) {
 
         this.songInputData = songInputData;
         this.songLoader = songLoader;

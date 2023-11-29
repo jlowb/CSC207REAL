@@ -4,7 +4,7 @@ import javazoom.jl.decoder.JavaLayerException;
 
 import java.io.IOException;
 
-public interface PlaySongInputBoundary {
+public interface SongInputBoundary {
 
     void execute(SongInputData songInputData) throws IOException, InterruptedException, JavaLayerException;
 }

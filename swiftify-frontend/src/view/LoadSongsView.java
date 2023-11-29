@@ -6,7 +6,7 @@ import entity.Song;
 import javazoom.jl.decoder.JavaLayerException;
 import use_case.pause_song.PauseSongInteractor;
 import use_case.play_song.SongInputData;
-import use_case.play_song.PlaySongInteractor;
+import use_case.play_song.SongInteractor;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -73,7 +73,7 @@ public class LoadSongsView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() instanceof JButton) {
                     try {
-                        new PlaySongInteractor(song, songLoader, music).execute(song);
+                        new SongInteractor(song, songLoader, music).execute(song);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     } catch (InterruptedException ex) {
