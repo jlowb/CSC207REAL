@@ -8,6 +8,7 @@ import javazoom.jl.decoder.JavaLayerException;
 
 public class PlayerState {
 
+
     private final static int NOTSTARTED = 0;
     private final static int PLAYING = 1;
     private final static int PAUSED = 2;
