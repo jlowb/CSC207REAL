@@ -1,4 +1,3 @@
 /Users/megatron/IdeaProjects/CSC207REAL/swiftify-backend/src/main/java/com/group113/swiftify/FetchSongHandler.java
-/Users/megatron/IdeaProjects/CSC207REAL/swiftify-backend/src/main/java/com/group113/swiftify/FetchAlbumTitlesHandler.java
-/Users/megatron/IdeaProjects/CSC207REAL/swiftify-backend/src/main/java/com/group113/swiftify/FetchSongMetadataHandler.java
+/Users/megatron/IdeaProjects/CSC207REAL/swiftify-backend/src/main/java/com/group113/swiftify/MusicMetadataHandler.java
 /Users/megatron/IdeaProjects/CSC207REAL/swiftify-backend/src/main/java/com/group113/swiftify/DependencyFactory.java
