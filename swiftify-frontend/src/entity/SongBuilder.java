@@ -68,6 +68,7 @@ public class SongBuilder {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Collections.sort(songs);
         return songs;
     }
 }
