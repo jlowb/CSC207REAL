@@ -2,6 +2,8 @@ package entity;
 
 import javazoom.jl.decoder.JavaLayerException;
 
+//Instead we're using player state, it does the exact same thing.
+
 public class MusicPlaybackControl {
     private boolean playing;
 
@@ -12,8 +14,6 @@ public class MusicPlaybackControl {
     public void play() {
         if (!playing) {
 
-
-
             playing = true;
         } else {
             System.out.println("Already playing.");
@@ -22,13 +22,6 @@ public class MusicPlaybackControl {
 
     public void pause() {
         if (playing) {
-
-
-
-
-
-
-
 
         } else {
             System.out.println("Already paused.");

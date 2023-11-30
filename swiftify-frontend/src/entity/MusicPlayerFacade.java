@@ -1,15 +1,17 @@
 package entity;
 
+import javazoom.jl.decoder.JavaLayerException;
+
 public class MusicPlayerFacade {
     private final MusicQueue musicQueue;
-    private final MusicPlaybackControl playbackControl;
+    private final PlayerState playbackControl;
 
-    public MusicPlayerFacade(boolean playing, boolean shuffled, int lengthOfDiscography, String url) {
+    public MusicPlayerFacade(boolean playing, boolean shuffled, int lengthOfDiscography, String url) throws JavaLayerException {
         this.musicQueue = new MusicQueue(shuffled, lengthOfDiscography);
-        this.playbackControl = new MusicPlaybackControl(playing, url);
+        this.playbackControl = new PlayerState(url);
     }
 
-    public void play() {
+    public void play() throws JavaLayerException {
         playbackControl.play();
     }
 
@@ -17,12 +19,12 @@ public class MusicPlayerFacade {
         playbackControl.pause();
     }
 
-    public void playNextSong() {
+    public void playNextSong() throws JavaLayerException {
         musicQueue.next();
         playbackControl.play();
     }
 
-    public void playPreviousSong() {
+    public void playPreviousSong() throws JavaLayerException {
         musicQueue.previous();
         playbackControl.play();
     }
