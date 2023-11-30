@@ -120,6 +120,10 @@ public class PlayerState {
         return playerStatus == FINISHED;
     }
 
+    public boolean isPlaying() {
+        return playerStatus == PLAYING;
+    }
+
 
     // demo how to use with URL
     public static void main(String[] argv) {

@@ -1,4 +1,9 @@
 package interface_adapter.play_song;
 
-public class PlaySongPresenter {
+import use_case.play_song.PlaySongOutputBoundary;
+
+public class PlaySongPresenter implements PlaySongOutputBoundary {
+
+
+
 }

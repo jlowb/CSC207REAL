@@ -47,7 +47,7 @@ public class LoadSongsView extends JFrame {
             }
         };
 
-        //
+        // Testing Song Play Pause with buttons.
         Song song1 = new Song(24, "S", 11, 11, "sss", "ss");
         //CAll interactor
         SongInputData song = new SongInputData(song1);
