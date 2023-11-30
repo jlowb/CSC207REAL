@@ -3,10 +3,11 @@ package view;
 import data_access.URLSongLoader;
 import entity.PlayerState;
 import entity.Song;
+import interface_adapter.play_song.PlaySongController;
 import javazoom.jl.decoder.JavaLayerException;
-import use_case.pause_song.PauseSongInteractor;
+import use_case.play_song.PlaySongInteractor;
+import use_case.play_song.SongInputBoundary;
 import use_case.play_song.SongInputData;
-import use_case.play_song.SongInteractor;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -49,7 +50,7 @@ public class LoadSongsView extends JFrame {
 
         // Testing Song Play Pause with buttons.
         Song song1 = new Song(24, "S", 11, 11, "sss", "ss");
-        //CAll interactor
+        //Preparing Interactor Call
         SongInputData song = new SongInputData(song1);
         URLSongLoader songLoader = new URLSongLoader();
         String songURL;
@@ -68,12 +69,43 @@ public class LoadSongsView extends JFrame {
         }
         //
 
+        /*
+        Play From Interactor:
+
+        if (e.getSource() instanceof JButton) {
+                    try {
+                        new PlaySongInteractor(song, songLoader, music).execute(song);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (JavaLayerException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+
+
+         Pause From Interactor:
+
+         if (e.getSource() instanceof JButton) {
+                    try {
+                        new PauseSongInteractor(song, songLoader, music).execute(song);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+         */
+
         ActionListener b = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() instanceof JButton) {
+
+                    // Directly calls Interactor, I've no idea how to make the controller work.
                     try {
-                        new SongInteractor(song, songLoader, music).execute(song);
+                        new PlaySongInteractor(song, songLoader, music).execute(song);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     } catch (InterruptedException ex) {
@@ -92,24 +124,13 @@ public class LoadSongsView extends JFrame {
         ActionListener c = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() instanceof JButton) {
-                    try {
-                        new PauseSongInteractor(song, songLoader, music).execute(song);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (InterruptedException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
+
             }
         };
 
         this.nextSongButton.addActionListener(c);
 
     }
-
-
-
 
     public void addSong(String songName) {
         songPanel.add(new JButton(songName));
