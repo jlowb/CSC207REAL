@@ -4,13 +4,13 @@ import entity.Album;
 
 public class LoadSongsInputData {
 
-    private final Album album;
+    private final String albumName;
 
-    public LoadSongsInputData(Album album) {
-        this.album = album;
+    public LoadSongsInputData(String albumName) {
+        this.albumName = albumName;
     }
 
-    public Album getAlbum() {
-        return this.album;
+    public String getAlbumName() {
+        return this.albumName;
     }
 }
