@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
+/**
+ * Represents a music queue that can be used to manage and control a list of songs.
+ */
+
 public class MusicQueue implements Iterable<Integer> {
     private Node head;
     private Node tail;
@@ -12,6 +16,10 @@ public class MusicQueue implements Iterable<Integer> {
     private final Random random;
     private boolean shuffled;
     private int lengthOfDiscography;
+
+    /**
+     * Represents a node within the music queue.
+     */
 
     private static class Node {
         int songID;
@@ -23,6 +31,13 @@ public class MusicQueue implements Iterable<Integer> {
         }
     }
 
+    /**
+     * Constructs a new MusicQueue with the specified configuration.
+     *
+     * @param shuffled          Whether the queue should be initially shuffled.
+     * @param lengthOfDiscography The total length of the music discography.
+     */
+
     public MusicQueue(boolean shuffled, int lengthOfDiscography) {
         this.head = null;
         this.tail = null;
@@ -32,9 +47,21 @@ public class MusicQueue implements Iterable<Integer> {
         this.lengthOfDiscography = lengthOfDiscography;
     }
 
+    /**
+     * Gets the ID of the currently playing song.
+     *
+     * @return The ID of the currently playing song, or -1 if no song is playing.
+     */
+
     public int getCurrentID() {
         return (current != null) ? current.songID : -1;
     }
+
+    /**
+     * Adds a new song to the queue.
+     *
+     * @param songID The ID of the song to add.
+     */
 
     public void add(int songID) {
         Node newNode = new Node(songID);
@@ -49,6 +76,10 @@ public class MusicQueue implements Iterable<Integer> {
         }
     }
 
+    /**
+     * Moves to the next song in the queue.
+     */
+
     public void next() {
         if (isNotEmpty()) {
             if (current.next == null){
@@ -58,15 +89,25 @@ public class MusicQueue implements Iterable<Integer> {
         }
     }
 
+    /**
+     * Moves to the previous song in the queue.
+     */
     public void previous() {
         if (isNotEmpty() && current.prev != null) {
             current = current.prev;
         }
     }
 
+    /**
+     * Clears the entire queue.
+     */
     public void clearQueue() {
         current.next = null;
     }
+
+    /**
+     * Toggles shuffle mode on/off.
+     */
 
     public void toggleShuffle() {
         shuffled = !shuffled;
@@ -74,6 +115,10 @@ public class MusicQueue implements Iterable<Integer> {
             shuffle();
         }
     }
+
+    /**
+     * Shuffles the songs in the queue.
+     */
 
     private void shuffle() {
         if (isNotEmpty()) {
@@ -83,6 +128,13 @@ public class MusicQueue implements Iterable<Integer> {
             rebuildQueue(nodes, currentShuffleNode);
         }
     }
+
+    /**
+     * Converts the queue to an ArrayList of nodes starting from the specified node.
+     *
+     * @param startNode The starting node.
+     * @return An ArrayList containing nodes.
+     */
 
     private ArrayList<Node> toArray(Node startNode) {
         ArrayList<Node> nodes = new ArrayList<Node>();
@@ -94,6 +146,13 @@ public class MusicQueue implements Iterable<Integer> {
         return nodes;
     }
 
+    /**
+     * Rebuilds the queue based on the shuffled order.
+     *
+     * @param nodes         The ArrayList of nodes representing the shuffled order.
+     * @param startNode     The node from which the shuffle started.
+     */
+
     private void rebuildQueue(ArrayList<Node> nodes, Node startNode) {
         startNode.next = nodes.get(0);
         tail = nodes.get(nodes.size() - 1);
@@ -104,6 +163,12 @@ public class MusicQueue implements Iterable<Integer> {
         nodes.get(nodes.size() - 1).next = null;
     }
 
+    /**
+     * Gets the ID of the next song to play, considering shuffle mode.
+     *
+     * @return The ID of the next song to play.
+     */
+
     private int getNextSongId() {
         if (shuffled) {
             return getRandomUnplayedSong();
@@ -111,6 +176,12 @@ public class MusicQueue implements Iterable<Integer> {
             return (current.songID + 1) % lengthOfDiscography;
         }
     }
+
+    /**
+     * Gets a random unplayed song ID.
+     *
+     * @return A random unplayed song ID.
+     */
 
     private int getRandomUnplayedSong() {
         int nextSongId;
@@ -120,6 +191,13 @@ public class MusicQueue implements Iterable<Integer> {
 
         return nextSongId;
     }
+
+    /**
+     * Checks if a song with the given ID has been played before the current song.
+     *
+     * @param songId The ID of the song to check.
+     * @return True if the song has been played, false otherwise.
+     */
 
     private boolean hasSongBeenPlayed(int songId) {
         for (int id : this){
@@ -134,6 +212,12 @@ public class MusicQueue implements Iterable<Integer> {
         return false;
     }
 
+    /**
+     * Checks if the queue is not empty.
+     *
+     * @return True if the queue is not empty, false otherwise.
+     */
+
     public boolean isNotEmpty() {
         return head != null;
     }
@@ -142,6 +226,10 @@ public class MusicQueue implements Iterable<Integer> {
     public Iterator<Integer> iterator() {
         return new MusicQueueIterator(head);
     }
+
+    /**
+     * An iterator for iterating through the song IDs in the queue.
+     */
 
     private class MusicQueueIterator implements Iterator<Integer> {
         private Node currentIteratorNode;
@@ -166,6 +254,10 @@ public class MusicQueue implements Iterable<Integer> {
             return songID;
         }
     }
+
+    /**
+     * Displays the current state of the queue.
+     */
 
     public void displayQueue() {
         if (!isNotEmpty()) {
