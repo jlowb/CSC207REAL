@@ -93,6 +93,7 @@ public class LoadSongsView extends JFrame {
         SongListPanel.add(SongPanel, BorderLayout.WEST);
         SongListPanel.add(AddToQueuePanel, BorderLayout.EAST);
         PlayPauseButton = new SongPlaybackButton(null);
+        PlayPauseButton.setText("(>");
         PreviousSongButton.setPreferredSize(new Dimension(50, 50));
         PlayPauseButton.setPreferredSize(new Dimension(100, 50));
         NextSongButton.setPreferredSize(new Dimension(50, 50));
