@@ -2,9 +2,11 @@ package entity;
 
 import interface_adapter.SongPlaybackState;
 
-public class SongPlaybackButton {
+import javax.swing.*;
 
-    private final SongPlaybackState songPlaybackState;
+public class SongPlaybackButton extends JButton {
+
+    private SongPlaybackState songPlaybackState;
 
     public SongPlaybackButton(SongPlaybackState songPlaybackState) {
         this.songPlaybackState = songPlaybackState;
@@ -12,5 +14,9 @@ public class SongPlaybackButton {
 
     public SongPlaybackState getSongPlaybackState() {
         return this.songPlaybackState;
+    }
+
+    public void setSongPlaybackState(SongPlaybackState songPlaybackState) {
+        this.songPlaybackState = songPlaybackState;
     }
 }

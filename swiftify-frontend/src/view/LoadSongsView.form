@@ -75,7 +75,7 @@
                   <component id="556fa" class="javax.swing.JButton" binding="PlayPauseButton">
                     <constraints/>
                     <properties>
-                      <text value="||"/>
+                      <text value="(&gt;"/>
                     </properties>
                   </component>
                   <component id="77f18" class="javax.swing.JButton" binding="NextSongButton">

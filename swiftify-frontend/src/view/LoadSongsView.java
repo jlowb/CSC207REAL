@@ -1,12 +1,24 @@
 package view;
 
+import data_access.URLSongLoader;
 import entity.Song;
 import entity.SongButton;
+import entity.SongPlaybackButton;
+import interface_adapter.SongPlaybackState;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.play_song.PlaySongController;
+import interface_adapter.play_song.PlaySongPresenter;
+import interface_adapter.play_song.PlaySongViewModel;
+import use_case.play_song.PlaySongInputBoundary;
+import use_case.play_song.PlaySongInputData;
+import use_case.play_song.PlaySongInteractor;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URL;
 
 public class LoadSongsView extends JFrame {
     private JPanel LoadSongsViewPanel;
@@ -49,9 +61,23 @@ public class LoadSongsView extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() instanceof SongButton) {
-                
+                PlaySongInputData playSongInputData = new PlaySongInputData(((SongButton) e.getSource()).getSongId(), ((SongButton) e.getSource()).getSongName(), LoadSongsView.this);
+                PlaySongInputBoundary playSongInputBoundary = new PlaySongInteractor(new URLSongLoader(), new PlaySongPresenter(new PlaySongViewModel(), new ViewManagerModel()));
+                PlaySongController playSongController = new PlaySongController(playSongInputBoundary);
+                try {
+                    playSongController.execute(playSongInputData);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         }
+    };
+
+    public void changePlaybackState(SongPlaybackState songPlaybackState) {
+        PlayPauseButton.setText("||");
+        ((SongPlaybackButton) PlayPauseButton).setSongPlaybackState(songPlaybackState);
     }
 
     private void adjustUIComponents() {
@@ -63,7 +89,9 @@ public class LoadSongsView extends JFrame {
         SongListPanel.add(SongPanel, BorderLayout.WEST);
         SongListPanel.add(AddToQueuePanel, BorderLayout.EAST);
         PreviousSongButton.setPreferredSize(new Dimension(50, 50));
+        PlayPauseButton = new SongPlaybackButton(null);
         PlayPauseButton.setPreferredSize(new Dimension(100, 50));
+        PlayPauseButton.addActionListener(playSongActionListener);
         NextSongButton.setPreferredSize(new Dimension(50, 50));
         ShuffleButton.setPreferredSize(new Dimension(50, 50));
     }

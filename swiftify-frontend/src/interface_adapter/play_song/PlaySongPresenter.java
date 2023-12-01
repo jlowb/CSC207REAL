@@ -18,7 +18,7 @@ public class PlaySongPresenter implements PlaySongOutputBoundary {
     }
 
     public void preparePlayingView(PlaySongOutputData playSongOutputData) {
-        SongPlaybackState songPlaybackState = new SongPlaybackState(playSongOutputData.getMusicPlayer(), true);
+        SongPlaybackState songPlaybackState = new SongPlaybackState(playSongOutputData.getView(), playSongOutputData.getMusicPlayer(), true);
         this.playSongViewModel.setState(songPlaybackState);
         this.playSongViewModel.firePropertyChanged();
         viewManagerModel.setActiveView(playSongViewModel.getViewName());

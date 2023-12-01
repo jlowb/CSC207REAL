@@ -1,6 +1,7 @@
 package view;
 
 import entity.Song;
+import interface_adapter.SongPlaybackState;
 import interface_adapter.ViewModel;
 import interface_adapter.load_songs.LoadSongsState;
 
@@ -21,6 +22,9 @@ public class ViewBuilder {
         if (this.viewModel.getViewName().equalsIgnoreCase("AlbumView")) {
             return buildAlbumView();
         }
+        if (this.viewModel.getViewName().equalsIgnoreCase("PlaySongView")) {
+            return buildPlayingView();
+        }
 
         // write switch case for other views later
         return new JFrame();
@@ -37,5 +41,12 @@ public class ViewBuilder {
 
     public LoadAlbumView1 buildAlbumView() {
         return new LoadAlbumView1();
+    }
+
+    public LoadSongsView buildPlayingView() {
+        SongPlaybackState songPlaybackState = (SongPlaybackState) this.viewModel.getState();
+        LoadSongsView view = songPlaybackState.getView();
+        view.changePlaybackState(songPlaybackState);
+        return view;
     }
 }

@@ -18,11 +18,11 @@ public class PlaySongInteractor implements PlaySongInputBoundary {
         this.playSongOutputBoundary = playSongOutputBoundary;
     }
 
-    public void execute(SongInputData songInputData) throws IOException, InterruptedException, JavaLayerException {
+    public void execute(PlaySongInputData songInputData) throws IOException, InterruptedException, JavaLayerException {
         String songURL = songLoader.fetchPresignedURL(songInputData.getSongId());
         PlayerState musicPlayer = new PlayerState(songURL);
         musicPlayer.play();
-        PlaySongOutputData playSongOutputData = new PlaySongOutputData(songInputData.getSongName(), musicPlayer);
+        PlaySongOutputData playSongOutputData = new PlaySongOutputData(songInputData.getSongName(), musicPlayer, songInputData.getView());
         this.playSongOutputBoundary.preparePlayingView(playSongOutputData);
     }
 }

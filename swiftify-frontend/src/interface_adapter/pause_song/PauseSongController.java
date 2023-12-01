@@ -3,7 +3,7 @@ package interface_adapter.pause_song;
 import entity.Song;
 import javazoom.jl.decoder.JavaLayerException;
 import use_case.play_song.PlaySongInputBoundary;
-import use_case.play_song.SongInputData;
+import use_case.play_song.PlaySongInputData;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ public class PauseSongController {
     }
 
     public void execute(Song song) throws IOException, InterruptedException, JavaLayerException {
-        SongInputData songInputData = new SongInputData(song);
+        PlaySongInputData songInputData = new PlaySongInputData(song);
 
         pauseSongInteractor.execute(songInputData);
     }
