@@ -71,10 +71,10 @@ public class Vieww {
                             LoadAlbumView1 page = new LoadAlbumView1();
                             page.setVisible(true);
                         } else if ("Deluxe / Deluxe Edition".equals(AlbumType)) {
-                            DeluxeVersion page = new DeluxeVersion();
+                            deluxes page = new deluxes();
                             page.setVisible(true);
                         } else if ("Taylor's Version".equals(AlbumType)) {
-                            TaylorVersion page = new TaylorVersion();
+                            taylorver page = new taylorver();
                             page.setVisible(true);
                         }
 

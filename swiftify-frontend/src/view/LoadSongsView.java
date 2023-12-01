@@ -18,6 +18,7 @@ public class LoadSongsView extends JFrame {
     private JButton PlayPauseButton;
     private JButton NextSongButton;
     private JButton ShuffleButton;
+    private JButton button1;
     private JPanel SongPanel;
     private JPanel AddToQueuePanel;
 

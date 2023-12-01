@@ -1,8 +1,5 @@
 package view;
 
-import entity.Album;
-import entity.MusicLibrary;
-import entity.Song;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.load_album.LoadAlbumViewModel;
 import interface_adapter.load_songs.LoadSongsController;
@@ -14,13 +11,11 @@ import use_case.load_songs.LoadSongsInteractor;
 import use_case.load_songs.LoadSongsOutputBoundary;
 
 import javax.swing.*;
-import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyChangeListener {
@@ -47,6 +42,11 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
     private JPanel redpanel;
     private JPanel reputationpanel;
     private JPanel folklorepanel;
+    private JButton button1;
+    private JButton button2;
+    private JButton button3;
+    private JButton backButton;
+    private JPanel panelmain;
 
 
     public LoadAlbumView1() {
@@ -54,7 +54,7 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
         loadAlbumViewModel.addPropertyChangeListener(this);
 
         createUIComponents();
-        setContentPane(panel);
+        setContentPane(panelmain);
         setTitle("Swiftify - Albums");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1080, 680);
