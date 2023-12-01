@@ -72,12 +72,6 @@
                       <text value="&lt;"/>
                     </properties>
                   </component>
-                  <component id="556fa" class="javax.swing.JButton" binding="PlayPauseButton" custom-create="true">
-                    <constraints/>
-                    <properties>
-                      <text value="(&gt;"/>
-                    </properties>
-                  </component>
                   <component id="77f18" class="javax.swing.JButton" binding="NextSongButton">
                     <constraints/>
                     <properties>

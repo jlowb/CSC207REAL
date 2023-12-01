@@ -31,14 +31,13 @@ public class LoadSongsView extends JFrame {
     private JPanel SongListPanel;
     private JSplitPane MainPanel;
     private JButton PreviousSongButton;
-    private JButton PlayPauseButton;
+    private SongPlaybackButton PlayPauseButton;
     private JButton NextSongButton;
     private JButton ShuffleButton;
     private JPanel SongPanel;
     private JPanel AddToQueuePanel;
 
     public LoadSongsView(String albumName) {
-        createUIComponents();
         setContentPane(LoadSongsViewPanel);
         adjustUIComponents();
         setTitle("Swiftify Album - " + albumName);
@@ -93,13 +92,11 @@ public class LoadSongsView extends JFrame {
         SongListPanel.setLayout(new BorderLayout());
         SongListPanel.add(SongPanel, BorderLayout.WEST);
         SongListPanel.add(AddToQueuePanel, BorderLayout.EAST);
+        PlayPauseButton = new SongPlaybackButton(null);
         PreviousSongButton.setPreferredSize(new Dimension(50, 50));
         PlayPauseButton.setPreferredSize(new Dimension(100, 50));
         NextSongButton.setPreferredSize(new Dimension(50, 50));
         ShuffleButton.setPreferredSize(new Dimension(50, 50));
-    }
-
-    private void createUIComponents() {
-        PlayPauseButton = new SongPlaybackButton(null);
+        ControlsPanel.add(PlayPauseButton, 1);
     }
 }
