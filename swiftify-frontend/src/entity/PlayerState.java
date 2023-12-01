@@ -141,7 +141,7 @@ public class PlayerState {
             Thread.sleep(3000); // Wait for 3 seconds
 
             // Test resume functionality
-            player.resume();
+            player.play();
             System.out.println("Audio Resumed...");
             Thread.sleep(5000); // Let the audio play for another 5 seconds
 

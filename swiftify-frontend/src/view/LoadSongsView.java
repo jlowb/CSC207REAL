@@ -103,10 +103,11 @@ public class LoadSongsView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() instanceof JButton) {
+                    SongInputBoundary blah = new PlaySongInteractor(song, songLoader, music);
 
-                    // Directly calls Interactor, I've no idea how to make the controller work.
+                    PlaySongController something = new PlaySongController(blah);
                     try {
-                        new PlaySongInteractor(song, songLoader, music).execute(song);
+                        something.execute(song1);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     } catch (InterruptedException ex) {
