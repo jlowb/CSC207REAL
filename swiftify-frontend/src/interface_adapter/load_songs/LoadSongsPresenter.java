@@ -6,8 +6,8 @@ import use_case.load_songs.LoadSongsOutputData;
 
 public class LoadSongsPresenter implements LoadSongsOutputBoundary {
 
-    public final LoadSongsViewModel loadSongsViewModel;
-    public final ViewManagerModel viewManagerModel;
+    private final LoadSongsViewModel loadSongsViewModel;
+    private final ViewManagerModel viewManagerModel;
 
     public LoadSongsPresenter(LoadSongsViewModel loadSongsViewModel, ViewManagerModel viewManagerModel) {
         this.loadSongsViewModel = loadSongsViewModel;
@@ -17,10 +17,11 @@ public class LoadSongsPresenter implements LoadSongsOutputBoundary {
     public void loadSongs(LoadSongsOutputData loadSongsOutputData) {
         LoadSongsState loadSongsState = loadSongsViewModel.getState();
         if (loadSongsState == null) {
-            loadSongsViewModel.setState(new LoadSongsState(loadSongsOutputData.getSongs()));
+            loadSongsViewModel.setState(new LoadSongsState(loadSongsOutputData.getAlbumName(), loadSongsOutputData.getSongs()));
             loadSongsViewModel.firePropertyChanged();
         }
         viewManagerModel.setActiveView(loadSongsViewModel.getViewName());
+        viewManagerModel.setViewModel(this.loadSongsViewModel);
         viewManagerModel.firePropertyChanged();
     }
 
