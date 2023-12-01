@@ -38,6 +38,7 @@ public class LoadSongsView extends JFrame {
     private JPanel AddToQueuePanel;
 
     public LoadSongsView(String albumName) {
+        createUIComponents();
         setContentPane(LoadSongsViewPanel);
         adjustUIComponents();
         setTitle("Swiftify Album - " + albumName);
@@ -75,7 +76,6 @@ public class LoadSongsView extends JFrame {
                 } catch (JavaLayerException ex) {
                     throw new RuntimeException(ex);
                 }
-
             }
         }
     };
@@ -94,9 +94,12 @@ public class LoadSongsView extends JFrame {
         SongListPanel.add(SongPanel, BorderLayout.WEST);
         SongListPanel.add(AddToQueuePanel, BorderLayout.EAST);
         PreviousSongButton.setPreferredSize(new Dimension(50, 50));
-        PlayPauseButton = new SongPlaybackButton(null);
         PlayPauseButton.setPreferredSize(new Dimension(100, 50));
         NextSongButton.setPreferredSize(new Dimension(50, 50));
         ShuffleButton.setPreferredSize(new Dimension(50, 50));
+    }
+
+    private void createUIComponents() {
+        PlayPauseButton = new SongPlaybackButton(null);
     }
 }
