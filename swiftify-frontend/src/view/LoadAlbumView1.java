@@ -1,7 +1,7 @@
 package view;
 
-import data_access.SongLoader;
 import entity.Album;
+import entity.MusicLibrary;
 import entity.Song;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.load_album.LoadAlbumViewModel;
@@ -11,6 +11,7 @@ import interface_adapter.load_songs.LoadSongsViewModel;
 import use_case.load_songs.LoadSongsInputBoundary;
 import use_case.load_songs.LoadSongsInputData;
 import use_case.load_songs.LoadSongsInteractor;
+import use_case.load_songs.LoadSongsOutputBoundary;
 
 import javax.swing.*;
 import javax.swing.text.View;
@@ -83,6 +84,7 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
                  //   controller.execute(albumName);
 
                     // hagen code here
+                    /*
                     ViewManagerModel viewManagerModel = new ViewManagerModel();
                     LoadSongsInputBoundary loadSongsInputBoundary = new LoadSongsInteractor(
                             new SongLoader(), new LoadSongsPresenter(new LoadSongsViewModel(), viewManagerModel)
@@ -93,7 +95,7 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
                     );
                     LoadSongsController controller = new LoadSongsController(loadSongsInputBoundary);
                     controller.execute(inputData);
-                    /*
+
                     LoadSongsViewModel loadSongsViewModel = controller.loadSongsInputBoundary.getOutputBoundary().getModel();
                     LoadSongsView page = new LoadSongsView("testAlbum");
                     for (Song song : loadSongsViewModel.getState().getSongs()) {
@@ -103,8 +105,16 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
                     page.setVisible(true);
 
                      */
+                    LoadSongsViewModel loadSongsViewModel = new LoadSongsViewModel();
+                    ViewManagerModel viewManagerModel = new ViewManagerModel();
+                    new ViewManager(viewManagerModel);
+                    LoadSongsOutputBoundary loadSongsOutputBoundary = new LoadSongsPresenter(loadSongsViewModel, viewManagerModel);
+                    LoadSongsInputBoundary loadSongsInputBoundary = new LoadSongsInteractor(loadSongsOutputBoundary);
+                    LoadSongsController loadSongsController = new LoadSongsController(loadSongsInputBoundary);
+                    LoadSongsInputData loadSongsInputData = new LoadSongsInputData(albumName);
+                    loadSongsController.execute(loadSongsInputData);
                 }
-                dispose();
+                //dispose();
             }
 
             private String convertFunc(String albumName_Button) {

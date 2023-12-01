@@ -1,6 +1,7 @@
 package view;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModel;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
@@ -8,7 +9,7 @@ import java.beans.PropertyChangeListener;
 
 public class ViewManager implements PropertyChangeListener {
 
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
     public ViewManager(ViewManagerModel viewManagerModel) {
         this.viewManagerModel = viewManagerModel;
@@ -18,8 +19,8 @@ public class ViewManager implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("view")) {
-            String viewName = (String) evt.getNewValue();
-            ViewBuilder viewBuilder = new ViewBuilder(viewName);
+            ViewModel viewModel = (ViewModel) evt.getNewValue();
+            ViewBuilder viewBuilder = new ViewBuilder(viewModel);
             viewBuilder.buildView().setVisible(true);
         }
     }

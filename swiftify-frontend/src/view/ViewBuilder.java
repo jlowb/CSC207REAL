@@ -1,28 +1,41 @@
 package view;
 
+import entity.Song;
+import interface_adapter.ViewModel;
+import interface_adapter.load_songs.LoadSongsState;
+
 import javax.swing.*;
 
 public class ViewBuilder {
 
-    private String viewName;
+    private final ViewModel viewModel;
 
-    public ViewBuilder(String viewName) {
-        this.viewName = viewName;
+    public ViewBuilder(ViewModel viewModel) {
+        this.viewModel = viewModel;
     }
 
     public JFrame buildView() {
-        JFrame view = new JFrame();
-        if (this.viewName.equalsIgnoreCase("LoadSongsView")) {
-            view = buildView2("test");
+        if (this.viewModel.getViewName().equalsIgnoreCase("LoadSongsView")) {
+            return buildAlbumSongsView();
         }
-        return view;
+        if (this.viewModel.getViewName().equalsIgnoreCase("AlbumView")) {
+            return buildAlbumView();
+        }
+
+        // write switch case for other views later
+        return new JFrame();
     }
 
-    private LoadAlbumView1 buildView1() {
+    private LoadSongsView1 buildAlbumSongsView() {
+        LoadSongsState loadSongsState = (LoadSongsState) this.viewModel.getState();
+        LoadSongsView1 loadSongsView1 = new LoadSongsView1(loadSongsState.getAlbumName());
+        for (Song song : loadSongsState.getSongs()) {
+            loadSongsView1.addSong(song);
+        }
+        return loadSongsView1;
+    }
+
+    public LoadAlbumView1 buildAlbumView() {
         return new LoadAlbumView1();
-    }
-
-    private LoadSongsView buildView2(String albumName) {
-        return new LoadSongsView(albumName);
     }
 }

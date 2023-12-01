@@ -1,5 +1,6 @@
 package interface_adapter.load_songs;
 
+import interface_adapter.State;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
@@ -10,7 +11,7 @@ public class LoadSongsViewModel extends ViewModel {
     private LoadSongsState state;
 
     public LoadSongsViewModel() {
-        super("LoadSongsView");
+        super("LoadSongsView", new State());
     }
 
     public void setState(LoadSongsState state) {

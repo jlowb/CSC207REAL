@@ -44,7 +44,7 @@ public class LoadSongsView extends JFrame {
     }
 
     public static void main(String[] args) {
-        new LoadSongsView(args[0]);
+        new LoadSongsView("test");
     }
 }
 
