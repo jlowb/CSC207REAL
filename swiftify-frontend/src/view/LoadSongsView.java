@@ -18,6 +18,7 @@ public class LoadSongsView extends JFrame {
     private JButton PlayPauseButton;
     private JButton NextSongButton;
     private JButton ShuffleButton;
+    private JButton backButton;
     private JPanel SongPanel;
     private JPanel AddToQueuePanel;
 
@@ -52,5 +53,6 @@ public class LoadSongsView extends JFrame {
         PlayPauseButton.setPreferredSize(new Dimension(100, 50));
         NextSongButton.setPreferredSize(new Dimension(50, 50));
         ShuffleButton.setPreferredSize(new Dimension(50, 50));
+        backButton.setPreferredSize(new Dimension(50,50));
     }
 }
