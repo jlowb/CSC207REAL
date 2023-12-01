@@ -1,20 +1,23 @@
 package use_case.play_song;
 
+import entity.PlayerState;
 import entity.Song;
 
 public class PlaySongOutputData {
 
-    private final Song song;
+    private final String songName;
+    private final PlayerState musicPlayer;
 
-    public PlaySongOutputData(Song song) {
-        this.song = song;
+    public PlaySongOutputData(String songName, PlayerState musicPlayer) {
+        this.songName = songName;
+        this.musicPlayer = musicPlayer;
     }
 
-    public int getSongID() {
-        return this.song.getSongID();
+    public String getSong() {
+        return this.songName;
     }
 
-    public Song getSong() {
-        return this.song;
+    public PlayerState getMusicPlayer() {
+        return this.musicPlayer;
     }
 }

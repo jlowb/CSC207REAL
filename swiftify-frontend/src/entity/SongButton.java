@@ -1,12 +1,13 @@
-package use_case.play_song;
+package entity;
 
-import entity.Song;
+import javax.swing.*;
 
-public class SongInputData {
+public class SongButton extends JButton {
+
     private final Integer songId;
     private final String songName;
 
-    public SongInputData(Integer songId, String songName) {
+    public SongButton(Integer songId, String songName) {
         this.songId = songId;
         this.songName = songName;
     }
@@ -14,7 +15,6 @@ public class SongInputData {
     public Integer getSongId() {
         return this.songId;
     }
-
     public String getSongName() {
         return this.songName;
     }

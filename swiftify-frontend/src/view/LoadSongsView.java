@@ -1,9 +1,12 @@
 package view;
 
 import entity.Song;
+import entity.SongButton;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoadSongsView extends JFrame {
     private JPanel LoadSongsViewPanel;
@@ -36,8 +39,19 @@ public class LoadSongsView extends JFrame {
     }
 
     public void addSong(Song song) {
-        SongPanel.add(new JButton(song.getTitle()));
+        SongButton songButton = new SongButton(song.getSongID(), song.getTitle());
+        SongPanel.add(songButton);
         AddToQueuePanel.add(new JButton("+"));
+    }
+
+    ActionListener playSongActionListener = new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() instanceof SongButton) {
+                
+            }
+        }
     }
 
     private void adjustUIComponents() {

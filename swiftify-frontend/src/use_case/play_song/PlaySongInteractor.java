@@ -6,32 +6,23 @@ import javazoom.jl.decoder.JavaLayerException;
 
 import java.io.IOException;
 
-public class PlaySongInteractor implements SongInputBoundary {
+public class PlaySongInteractor implements PlaySongInputBoundary {
+
+    private final URLSongLoader songLoader;
+    private final PlaySongOutputBoundary playSongOutputBoundary;
 
 
-    //Might only need song input data?
-    final SongInputData songInputData;
-    final URLSongLoader songLoader;
-    final PlayerState musicPlaybackControl;
-
-
-    public PlaySongInteractor(SongInputData songInputData,
-                              URLSongLoader songLoader,
-                              PlayerState musicPlaybackControl) {
-
-        this.songInputData = songInputData;
+    public PlaySongInteractor(URLSongLoader songLoader,
+                              PlaySongOutputBoundary playSongOutputBoundary) {
         this.songLoader = songLoader;
-        //this.songOutputBoundary = songOutputBoundary;
-        this.musicPlaybackControl = musicPlaybackControl;
+        this.playSongOutputBoundary = playSongOutputBoundary;
     }
 
-
-    @Override
     public void execute(SongInputData songInputData) throws IOException, InterruptedException, JavaLayerException {
-        String songURL = songLoader.fetchPresignedURL(this.songInputData.getSongID());
-        PlayerState player = musicPlaybackControl;
-        player.play();
-
-        //PlaySongOutputData songOutputData = new PlaySongOutputData(songInputData);
+        String songURL = songLoader.fetchPresignedURL(songInputData.getSongId());
+        PlayerState musicPlayer = new PlayerState(songURL);
+        musicPlayer.play();
+        PlaySongOutputData playSongOutputData = new PlaySongOutputData(songInputData.getSongName(), musicPlayer);
+        this.playSongOutputBoundary.preparePlayingView(playSongOutputData);
     }
 }
