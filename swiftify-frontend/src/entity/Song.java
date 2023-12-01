@@ -1,15 +1,22 @@
-package src.entity;
+package entity;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Song implements Comparable<Song> {
-    private final int songID; // Now an integer
+    private final int songID;
     private final String album;
-    private final int duration; // in seconds
+    private final int duration;
     private final int releaseYear;
     private final String s3Key;
     private final String title;
 
     // Constructor
-    public Song(int songID, String album, int duration, int releaseYear, String s3Key, String title) {
+    public Song(@JsonProperty("SongID") int songID,
+                @JsonProperty("album") String album,
+                @JsonProperty("duration") int duration,
+                @JsonProperty("release_year") int releaseYear,
+                @JsonProperty("s3_key") String s3Key,
+                @JsonProperty("title") String title) {
         this.songID = songID;
         this.album = album;
         this.duration = duration;
