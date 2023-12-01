@@ -29,9 +29,9 @@ public class PauseSongInteractor implements PlaySongInputBoundary {
 
     @Override
     public void execute(PlaySongInputData songInputData) throws IOException, InterruptedException {
-        String songURL = songLoader.fetchPresignedURL(this.songInputData.getSongID());
-        PlayerState player = musicPlaybackControl;
-        player.pause();
+        //String songURL = songLoader.fetchPresignedURL(this.songInputData.getSongID());
+        //PlayerState player = musicPlaybackControl;
+        //player.pause();
 
         //PlaySongOutputData songOutputData = new PlaySongOutputData(songInputData);
     }

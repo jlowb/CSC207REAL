@@ -15,9 +15,9 @@ public class PauseSongController {
     }
 
     public void execute(Song song) throws IOException, InterruptedException, JavaLayerException {
-        PlaySongInputData songInputData = new PlaySongInputData(song);
+        //PlaySongInputData songInputData = new PlaySongInputData(song.getSongID());
 
-        pauseSongInteractor.execute(songInputData);
+        //pauseSongInteractor.execute(songInputData);
     }
 
 

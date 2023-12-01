@@ -9,6 +9,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.play_song.PlaySongController;
 import interface_adapter.play_song.PlaySongPresenter;
 import interface_adapter.play_song.PlaySongViewModel;
+import javazoom.jl.decoder.JavaLayerException;
 import use_case.play_song.PlaySongInputBoundary;
 import use_case.play_song.PlaySongInputData;
 import use_case.play_song.PlaySongInteractor;
@@ -52,6 +53,7 @@ public class LoadSongsView extends JFrame {
 
     public void addSong(Song song) {
         SongButton songButton = new SongButton(song.getSongID(), song.getTitle());
+        songButton.addActionListener(playSongActionListener);
         SongPanel.add(songButton);
         AddToQueuePanel.add(new JButton("+"));
     }
@@ -70,7 +72,10 @@ public class LoadSongsView extends JFrame {
                     throw new RuntimeException(ex);
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
+                } catch (JavaLayerException ex) {
+                    throw new RuntimeException(ex);
                 }
+
             }
         }
     };
@@ -91,7 +96,6 @@ public class LoadSongsView extends JFrame {
         PreviousSongButton.setPreferredSize(new Dimension(50, 50));
         PlayPauseButton = new SongPlaybackButton(null);
         PlayPauseButton.setPreferredSize(new Dimension(100, 50));
-        PlayPauseButton.addActionListener(playSongActionListener);
         NextSongButton.setPreferredSize(new Dimension(50, 50));
         ShuffleButton.setPreferredSize(new Dimension(50, 50));
     }
