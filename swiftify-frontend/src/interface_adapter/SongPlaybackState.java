@@ -4,8 +4,8 @@ import entity.PlayerState;
 
 public class SongPlaybackState extends State {
 
-    private final PlayerState musicPlayer;
-    private final boolean playing;
+    private PlayerState musicPlayer;
+    private boolean playing;
 
     public SongPlaybackState(PlayerState musicPlayer, boolean playing) {
         this.musicPlayer = musicPlayer;
