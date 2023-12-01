@@ -26,9 +26,9 @@ public class ViewBuilder {
         return new JFrame();
     }
 
-    private LoadSongsView1 buildAlbumSongsView() {
+    private LoadSongsView buildAlbumSongsView() {
         LoadSongsState loadSongsState = (LoadSongsState) this.viewModel.getState();
-        LoadSongsView1 loadSongsView1 = new LoadSongsView1(loadSongsState.getAlbumName());
+        LoadSongsView loadSongsView1 = new LoadSongsView(loadSongsState.getAlbumName());
         for (Song song : loadSongsState.getSongs()) {
             loadSongsView1.addSong(song);
         }

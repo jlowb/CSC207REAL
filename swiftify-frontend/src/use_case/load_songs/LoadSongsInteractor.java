@@ -17,14 +17,11 @@ public class LoadSongsInteractor implements LoadSongsInputBoundary {
     @Override
     public void execute(LoadSongsInputData loadSongsInputData) {
         List<Song> songList = new ArrayList<Song>();
-        /*
         for (Song song : MusicLibrary.getInstance().getSongs()) {
             if (song.getAlbum().equals(loadSongsInputData.getAlbumName())) {
                 songList.add(song);
             }
         }
-
-         */
         LoadSongsOutputData loadSongsOutputData = new LoadSongsOutputData(loadSongsInputData.getAlbumName(), songList, false);
         loadSongsOutputBoundary.loadSongs(loadSongsOutputData);
     }

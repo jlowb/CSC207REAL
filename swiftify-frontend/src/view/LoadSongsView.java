@@ -1,51 +1,56 @@
 package view;
 
+import entity.Song;
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 
 public class LoadSongsView extends JFrame {
-    private JPanel loadSongsPanel;
-    private JButton backButton;
-    private JProgressBar progressBar;
-    private JPanel panel2;
-    private JButton previousSongButton;
-    private JButton nextSongButton;
-    private JButton playPauseButton;
-    private JScrollBar scrollBar;
-    private JPanel songPanel;
-    private JPanel playerPanel;
-    private JPanel controlsPanel;
-    private JPanel mainPanel;
+    private JPanel LoadSongsViewPanel;
+    private JProgressBar SongProgressBar;
+    private JPanel ControlsPanel;
+    private JLabel CurrentSongField;
+    private JPanel RightPanel;
+    private JScrollPane LeftPanel;
+    private JPanel SongListPanel;
+    private JSplitPane MainPanel;
+    private JButton PreviousSongButton;
+    private JButton PlayPauseButton;
+    private JButton NextSongButton;
+    private JButton ShuffleButton;
+    private JPanel SongPanel;
+    private JPanel AddToQueuePanel;
 
-
-    public LoadSongsView(String selectedAlbum) {
-        setContentPane(loadSongsPanel);
-        setTitle("Swiftify Album- Red");
+    public LoadSongsView(String albumName) {
+        setContentPane(LoadSongsViewPanel);
+        adjustUIComponents();
+        setTitle("Swiftify Album - " + albumName);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1080, 680);
         setLocationRelativeTo(null);
         setVisible(true);
-
-        ActionListener a = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() instanceof JButton) {
-                    LoadAlbumView1 page = new LoadAlbumView1();
-                    page.setVisible(true);
-                }
-                dispose();
-            }
-        };
-    }
-
-    public void addSong(String songName) {
-        songPanel.add(new JButton(songName));
     }
 
     public static void main(String[] args) {
-        new LoadSongsView("test");
+        new LoadSongsView("Test");
+    }
+
+    public void addSong(Song song) {
+        SongPanel.add(new JButton(song.getTitle()));
+        AddToQueuePanel.add(new JButton("+"));
+    }
+
+    private void adjustUIComponents() {
+        SongPanel = new JPanel();
+        SongPanel.setLayout(new BoxLayout(SongPanel, BoxLayout.Y_AXIS));
+        AddToQueuePanel = new JPanel();
+        AddToQueuePanel.setLayout(new BoxLayout(AddToQueuePanel, BoxLayout.Y_AXIS));
+        SongListPanel.setLayout(new BorderLayout());
+        SongListPanel.add(SongPanel, BorderLayout.WEST);
+        SongListPanel.add(AddToQueuePanel, BorderLayout.EAST);
+        PreviousSongButton.setPreferredSize(new Dimension(50, 50));
+        PlayPauseButton.setPreferredSize(new Dimension(100, 50));
+        NextSongButton.setPreferredSize(new Dimension(50, 50));
+        ShuffleButton.setPreferredSize(new Dimension(50, 50));
     }
 }
-
-
