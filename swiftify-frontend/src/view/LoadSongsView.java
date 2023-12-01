@@ -81,8 +81,8 @@ public class LoadSongsView extends JFrame {
     };
 
     public void changePlaybackState(SongPlaybackState songPlaybackState) {
-        PlayPauseButton.setText("||");
-        ((SongPlaybackButton) PlayPauseButton).setSongPlaybackState(songPlaybackState);
+        this.PlayPauseButton.setText("||");
+        ((SongPlaybackButton) this.PlayPauseButton).setSongPlaybackState(songPlaybackState);
     }
 
     private void adjustUIComponents() {

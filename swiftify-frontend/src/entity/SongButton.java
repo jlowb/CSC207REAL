@@ -10,6 +10,7 @@ public class SongButton extends JButton {
     public SongButton(Integer songId, String songName) {
         this.songId = songId;
         this.songName = songName;
+        this.setText(songName);
     }
 
     public Integer getSongId() {
