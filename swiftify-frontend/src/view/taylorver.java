@@ -42,10 +42,10 @@ public class taylorver extends JFrame implements ActionListener, PropertyChangeL
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        redpanel = new LoadAlbumView1.ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/red.png");
+        redpanel = new LoadAlbumView1.ImagePanel("swiftify-frontend/src/pngs/red.png");
         setContentPane(redpanel);
 
-        fearlesspanel = new LoadAlbumView1.ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/fearless.png");
+        fearlesspanel = new LoadAlbumView1.ImagePanel("swiftify-frontend/src/pngs/fearless.png");
         setContentPane(fearlesspanel);
 
         fearlessbutton = new JButton("Fearless (Taylor's Version)");

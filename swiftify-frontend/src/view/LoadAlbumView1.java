@@ -160,34 +160,34 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        Panel1 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/taylor_swift.png");
+        Panel1 = new ImagePanel("swiftify-frontend/src/pngs/taylor_swift.png");
         setContentPane(Panel1);
 
-        Panel6 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/fearless.png");
+        Panel6 = new ImagePanel("swiftify-frontend/src/pngs/fearless.png");
         setContentPane(Panel6);
 
-        Panel2 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/speak_now.png");
+        Panel2 = new ImagePanel("swiftify-frontend/src/pngs/speak_now.png");
         setContentPane(Panel2);
 
-        Panel3 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/1989.png");
+        Panel3 = new ImagePanel("swiftify-frontend/src/pngs/1989.png");
         setContentPane(Panel3);
 
-        Panel4 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/lover.png");
+        Panel4 = new ImagePanel("swiftify-frontend/src/pngs/lover.png");
         setContentPane(Panel4);
 
-        Panel5 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/evermore.png");
+        Panel5 = new ImagePanel("swiftify-frontend/src/pngs/evermore.png");
         setContentPane(Panel5);
 
-        Panel10 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/midnights.png");
+        Panel10 = new ImagePanel("swiftify-frontend/src/pngs/midnights.png");
         setContentPane(Panel10);
 
-        Panel7 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/red.png");
+        Panel7 = new ImagePanel("swiftify-frontend/src/pngs/red.png");
         setContentPane(Panel7);
 
-        Panel9 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/folklore.png");
+        Panel9 = new ImagePanel("swiftify-frontend/src/pngs/folklore.png");
         setContentPane(Panel9);
 
-        Panel8 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/reputation.png");
+        Panel8 = new ImagePanel("swiftify-frontend/src/pngs/reputation.png");
         setContentPane(Panel8);
 
     }

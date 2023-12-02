@@ -33,10 +33,10 @@ public class deluxes extends JFrame implements ActionListener, PropertyChangeLis
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        speakpanel = new LoadAlbumView1.ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/speak_now.png");
+        speakpanel = new LoadAlbumView1.ImagePanel("swiftify-frontend/src/pngs/speak_now.png");
         setContentPane(speakpanel);
 
-        a1989panel = new LoadAlbumView1.ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/1989.png");
+        a1989panel = new LoadAlbumView1.ImagePanel("swiftify-frontend/src/pngs/1989.png");
         setContentPane(a1989panel);
         speakbutton = new JButton("Speak Now");
         a1989button = new JButton("1989");
