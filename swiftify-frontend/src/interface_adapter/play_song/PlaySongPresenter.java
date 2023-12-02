@@ -24,6 +24,7 @@ public class PlaySongPresenter implements PlaySongOutputBoundary {
         viewManagerModel.setActiveView(playSongViewModel.getViewName());
         viewManagerModel.setViewModel(this.playSongViewModel);
         viewManagerModel.firePropertyChanged();
+        playSongOutputData.getMusicPlayer().play();
     }
 
     public PlaySongViewModel getModel() {
