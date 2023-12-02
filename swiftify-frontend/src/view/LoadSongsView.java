@@ -15,6 +15,7 @@ import use_case.play_song.PlaySongInputData;
 import use_case.play_song.PlaySongInteractor;
 
 import javax.swing.*;
+import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -64,7 +65,9 @@ public class LoadSongsView extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() instanceof SongButton) {
                 PlaySongInputData playSongInputData = new PlaySongInputData(((SongButton) e.getSource()).getSongId(), ((SongButton) e.getSource()).getSongName(), LoadSongsView.this);
-                PlaySongInputBoundary playSongInputBoundary = new PlaySongInteractor(new URLSongLoader(), new PlaySongPresenter(new PlaySongViewModel(), new ViewManagerModel()));
+                ViewManagerModel viewManagerModel = new ViewManagerModel();
+                new ViewManager(viewManagerModel);
+                PlaySongInputBoundary playSongInputBoundary = new PlaySongInteractor(new URLSongLoader(), new PlaySongPresenter(new PlaySongViewModel(), viewManagerModel));
                 PlaySongController playSongController = new PlaySongController(playSongInputBoundary);
                 try {
                     playSongController.execute(playSongInputData);
