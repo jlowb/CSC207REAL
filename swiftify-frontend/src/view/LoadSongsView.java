@@ -1,6 +1,30 @@
 package view;
 
+import data_access.URLSongLoader;
 import entity.Song;
+import entity.SongButton;
+import entity.SongPlaybackButton;
+import interface_adapter.SongPlaybackState;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.pause_song.PauseSongController;
+import interface_adapter.pause_song.PauseSongPresenter;
+import interface_adapter.pause_song.PauseSongViewModel;
+import interface_adapter.play_song.PlaySongController;
+import interface_adapter.play_song.PlaySongPresenter;
+import interface_adapter.play_song.PlaySongViewModel;
+import interface_adapter.resume_song.ResumeSongController;
+import interface_adapter.resume_song.ResumeSongPresenter;
+import interface_adapter.resume_song.ResumeSongViewModel;
+import javazoom.jl.decoder.JavaLayerException;
+import use_case.pause_song.PauseSongInputBoundary;
+import use_case.pause_song.PauseSongInputData;
+import use_case.pause_song.PauseSongInteractor;
+import use_case.play_song.PlaySongInputBoundary;
+import use_case.play_song.PlaySongInputData;
+import use_case.play_song.PlaySongInteractor;
+import use_case.resume_song.ResumeSongInputBoundary;
+import use_case.resume_song.ResumeSongInputData;
+import use_case.resume_song.ResumeSongInteractor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +46,6 @@ public class LoadSongsView extends JFrame {
     private JButton ShuffleButton;
     private JButton BackButton;
     private JPanel CoverPanel;
-    private JProgressBar SongProgressBar;
     private JPanel BackPanel;
     private JPanel MusicPlayPanel;
     private JPanel ControlPanel;
@@ -168,9 +191,6 @@ public class LoadSongsView extends JFrame {
         ControlsPanel.add(PreviousSongButton, 0);
         ControlsPanel.add(PlayPauseButton, 1);
         ControlsPanel.add(NextSongButton, 2);
-
-
-
     }
 
     private void createUIComponents() {

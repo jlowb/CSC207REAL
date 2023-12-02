@@ -110,7 +110,15 @@
                     </constraints>
                     <properties/>
                     <border type="none"/>
-                    <children/>
+                    <children>
+                      <component id="f8ba1" class="javax.swing.JButton" binding="ShuffleButton">
+                        <constraints/>
+                        <properties>
+                          <icon value="↹"/>
+                          <text value="Button"/>
+                        </properties>
+                      </component>
+                    </children>
                   </grid>
                 </children>
               </grid>

@@ -19,7 +19,7 @@ public class ViewBuilder {
         if (this.viewModel.getViewName().equalsIgnoreCase("LoadSongsView")) {
             return buildAlbumSongsView();
         }
-        if (this.viewModel.getViewName().equalsIgnoreCase("AlbumView")) {
+        if (this.viewModel.getViewName().equalsIgnoreCase("LoadAlbumView")) {
             return buildAlbumView();
         }
         if (this.viewModel.getViewName().equalsIgnoreCase("PlaySongView")) {
