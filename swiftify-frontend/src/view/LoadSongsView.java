@@ -85,6 +85,7 @@ public class LoadSongsView extends JFrame {
     public void changePlaybackState(SongPlaybackState songPlaybackState) {
         this.PlayPauseButton.setText("||");
         ((SongPlaybackButton) this.PlayPauseButton).setSongPlaybackState(songPlaybackState);
+        CurrentSongField.setText("Currently Playing: " + songPlaybackState.getSongName());
     }
 
     private void adjustUIComponents() {
