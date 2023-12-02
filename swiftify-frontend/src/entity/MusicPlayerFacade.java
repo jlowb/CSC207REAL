@@ -3,47 +3,36 @@ package entity;
 import javazoom.jl.decoder.JavaLayerException;
 
 public class MusicPlayerFacade {
-    private final MusicQueueSingleton musicQueue;
-    private final PlayerState playbackControl;
+    private static MusicPlayerFacade instance;
+    private MusicQueue queue;
+
+    private PlayerState playbackControl; // implement methods for this if needed
+
+    private MusicPlayerFacade(boolean shuffled, int discographyLength) {
+        this.queue = new MusicQueue(shuffled, discographyLength);
+    }
+
+    public static synchronized MusicPlayerFacade getInstance() {
+        if (instance == null) {
+            MusicLibrary library = MusicLibrary.getInstance();
+            instance = new MusicPlayerFacade(false, library.getLength());
+        }
+        return instance;
+    }
 
     // QUEUE ONLY
     public void toggleShuffle() {
-        musicQueue.getQueue().toggleShuffle();
+        queue.toggleShuffle();
     }
     public int getCurrentSong() {
-        return musicQueue.getQueue().getCurrentID();
+        return queue.getCurrentID();
     }
     public int getPrevSong() {
-        musicQueue.getQueue().previous();
-        return musicQueue.getQueue().getCurrentID();
+        queue.previous();
+        return queue.getCurrentID();
     }
     public int getNextSong() {
-        musicQueue.getQueue().next();
-        return musicQueue.getQueue().getCurrentID();
-    }
-
-    // QUEUE PLUS MUSIC PLAYER (CAN DELETE?)
-    public MusicPlayerFacade(String url) throws JavaLayerException {
-        MusicQueueSingleton musicQueue = MusicQueueSingleton.getInstance();
-        this.musicQueue = musicQueue;
-        this.playbackControl = new PlayerState(url);
-    }
-
-    public void play() throws JavaLayerException {
-        playbackControl.play();
-    }
-
-    public void pause() {
-        playbackControl.pause();
-    }
-
-    public void playNextSong() throws JavaLayerException {
-        musicQueue.getQueue().next();
-        playbackControl.play();
-    }
-
-    public void playPreviousSong() throws JavaLayerException {
-        musicQueue.getQueue().previous();
-        playbackControl.play();
+        queue.next();
+        return queue.getCurrentID();
     }
 }
