@@ -1,13 +1,20 @@
 package use_case.load_album;
 
-import java.util.LinkedList;
-
 public class LoadAlbumsOutputData {
-    private LinkedList<String> albums;
-    public LinkedList<String> getAlbums() {
-        return albums;
+
+    private final String albumType;
+    private final Object view;
+    private boolean useCaseFailed;
+
+    public LoadAlbumsOutputData(String albumType, Object view, boolean useCaseFailed) {
+        this.albumType = albumType;
+        this.useCaseFailed = useCaseFailed;
+        this.view = view;
     }
-    public void setSongs(LinkedList<String> albums) {
-        this.albums = albums;
+
+  ;
+    public String getAlbumType() {
+        return albumType;
     }
+
 }
