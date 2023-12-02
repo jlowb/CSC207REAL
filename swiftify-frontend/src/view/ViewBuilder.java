@@ -20,11 +20,12 @@ public class ViewBuilder {
         if (this.viewModel.getViewName().equalsIgnoreCase("LoadSongsView")) {
             return buildAlbumSongsView();
         }
-        if (this.viewModel.getViewName().equalsIgnoreCase("AlbumView")) {
-            return buildAlbumView();
+
+        if (this.viewModel.getViewName().equalsIgnoreCase("All")) {
+            return buildAll();
         }
 
-        // write switch case for other views later
+
         return new JFrame();
     }
 
@@ -37,25 +38,45 @@ public class ViewBuilder {
         return loadSongsView1;
     }
 
-    private Vieww BuildAlbumView() {
-        LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
-        if (loadAlbumState.getAlbumType().equals("All")) {
-            LoadAlbumView1 LoadAlbumView1 = new LoadAlbumView1();
-            for (Album album : loadAlbumState.getAlbums()) {
-                for (int i=1; i < 11; i++ ) {
+ //   private JFrame BuildAlbumView() {
+       // LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
+       // if (loadAlbumState.getAlbumType().equals("All")) {
+          //  LoadAlbumView1 LoadAlbumView1 = new LoadAlbumView1();
+         //   for (Album album : loadAlbumState.getAlbums()) {
+        //    LoadAlbumView1 page = new LoadAlbumView1();
+        //    page.setVisible(true);
+     //   LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
+     //   if (loadAlbumState.getAlbumType().equals("All")) {
+         //   return buildAll();
 
 
-
-        }
+       //     }
+      //  return buildAll();
+     //   }
        // for (Album albumtype : loadAlbumState.getAlbums()) {
        //
 
       //  }
 
-        return vieww;
+    private LoadAlbumView1 buildAlbumView() {
+        LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
+        if (loadAlbumState.getAlbumType().equals("All")) {
+            return new LoadAlbumView1();
+        }
+
+        return new LoadAlbumView1(); // wont even just show the static screen
     }
 
-    public LoadAlbumView1 buildAlbumView() {
+
+
+    private JFrame buildAll() {
         return new LoadAlbumView1();
     }
+
+
+
+
+  //  public LoadAlbumView1 buildAlbumView() {
+   //     return new LoadAlbumView1();
+  //  }
 }

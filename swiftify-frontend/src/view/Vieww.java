@@ -72,6 +72,7 @@ public class Vieww {
                         LoadAlbumsInputData loadAlbumsInputData = new LoadAlbumsInputData(AlbumType);
                         loadAlbumController.execute(loadAlbumsInputData);
 
+
                     //    if ("All".equals(AlbumType)) {
                     //        LoadAlbumView1 page = new LoadAlbumView1();
                     //    page.setVisible(true);

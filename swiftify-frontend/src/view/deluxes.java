@@ -15,7 +15,6 @@ public class deluxes extends JFrame implements ActionListener, PropertyChangeLis
     private JButton button1;
     private JButton button2;
     private JButton button3;
-    private JButton backButton;
 
     public deluxes(){
         createUIComponents();
@@ -27,10 +26,6 @@ public class deluxes extends JFrame implements ActionListener, PropertyChangeLis
         setVisible(true);
 
     }
-
-
-
-
 
 
         public static void main(String[] args) {

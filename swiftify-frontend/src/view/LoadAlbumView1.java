@@ -50,8 +50,8 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
 
 
     public LoadAlbumView1() {
-        loadAlbumViewModel = new LoadAlbumViewModel();
-        loadAlbumViewModel.addPropertyChangeListener(this);
+        LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
+        loadAlbumViewModel.addPropertyChangeListener((PropertyChangeListener) this);
 
         createUIComponents();
         setContentPane(panelmain);
