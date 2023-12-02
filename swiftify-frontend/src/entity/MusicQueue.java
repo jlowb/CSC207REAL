@@ -11,7 +11,7 @@ public class MusicQueue implements Iterable<Integer> {
     private Node current;
     private final Random random;
     private boolean shuffled;
-    private int lengthOfDiscography;
+    private int discographyLength;
 
     private static class Node {
         int songID;
@@ -23,13 +23,13 @@ public class MusicQueue implements Iterable<Integer> {
         }
     }
 
-    public MusicQueue(boolean shuffled, int lengthOfDiscography) {
+    public MusicQueue(boolean shuffled, int discographyLength) {
         this.head = null;
         this.tail = null;
         this.current = null;
         this.random = new Random();
         this.shuffled = shuffled;
-        this.lengthOfDiscography = lengthOfDiscography;
+        this.discographyLength = discographyLength;
     }
 
     public int getCurrentID() {
@@ -108,14 +108,14 @@ public class MusicQueue implements Iterable<Integer> {
         if (shuffled) {
             return getRandomUnplayedSong();
         } else {
-            return (current.songID + 1) % lengthOfDiscography;
+            return (current.songID + 1) % discographyLength;
         }
     }
 
     private int getRandomUnplayedSong() {
         int nextSongId;
         do {
-            nextSongId = random.nextInt(lengthOfDiscography);
+            nextSongId = random.nextInt(discographyLength);
         } while (hasSongBeenPlayed(nextSongId));
 
         return nextSongId;

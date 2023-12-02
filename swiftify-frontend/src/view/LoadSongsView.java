@@ -135,6 +135,22 @@ public class LoadSongsView extends JFrame {
         }
     };
 
+    ActionListener nextSongActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (PlayPauseButton.getSongPlaybackState() != null) {
+                PlayPauseButton.getSongPlaybackState().getMusicPlayer().stop();
+            }
+        }
+    };
+
+    ActionListener prevSongActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    };
+
     WindowListener ghettoBackButton = new WindowAdapter() {
 
         @Override

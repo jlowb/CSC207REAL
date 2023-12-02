@@ -3,11 +3,29 @@ package entity;
 import javazoom.jl.decoder.JavaLayerException;
 
 public class MusicPlayerFacade {
-    private final MusicQueue musicQueue;
+    private final MusicQueueSingleton musicQueue;
     private final PlayerState playbackControl;
 
-    public MusicPlayerFacade(boolean playing, boolean shuffled, int lengthOfDiscography, String url) throws JavaLayerException {
-        this.musicQueue = new MusicQueue(shuffled, lengthOfDiscography);
+    // QUEUE ONLY
+    public void toggleShuffle() {
+        musicQueue.getQueue().toggleShuffle();
+    }
+    public int getCurrentSong() {
+        return musicQueue.getQueue().getCurrentID();
+    }
+    public int getPrevSong() {
+        musicQueue.getQueue().previous();
+        return musicQueue.getQueue().getCurrentID();
+    }
+    public int getNextSong() {
+        musicQueue.getQueue().next();
+        return musicQueue.getQueue().getCurrentID();
+    }
+
+    // QUEUE PLUS MUSIC PLAYER (CAN DELETE?)
+    public MusicPlayerFacade(String url) throws JavaLayerException {
+        MusicQueueSingleton musicQueue = MusicQueueSingleton.getInstance();
+        this.musicQueue = musicQueue;
         this.playbackControl = new PlayerState(url);
     }
 
@@ -20,20 +38,12 @@ public class MusicPlayerFacade {
     }
 
     public void playNextSong() throws JavaLayerException {
-        musicQueue.next();
+        musicQueue.getQueue().next();
         playbackControl.play();
     }
 
     public void playPreviousSong() throws JavaLayerException {
-        musicQueue.previous();
+        musicQueue.getQueue().previous();
         playbackControl.play();
-    }
-
-    public void toggleShuffle() {
-        musicQueue.toggleShuffle();
-    }
-
-    public int getCurrentSong() {
-        return musicQueue.getCurrentID();
     }
 }
