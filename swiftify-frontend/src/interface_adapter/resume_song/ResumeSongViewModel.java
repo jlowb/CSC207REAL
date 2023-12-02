@@ -1,26 +1,17 @@
-package interface_adapter.play_song;
+package interface_adapter.resume_song;
 
 import interface_adapter.SongPlaybackState;
-import interface_adapter.State;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class PlaySongViewModel extends ViewModel {
+public class ResumeSongViewModel extends ViewModel {
 
     private SongPlaybackState state;
 
-    public PlaySongViewModel() {
-        super("PlaySongView", new State());
-    }
-
-    public void setState(SongPlaybackState state) {
-        this.state = state;
-    }
-
-    public SongPlaybackState getState() {
-        return this.state;
+    public ResumeSongViewModel(SongPlaybackState state) {
+        super("ResumeSongView", state);
     }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
