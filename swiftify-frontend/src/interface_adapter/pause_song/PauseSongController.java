@@ -2,23 +2,20 @@ package interface_adapter.pause_song;
 
 import entity.Song;
 import javazoom.jl.decoder.JavaLayerException;
+import use_case.pause_song.PauseSongInputBoundary;
+import use_case.pause_song.PauseSongInputData;
 import use_case.play_song.PlaySongInputBoundary;
-import use_case.play_song.PlaySongInputData;
 
 import java.io.IOException;
 
 public class PauseSongController {
-    final PlaySongInputBoundary pauseSongInteractor;
+    private final PauseSongInputBoundary pauseSongInputBoundary;
 
-    public PauseSongController(PlaySongInputBoundary pauseSongInteractor) {
-        this.pauseSongInteractor = pauseSongInteractor;
+    public PauseSongController(PauseSongInputBoundary pauseSongInputBoundary) {
+        this.pauseSongInputBoundary = pauseSongInputBoundary;
     }
 
-    public void execute(Song song) throws IOException, InterruptedException, JavaLayerException {
-        //PlaySongInputData songInputData = new PlaySongInputData(song.getSongID());
-
-        //pauseSongInteractor.execute(songInputData);
+    public void execute(PauseSongInputData pauseSongInputData) throws IOException, InterruptedException, JavaLayerException {
+        pauseSongInputBoundary.execute(pauseSongInputData);
     }
-
-
 }

@@ -7,32 +7,17 @@ import use_case.play_song.PlaySongInputData;
 
 import java.io.IOException;
 
-public class PauseSongInteractor implements PlaySongInputBoundary {
+public class PauseSongInteractor implements PauseSongInputBoundary {
 
+    private final PauseSongOutputBoundary pauseSongOutputBoundary;
 
-    //Might only need song input data?
-    final PlaySongInputData songInputData;
-    final URLSongLoader songLoader;
-    final PlayerState musicPlaybackControl;
-
-
-    public PauseSongInteractor(PlaySongInputData songInputData,
-                               URLSongLoader songLoader,
-                               PlayerState musicPlaybackControl) {
-
-        this.songInputData = songInputData;
-        this.songLoader = songLoader;
-        //this.songOutputBoundary = songOutputBoundary;
-        this.musicPlaybackControl = musicPlaybackControl;
+    public PauseSongInteractor(PauseSongOutputBoundary pauseSongOutputBoundary) {
+        this.pauseSongOutputBoundary = pauseSongOutputBoundary;
     }
 
-
-    @Override
-    public void execute(PlaySongInputData songInputData) throws IOException, InterruptedException {
-        //String songURL = songLoader.fetchPresignedURL(this.songInputData.getSongID());
-        //PlayerState player = musicPlaybackControl;
-        //player.pause();
-
-        //PlaySongOutputData songOutputData = new PlaySongOutputData(songInputData);
+    public void execute(PauseSongInputData pauseSongInputData) throws IOException, InterruptedException {
+        pauseSongInputData.getState().getMusicPlayer().pause();
+        pauseSongInputData.getState().setPlaying(false);
+        this.pauseSongOutputBoundary.preparePausedView(new PauseSongOutputData(pauseSongInputData.getState(), pauseSongInputData.getView()));
     }
 }

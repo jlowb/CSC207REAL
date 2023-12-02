@@ -25,6 +25,12 @@ public class ViewBuilder {
         if (this.viewModel.getViewName().equalsIgnoreCase("PlaySongView")) {
             return buildPlayingView();
         }
+        if (this.viewModel.getViewName().equalsIgnoreCase("PauseSongView")) {
+            return buildPausedView();
+        }
+        if (this.viewModel.getViewName().equalsIgnoreCase("ResumeSongView")) {
+            return buildResumedView();
+        }
 
         // write switch case for other views later
         return new JFrame();
@@ -46,7 +52,21 @@ public class ViewBuilder {
     public LoadSongsView buildPlayingView() {
         SongPlaybackState songPlaybackState = (SongPlaybackState) this.viewModel.getState();
         LoadSongsView view = songPlaybackState.getView();
-        view.changePlaybackState(songPlaybackState);
+        view.setPlayingView(songPlaybackState);
+        return view;
+    }
+
+    public LoadSongsView buildPausedView() {
+        SongPlaybackState songPlaybackState = (SongPlaybackState) this.viewModel.getState();
+        LoadSongsView view = songPlaybackState.getView();
+        view.setPausedView(songPlaybackState);
+        return view;
+    }
+
+    public LoadSongsView buildResumedView() {
+        SongPlaybackState songPlaybackState = (SongPlaybackState) this.viewModel.getState();
+        LoadSongsView view = songPlaybackState.getView();
+        view.setResumedView(songPlaybackState);
         return view;
     }
 }

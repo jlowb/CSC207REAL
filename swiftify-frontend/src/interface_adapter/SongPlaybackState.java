@@ -24,4 +24,16 @@ public class SongPlaybackState extends State {
     public String getSongName() {
         return this.songName;
     }
+
+    public PlayerState getMusicPlayer() {
+        return this.musicPlayer;
+    }
+
+    public boolean getPlaying() {
+        return this.playing;
+    }
+
+    public void setPlaying(boolean playing) {
+        this.playing = playing;
+    }
 }

@@ -1,18 +1,17 @@
-package interface_adapter.pause_song;
+package interface_adapter.resume_song;
 
-import entity.Song;
 import interface_adapter.SongPlaybackState;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class PauseSongViewModel extends ViewModel {
+public class ResumeSongViewModel extends ViewModel {
 
     private SongPlaybackState state;
 
-    public PauseSongViewModel(SongPlaybackState state) {
-        super("PauseSongView", state);
+    public ResumeSongViewModel(SongPlaybackState state) {
+        super("ResumeSongView", state);
     }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);

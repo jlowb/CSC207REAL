@@ -7,13 +7,13 @@ import use_case.play_song.PlaySongInputData;
 import java.io.IOException;
 
 public class PlaySongController {
-    private final PlaySongInputBoundary songInputBoundary;
+    private final PlaySongInputBoundary playSongInputBoundary;
 
     public PlaySongController(PlaySongInputBoundary songInputBoundary) {
-        this.songInputBoundary = songInputBoundary;
+        this.playSongInputBoundary = songInputBoundary;
     }
 
-    public void execute(PlaySongInputData songInputData) throws IOException, InterruptedException, JavaLayerException {
-        songInputBoundary.execute(songInputData);
+    public void execute(PlaySongInputData playSongInputData) throws IOException, InterruptedException, JavaLayerException {
+        playSongInputBoundary.execute(playSongInputData);
     }
 }

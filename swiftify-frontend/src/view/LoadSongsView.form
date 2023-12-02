@@ -66,18 +66,6 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="c3a0d" class="javax.swing.JButton" binding="PreviousSongButton">
-                    <constraints/>
-                    <properties>
-                      <text value="&lt;"/>
-                    </properties>
-                  </component>
-                  <component id="77f18" class="javax.swing.JButton" binding="NextSongButton">
-                    <constraints/>
-                    <properties>
-                      <text value="&gt;"/>
-                    </properties>
-                  </component>
                   <component id="e7316" class="javax.swing.JButton" binding="ShuffleButton">
                     <constraints/>
                     <properties>
