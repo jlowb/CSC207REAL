@@ -1,6 +1,7 @@
 package view;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModel;
 import interface_adapter.load_album.LoadAlbumController;
 import interface_adapter.load_album.LoadAlbumPresenter;
 import interface_adapter.load_album.LoadAlbumViewModel;
@@ -71,6 +72,7 @@ public class Vieww {
                         LoadAlbumController loadAlbumController = new LoadAlbumController(loadAlbumsInputBoundary);
                         LoadAlbumsInputData loadAlbumsInputData = new LoadAlbumsInputData(AlbumType);
                         loadAlbumController.execute(loadAlbumsInputData);
+
 
 
                     //    if ("All".equals(AlbumType)) {
