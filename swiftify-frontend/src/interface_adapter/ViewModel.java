@@ -5,9 +5,11 @@ import java.beans.PropertyChangeListener;
 public abstract class ViewModel {
 
     private String viewName;
+    private State state;
 
-    public ViewModel(String viewName) {
+    public ViewModel(String viewName, State state) {
         this.viewName = viewName;
+        this.state = state;
     }
 
     public String getViewName() {
@@ -16,6 +18,10 @@ public abstract class ViewModel {
 
     public void setActiveView(String viewName) {
         this.viewName = viewName;
+    }
+
+    public State getState() {
+        return this.state;
     }
     public abstract void firePropertyChanged();
 

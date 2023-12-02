@@ -6,7 +6,7 @@ import use_case.load_songs.LoadSongsInputData;
 
 public class LoadSongsController {
 
-    public final LoadSongsInputBoundary loadSongsInputBoundary;
+    private final LoadSongsInputBoundary loadSongsInputBoundary;
 
     public LoadSongsController(LoadSongsInputBoundary loadSongsInputBoundary) {
         this.loadSongsInputBoundary = loadSongsInputBoundary;

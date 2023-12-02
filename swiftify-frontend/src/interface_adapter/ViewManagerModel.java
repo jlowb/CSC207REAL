@@ -1,6 +1,4 @@
-package interface_adapter.load_album;
-
-import interface_adapter.ViewModel;
+package interface_adapter;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
