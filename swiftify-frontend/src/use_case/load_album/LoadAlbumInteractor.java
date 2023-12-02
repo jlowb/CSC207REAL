@@ -24,7 +24,7 @@ public class LoadAlbumInteractor implements LoadAlbumsInputBoundary {
             }
         }
 
-        LoadAlbumsOutputData loadAlbumsOutputData = new LoadAlbumsOutputData(loadAlbumsInputData.getAlbumType(), AlbumList, false);
+        LoadAlbumsOutputData loadAlbumsOutputData = new LoadAlbumsOutputData(albumType, AlbumList, false);
         loadAlbumsOutputBoundary.loadAlbums(loadAlbumsOutputData);
 
     }

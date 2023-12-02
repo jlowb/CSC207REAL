@@ -22,26 +22,26 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
 
     private JPanel panel;
     private LoadAlbumViewModel loadAlbumViewModel;
-    private JButton MidnightsButton;
-    private JButton EvermoreButton;
-    private JButton LoverButton;
-    private JButton a1989Button;
-    private JButton FolkloreButton;
-    private JButton ReputationButton;
-    private JButton RedButton;
-    private JButton FearlessButton;
-    private JButton SpeakNowButton;
-    private JButton TaylorSwiftButton;
-    private JPanel panel11;
-    private JPanel fearlesspanel;
-    private JPanel Speaknowpanel;
-    private JPanel p1989panel;
-    private JPanel loverpanel;
-    private JPanel evermorepanel;
-    private JPanel midnightspanel;
-    private JPanel redpanel;
-    private JPanel reputationpanel;
-    private JPanel folklorepanel;
+    private JButton Album10;
+    private JButton Album5;
+    private JButton Album4;
+    private JButton Album3;
+    private JButton Album9;
+    private JButton Album8;
+    private JButton Album7;
+    private JButton Album6;
+    private JButton Album2;
+    private JButton Album1;
+    private JPanel Panel1;
+    private JPanel Panel6;
+    private JPanel Panel2;
+    private JPanel Panel3;
+    private JPanel Panel4;
+    private JPanel Panel5;
+    private JPanel Panel10;
+    private JPanel Panel7;
+    private JPanel Panel8;
+    private JPanel Panel9;
     private JButton button1;
     private JButton button2;
     private JButton button3;
@@ -138,16 +138,16 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
 
 
 
-        MidnightsButton.addActionListener(a);
-        EvermoreButton.addActionListener(a);
-        LoverButton.addActionListener(a);
-        a1989Button.addActionListener(a);
-        FolkloreButton.addActionListener(a);
-        ReputationButton.addActionListener(a);
-        RedButton.addActionListener(a);
-        FearlessButton.addActionListener(a);
-        SpeakNowButton.addActionListener(a);
-        TaylorSwiftButton.addActionListener(a);
+        Album10.addActionListener(a);
+        Album5.addActionListener(a);
+        Album4.addActionListener(a);
+        Album3.addActionListener(a);
+        Album9.addActionListener(a);
+        Album8.addActionListener(a);
+        Album7.addActionListener(a);
+        Album6.addActionListener(a);
+        Album2.addActionListener(a);
+        Album1.addActionListener(a);
 
     }
 
@@ -160,35 +160,35 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        panel11 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/taylor_swift.png");
-        setContentPane(panel11);
+        Panel1 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/taylor_swift.png");
+        setContentPane(Panel1);
 
-        fearlesspanel = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/fearless.png");
-        setContentPane(fearlesspanel);
+        Panel6 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/fearless.png");
+        setContentPane(Panel6);
 
-        Speaknowpanel = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/speak_now.png");
-        setContentPane(Speaknowpanel);
+        Panel2 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/speak_now.png");
+        setContentPane(Panel2);
 
-        p1989panel = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/1989.png");
-        setContentPane(p1989panel);
+        Panel3 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/1989.png");
+        setContentPane(Panel3);
 
-        loverpanel = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/lover.png");
-        setContentPane(loverpanel);
+        Panel4 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/lover.png");
+        setContentPane(Panel4);
 
-        evermorepanel = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/evermore.png");
-        setContentPane(evermorepanel);
+        Panel5 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/evermore.png");
+        setContentPane(Panel5);
 
-        midnightspanel = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/midnights.png");
-        setContentPane(midnightspanel);
+        Panel10 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/midnights.png");
+        setContentPane(Panel10);
 
-        redpanel = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/red.png");
-        setContentPane(redpanel);
+        Panel7 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/red.png");
+        setContentPane(Panel7);
 
-        folklorepanel = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/folklore.png");
-        setContentPane(folklorepanel);
+        Panel9 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/folklore.png");
+        setContentPane(Panel9);
 
-        reputationpanel = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/reputation.png");
-        setContentPane(reputationpanel);
+        Panel8 = new ImagePanel("/Users/malaikamalik/Desktop/malik130/CSC207REAL/swiftify-frontend/src/pngs/reputation.png");
+        setContentPane(Panel8);
 
     }
 

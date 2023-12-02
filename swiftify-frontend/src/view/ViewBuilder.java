@@ -1,5 +1,6 @@
 package view;
 
+import entity.Album;
 import entity.Song;
 import interface_adapter.ViewModel;
 import interface_adapter.load_album.LoadAlbumState;
@@ -38,7 +39,14 @@ public class ViewBuilder {
 
     private Vieww BuildAlbumView() {
         LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
-        Vieww vieww = new Vieww(loadAlbumState.getAlbumType());
+        if (loadAlbumState.getAlbumType().equals("All")) {
+            LoadAlbumView1 LoadAlbumView1 = new LoadAlbumView1();
+            for (Album album : loadAlbumState.getAlbums()) {
+                for (int i=1; i < 11; i++ ) {
+
+
+
+        }
        // for (Album albumtype : loadAlbumState.getAlbums()) {
        //
 

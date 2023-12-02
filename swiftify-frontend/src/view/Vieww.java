@@ -59,9 +59,6 @@ public class Vieww {
                         DataAccess dataAccess = new DataAccess();
                         String albumName = e.getActionCommand();
 
-
-
-
                         String AlbumType = (String) comb.getSelectedItem();
 
 
@@ -72,7 +69,7 @@ public class Vieww {
                         LoadAlbumsOutputBoundary loadAlbumsOutputBoundary = new LoadAlbumPresenter(loadAlbumViewModel, viewManagerModel);
                         LoadAlbumsInputBoundary loadAlbumsInputBoundary = new LoadAlbumInteractor(loadAlbumsOutputBoundary);
                         LoadAlbumController loadAlbumController = new LoadAlbumController(loadAlbumsInputBoundary);
-                        LoadAlbumsInputData loadAlbumsInputData = new LoadAlbumsInputData(albumName);
+                        LoadAlbumsInputData loadAlbumsInputData = new LoadAlbumsInputData(AlbumType);
                         loadAlbumController.execute(loadAlbumsInputData);
 
                     //    if ("All".equals(AlbumType)) {
