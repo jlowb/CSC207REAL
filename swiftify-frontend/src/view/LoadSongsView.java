@@ -146,7 +146,7 @@ public class LoadSongsView extends JFrame {
     };
 
     public void setPlayingView(SongPlaybackState songPlaybackState) {
-        PlayPauseButton.setText("||");
+        PlayPauseButton.setText("▐▐ ");
         PlayPauseButton.setSongPlaybackState(songPlaybackState);
         PreviousSongButton.setSongPlaybackState(songPlaybackState);
         NextSongButton.setSongPlaybackState(songPlaybackState);
@@ -154,12 +154,12 @@ public class LoadSongsView extends JFrame {
     }
 
     public void setPausedView(SongPlaybackState songPlaybackState) {
-        PlayPauseButton.setText("(>");
+        PlayPauseButton.setText("▶");
         CurrentSongField.setText("Currently Paused: " + songPlaybackState.getSongName());
     }
 
     public void setResumedView(SongPlaybackState songPlaybackState) {
-        PlayPauseButton.setText("||");
+        PlayPauseButton.setText("▐▐ ");
         CurrentSongField.setText("Currently Playing: " + songPlaybackState.getSongName());
     }
 
@@ -172,11 +172,13 @@ public class LoadSongsView extends JFrame {
         SongListPanel.add(SongPanel, BorderLayout.WEST);
         SongListPanel.add(AddToQueuePanel, BorderLayout.EAST);
         PreviousSongButton = new SongPlaybackButton(null);
-        PreviousSongButton.setText("<");
+        PreviousSongButton.setText("⏮");
+        //𓀿𓀐
         PlayPauseButton = new SongPlaybackButton(null);
-        PlayPauseButton.setText("(>");
+        PlayPauseButton.setText("▶");
         NextSongButton = new SongPlaybackButton(null);
-        NextSongButton.setText(">");
+        NextSongButton.setText("⏭");
+        //▄︻デ══━一
         PreviousSongButton.setPreferredSize(new Dimension(50, 50));
         PlayPauseButton.setPreferredSize(new Dimension(100, 50));
         NextSongButton.setPreferredSize(new Dimension(50, 50));

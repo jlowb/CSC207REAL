@@ -69,7 +69,7 @@
                   <component id="e7316" class="javax.swing.JButton" binding="ShuffleButton">
                     <constraints/>
                     <properties>
-                      <text value="?"/>
+                      <text value="↹"/>
                     </properties>
                   </component>
                 </children>
