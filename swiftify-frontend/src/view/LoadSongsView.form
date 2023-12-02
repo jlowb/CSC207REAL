@@ -5,7 +5,9 @@
     <constraints>
       <xy x="20" y="20" width="500" height="429"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-10265211"/>
+    </properties>
     <border type="none"/>
     <children>
       <splitpane id="dfc2e" binding="MainPanel">
@@ -14,7 +16,9 @@
             <preferred-size width="200" height="200"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-10265211"/>
+        </properties>
         <border type="none"/>
         <children>
           <scrollpane id="c344f" binding="LeftPanel">
