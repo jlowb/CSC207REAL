@@ -19,7 +19,7 @@ public class LoadAlbumInteractor implements LoadAlbumsInputBoundary {
         String albumType = loadAlbumsInputData.getAlbumType();
         List<Album> AlbumList = new ArrayList<Album>();
         for (Album album: MusicLibrary.getInstance().getAlbums()) {
-            if (album.getAlbumType().equals(loadAlbumsInputData.getAlbumType())) {
+            if (album.getName().contains(loadAlbumsInputData.getAlbumType())) {
                 AlbumList.add(album);
             }
         }
