@@ -16,9 +16,12 @@ public class LoadSongsView extends JFrame {
     private JButton PlayPauseButton;
     private JButton NextSongButton;
     private JButton ShuffleButton;
-    private JButton button1;
-    private JPanel panel2;
+    private JButton BackButton;
+    private JPanel CoverPanel;
     private JProgressBar SongProgressBar;
+    private JPanel BackPanel;
+    private JPanel MusicPlayPanel;
+    private JPanel ControlPanel;
     private JPanel SongPanel;
     private JPanel AddToQueuePanel;
 
@@ -60,7 +63,7 @@ public class LoadSongsView extends JFrame {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        panel2 = new LoadAlbumView1.ImagePanel("swiftify-frontend/src/pngs/taylor_swift.png");
-        setContentPane(panel2);
+        CoverPanel = new LoadAlbumView1.ImagePanel("swiftify-frontend/src/pngs/taylor_swift.png");
+        setContentPane(CoverPanel);
     }
 }
