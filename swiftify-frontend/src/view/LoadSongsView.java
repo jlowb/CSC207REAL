@@ -7,7 +7,6 @@ import java.awt.*;
 
 public class LoadSongsView extends JFrame {
     private JPanel LoadSongsViewPanel;
-    private JLabel CurrentSongField;
     private JPanel RightPanel;
     private JScrollPane LeftPanel;
     private JPanel SongListPanel;
@@ -22,6 +21,7 @@ public class LoadSongsView extends JFrame {
     private JPanel BackPanel;
     private JPanel MusicPlayPanel;
     private JPanel ControlPanel;
+    private JLabel CurrentSongField;
     private JPanel SongPanel;
     private JPanel AddToQueuePanel;
 
@@ -56,9 +56,6 @@ public class LoadSongsView extends JFrame {
         PlayPauseButton.setPreferredSize(new Dimension(100, 50));
         NextSongButton.setPreferredSize(new Dimension(50, 50));
         ShuffleButton.setPreferredSize(new Dimension(50, 50));
-
-
-
     }
 
     private void createUIComponents() {
