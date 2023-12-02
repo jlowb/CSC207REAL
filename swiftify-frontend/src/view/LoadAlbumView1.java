@@ -113,6 +113,15 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
                     LoadSongsController loadSongsController = new LoadSongsController(loadSongsInputBoundary);
                     LoadSongsInputData loadSongsInputData = new LoadSongsInputData(albumName);
                     loadSongsController.execute(loadSongsInputData);
+
+                   // LoadSongsViewModel loadSongsViewModel = new LoadSongsViewModel();
+                    // ViewManagerModel viewManagerModel = new ViewManagerModel();
+                    // new ViewManager(viewManagerModel);
+                    // LoadSongsOutputBoundary loadSongsOutputBoundary = new LoadSongsPresenter(loadSongsViewModel, viewManagerModel);
+                    // LoadSongsInputBoundary loadSongsInputBoundary = new LoadSongsInteractor(loadSongsOutputBoundary);
+                    // LoadSongsController loadSongsController = new LoadSongsController(loadSongsInputBoundary);
+                    // LoadSongsInputData loadSongsInputData = new LoadSongsInputData(albumName);
+                    // loadSongsController.execute(loadSongsInputData);
                 }
                 //dispose();
             }

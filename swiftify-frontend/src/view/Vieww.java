@@ -1,10 +1,10 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.load_album.LoadAlbumController;
+import interface_adapter.load_album.LoadAlbumPresenter;
 import interface_adapter.load_album.LoadAlbumViewModel;
-import use_case.load_album.DataAccess;
-import use_case.load_album.LoadAlbumInteractor;
-import use_case.load_album.LoadAlbumsInputBoundary;
+import use_case.load_album.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +16,7 @@ public class Vieww {
     private static JPanel panel;
     private static JComboBox<String> comb;
 
-    public Vieww() {
+    public Vieww(String AlbumType) {
         LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
         loadAlbumViewModel.addPropertyChangeListener((PropertyChangeListener) this);
     }
@@ -57,32 +57,40 @@ public class Vieww {
                 public void actionPerformed(ActionEvent e) {
                     if (e.getSource() instanceof JButton) {
                         DataAccess dataAccess = new DataAccess();
+                        String albumName = e.getActionCommand();
 
 
-                        LoadAlbumInteractor loadAlbumInteractor = dataAccess.LoadAlbumInteractor();
 
-                        LoadAlbumsInputBoundary loadAlbumsInputBoundary = loadAlbumInteractor;
-                        LoadAlbumController controller = new LoadAlbumController(loadAlbumsInputBoundary);
 
                         String AlbumType = (String) comb.getSelectedItem();
-                        controller.execute(AlbumType);
 
-                        if ("All".equals(AlbumType)) {
-                            LoadAlbumView1 page = new LoadAlbumView1();
-                            page.setVisible(true);
-                        } else if ("Deluxe / Deluxe Edition".equals(AlbumType)) {
-                            deluxes page = new deluxes();
-                            page.setVisible(true);
-                        } else if ("Taylor's Version".equals(AlbumType)) {
-                            taylorver page = new taylorver();
-                            page.setVisible(true);
+
+                        LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
+
+                        ViewManagerModel viewManagerModel = new ViewManagerModel();
+
+                        LoadAlbumsOutputBoundary loadAlbumsOutputBoundary = new LoadAlbumPresenter(loadAlbumViewModel, viewManagerModel);
+                        LoadAlbumsInputBoundary loadAlbumsInputBoundary = new LoadAlbumInteractor(loadAlbumsOutputBoundary);
+                        LoadAlbumController loadAlbumController = new LoadAlbumController(loadAlbumsInputBoundary);
+                        LoadAlbumsInputData loadAlbumsInputData = new LoadAlbumsInputData(albumName);
+                        loadAlbumController.execute(loadAlbumsInputData);
+
+                    //    if ("All".equals(AlbumType)) {
+                    //        LoadAlbumView1 page = new LoadAlbumView1();
+                    //    page.setVisible(true);
+                    //    } else if ("Deluxe / Deluxe Edition".equals(AlbumType)) {
+                    //        deluxes page = new deluxes();
+                    //        page.setVisible(true);
+                     //   } else if ("Taylor's Version".equals(AlbumType)) {
+                    //        taylorver page = new taylorver();
+                    //        page.setVisible(true);
                         }
 
 
 
                     }
-                    frame.dispose();
-                }
+                //    frame.dispose();
+              //  }
             };
 
             b.addActionListener(actionListener);

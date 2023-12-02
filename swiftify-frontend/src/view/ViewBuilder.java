@@ -2,6 +2,7 @@ package view;
 
 import entity.Song;
 import interface_adapter.ViewModel;
+import interface_adapter.load_album.LoadAlbumState;
 import interface_adapter.load_songs.LoadSongsState;
 
 import javax.swing.*;
@@ -33,6 +34,17 @@ public class ViewBuilder {
             loadSongsView1.addSong(song);
         }
         return loadSongsView1;
+    }
+
+    private Vieww BuildAlbumView() {
+        LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
+        Vieww vieww = new Vieww(loadAlbumState.getAlbumType());
+       // for (Album albumtype : loadAlbumState.getAlbums()) {
+       //
+
+      //  }
+
+        return vieww;
     }
 
     public LoadAlbumView1 buildAlbumView() {

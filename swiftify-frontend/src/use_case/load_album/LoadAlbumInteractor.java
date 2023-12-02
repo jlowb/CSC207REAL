@@ -1,21 +1,38 @@
 package use_case.load_album;
 
 import entity.Album;
+import entity.MusicLibrary;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoadAlbumInteractor implements LoadAlbumsInputBoundary {
 
-    private final LoadAlbumsDataAccessUserInterface albumDataAccess;
+    private final LoadAlbumsOutputBoundary loadAlbumsOutputBoundary;
 
-    public LoadAlbumInteractor(LoadAlbumsDataAccessUserInterface albumDataAccess) {
-        this.albumDataAccess = albumDataAccess;
+    public LoadAlbumInteractor(LoadAlbumsOutputBoundary loadAlbumsOutputBoundary) {
+        this.loadAlbumsOutputBoundary = loadAlbumsOutputBoundary;
+
+    }
+
+    public void execute(LoadAlbumsInputData loadAlbumsInputData) {
+        String albumType = loadAlbumsInputData.getAlbumType();
+        List<Album> AlbumList = new ArrayList<Album>();
+        for (Album album: MusicLibrary.getInstance().getAlbums()) {
+            if (album.getAlbumType().equals(loadAlbumsInputData.getAlbumType())) {
+                AlbumList.add(album);
+            }
+        }
+
+        LoadAlbumsOutputData loadAlbumsOutputData = new LoadAlbumsOutputData(loadAlbumsInputData.getAlbumType(), AlbumList, false);
+        loadAlbumsOutputBoundary.loadAlbums(loadAlbumsOutputData);
 
     }
 
     @Override
-    public List<Album> execute(LoadAlbumsInputData inputData) {
-        String albumType = inputData.getAlbumType();
-        return albumDataAccess.getAlbumsByType(albumType);
+    public LoadAlbumsOutputBoundary getOutputBoundary() {
+        return this.loadAlbumsOutputBoundary;
     }
+
+
 }
