@@ -7,8 +7,6 @@ import java.awt.*;
 
 public class LoadSongsView extends JFrame {
     private JPanel LoadSongsViewPanel;
-    private JProgressBar SongProgressBar;
-    private JPanel ControlsPanel;
     private JLabel CurrentSongField;
     private JPanel RightPanel;
     private JScrollPane LeftPanel;
@@ -20,6 +18,7 @@ public class LoadSongsView extends JFrame {
     private JButton ShuffleButton;
     private JButton button1;
     private JPanel panel2;
+    private JProgressBar SongProgressBar;
     private JPanel SongPanel;
     private JPanel AddToQueuePanel;
 
