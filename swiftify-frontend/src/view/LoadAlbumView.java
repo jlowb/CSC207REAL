@@ -18,7 +18,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.LinkedList;
 
-public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyChangeListener {
+public class LoadAlbumView extends JFrame implements ActionListener, PropertyChangeListener {
 
     private JPanel panel;
     private LoadAlbumViewModel loadAlbumViewModel;
@@ -49,7 +49,7 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
     private JPanel panelmain;
 
 
-    public LoadAlbumView1() {
+    public LoadAlbumView() {
         LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
         loadAlbumViewModel.addPropertyChangeListener((PropertyChangeListener) this);
 
@@ -155,7 +155,7 @@ public class LoadAlbumView1 extends JFrame implements ActionListener, PropertyCh
             return panel;
         }
     public static void main(String[] args) {
-        new LoadAlbumView1();
+        new LoadAlbumView();
     }
 
     private void createUIComponents() {

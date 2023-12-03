@@ -96,24 +96,6 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="bfaf7" class="javax.swing.JButton" binding="PreviousSongButton">
-                        <constraints/>
-                        <properties>
-                          <text value="&lt;"/>
-                        </properties>
-                      </component>
-                      <component id="36786" class="javax.swing.JButton" binding="PlayPauseButton">
-                        <constraints/>
-                        <properties>
-                          <text value="(&gt;"/>
-                        </properties>
-                      </component>
-                      <component id="6e1e5" class="javax.swing.JButton" binding="NextSongButton">
-                        <constraints/>
-                        <properties>
-                          <text value="&gt;"/>
-                        </properties>
-                      </component>
                       <component id="4afd8" class="javax.swing.JButton" binding="ShuffleButton">
                         <constraints/>
                         <properties>
