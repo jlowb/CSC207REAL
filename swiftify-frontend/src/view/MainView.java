@@ -31,11 +31,11 @@ public class MainView extends JFrame {
 
         frame.add(panel);
 
-        JLabel label = new JLabel("Select album type");
+        JLabel label = new JLabel("Select Artist");
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(label);
 
-        String[] choices = {"Group 113's favourites", "All"};
+        String[] choices = {"Taylor Swift"};
         comb = new JComboBox<>(choices);
         comb.setMaximumSize(comb.getPreferredSize());
         comb.setAlignmentX(Component.CENTER_ALIGNMENT);

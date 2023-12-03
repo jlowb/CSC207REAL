@@ -67,7 +67,7 @@ public class ViewBuilder {
     public LoadAlbumView buildAlbumsView() {
         LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
         LoadSongsController loadSongsController = LoadSongsUseCaseFactory.createLoadSongsController(this.viewManagerModel);
-        if (loadAlbumState.getSelection().equalsIgnoreCase("Group 113's Favourites")) {
+        if (loadAlbumState.getSelection().equalsIgnoreCase("Taylor Swift")) {
             return new LoadAlbumView(loadSongsController);
         }
         else {
