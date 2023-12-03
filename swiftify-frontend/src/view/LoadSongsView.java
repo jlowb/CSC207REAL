@@ -92,8 +92,7 @@ public class LoadSongsView extends JFrame {
             // BELOW IS SHADY
             MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
             int n = ((SongButton) e.getSource()).getSongId();
-            musicPlayer.addToQueue(n);
-            musicPlayer.getQueue().next();
+            musicPlayer.addToQueue(n-1);
             //
             PlaySongInputData playSongInputData = new PlaySongInputData(((SongButton) e.getSource()).getSongId(), ((SongButton) e.getSource()).getSongName(), LoadSongsView.this);
             ViewManagerModel viewManagerModel = new ViewManagerModel();
@@ -211,7 +210,8 @@ public class LoadSongsView extends JFrame {
     ActionListener shuffleActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
+            musicPlayer.toggleShuffle();
         }
     };
 
