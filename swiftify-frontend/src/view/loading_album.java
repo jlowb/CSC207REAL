@@ -28,7 +28,7 @@ public class loading_album extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() instanceof JButton) {
-                    LoadAlbumView1 page = new LoadAlbumView1();
+                    LoadAlbumView page = new LoadAlbumView();
                     page.setVisible(true);
                 }
                 dispose();

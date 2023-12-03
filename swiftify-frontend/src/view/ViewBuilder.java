@@ -1,6 +1,5 @@
 package view;
 
-import entity.Album;
 import entity.Song;
 import interface_adapter.ViewModel;
 import interface_adapter.load_album.LoadAlbumState;
@@ -58,19 +57,19 @@ public class ViewBuilder {
 
       //  }
 
-    private LoadAlbumView1 buildAlbumView() {
+    private LoadAlbumView buildAlbumView() {
         LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
         if (loadAlbumState.getAlbumType().equals("All")) {
-            return new LoadAlbumView1();
+            return new LoadAlbumView();
         }
 
-        return new LoadAlbumView1(); // wont even just show the static screen
+        return new LoadAlbumView(); // wont even just show the static screen
     }
 
 
 
     private JFrame buildAll() {
-        return new LoadAlbumView1();
+        return new LoadAlbumView();
     }
 
 

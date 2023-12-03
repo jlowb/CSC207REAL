@@ -1,6 +1,11 @@
 package view;
 
 import entity.Song;
+import entity.SongButton;
+import entity.SongPlaybackButton;
+import interface_adapter.pause_song.PauseSongController;
+import interface_adapter.play_song.PlaySongController;
+import interface_adapter.resume_song.ResumeSongController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,9 +16,9 @@ public class LoadSongsView extends JFrame {
     private JScrollPane LeftPanel;
     private JPanel SongListPanel;
     private JSplitPane MainPanel;
-    private JButton PreviousSongButton;
-    private JButton PlayPauseButton;
-    private JButton NextSongButton;
+    private SongPlaybackButton PreviousSongButton;
+    private SongPlaybackButton PlayPauseButton;
+    private SongPlaybackButton NextSongButton;
     private JButton ShuffleButton;
     private JButton BackButton;
     private JPanel CoverPanel;
@@ -24,8 +29,12 @@ public class LoadSongsView extends JFrame {
     private JLabel CurrentSongField;
     private JPanel SongPanel;
     private JPanel AddToQueuePanel;
+    private PlaySongController playSongController;
+    private PauseSongController pauseSongController;
+    private ResumeSongController resumeSongController;
 
     public LoadSongsView(String albumName) {
+        createUIComponents();
         setContentPane(LoadSongsViewPanel);
         adjustUIComponents();
         setTitle("Swiftify Album - " + albumName);
@@ -41,8 +50,14 @@ public class LoadSongsView extends JFrame {
     }
 
     public void addSong(Song song) {
-        SongPanel.add(new JButton(song.getTitle()));
+        SongButton songButton = new SongButton(song.getSongID(), song.getTitle());
+        SongPanel.add(songButton);
         AddToQueuePanel.add(new JButton("+"));
+    }
+
+    private void createUIComponents() {
+        CoverPanel = new LoadAlbumView.ImagePanel("swiftify-frontend/src/pngs/taylor_swift.png");
+        setContentPane(CoverPanel);
     }
 
     private void adjustUIComponents() {
@@ -53,15 +68,18 @@ public class LoadSongsView extends JFrame {
         SongListPanel.setLayout(new BorderLayout());
         SongListPanel.add(SongPanel, BorderLayout.WEST);
         SongListPanel.add(AddToQueuePanel, BorderLayout.EAST);
+        PreviousSongButton = new SongPlaybackButton(null);
+        PreviousSongButton.setText("⏮");
+        PlayPauseButton = new SongPlaybackButton(null);
+        PlayPauseButton.setText("▶");
+        NextSongButton = new SongPlaybackButton(null);
+        NextSongButton.setText("⏭");
         PreviousSongButton.setPreferredSize(new Dimension(50, 50));
         PlayPauseButton.setPreferredSize(new Dimension(100, 50));
         NextSongButton.setPreferredSize(new Dimension(50, 50));
         ShuffleButton.setPreferredSize(new Dimension(50, 50));
-    }
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-        CoverPanel = new LoadAlbumView1.ImagePanel("swiftify-frontend/src/pngs/taylor_swift.png");
-        setContentPane(CoverPanel);
+        ControlPanel.add(PreviousSongButton, 0);
+        ControlPanel.add(PlayPauseButton, 1);
+        ControlPanel.add(NextSongButton, 2);
     }
 }
