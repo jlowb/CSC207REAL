@@ -4,9 +4,13 @@ import data_access.URLSongLoader;
 import entity.MusicPlayerFacade;
 import entity.Song;
 import entity.SongButton;
+import entity.AddToQueueButton;
 import entity.SongPlaybackButton;
 import interface_adapter.SongPlaybackState;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.add_to_queue.AddToQueueController;
+import interface_adapter.add_to_queue.AddToQueuePresenter;
+import interface_adapter.add_to_queue.AddToQueueViewModel;
 import interface_adapter.next_song.NextSongController;
 import interface_adapter.next_song.NextSongPresenter;
 import interface_adapter.next_song.NextSongViewModel;
@@ -38,6 +42,9 @@ import use_case.prev_song.PrevSongInteractor;
 import use_case.resume_song.ResumeSongInputBoundary;
 import use_case.resume_song.ResumeSongInputData;
 import use_case.resume_song.ResumeSongInteractor;
+import use_case.add_to_queue.AddToQueueInputBoundary;
+import use_case.add_to_queue.AddToQueueInputData;
+import use_case.add_to_queue.AddToQueueInteractor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -79,7 +86,9 @@ public class LoadSongsView extends JFrame {
         SongButton songButton = new SongButton(song.getSongID(), song.getTitle());
         songButton.addActionListener(playSongActionListener);
         SongPanel.add(songButton);
-        AddToQueuePanel.add(new JButton("+"));
+        AddToQueueButton addToQueueButton = new AddToQueueButton("+", song.getSongID());
+        addToQueueButton.addActionListener(addToQueueActionListener);
+        AddToQueuePanel.add(addToQueueButton);
     }
 
     ActionListener playSongActionListener = new ActionListener() {
@@ -147,6 +156,26 @@ public class LoadSongsView extends JFrame {
                 } catch (JavaLayerException ex) {
                     throw new RuntimeException(ex);
                 }
+            }
+        }
+    };
+
+    ActionListener addToQueueActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AddToQueueInputData addToQueueInputData = new AddToQueueInputData(((AddToQueueButton) e.getSource()).getSongId(), LoadSongsView.this);
+            ViewManagerModel viewManagerModel = new ViewManagerModel();
+            new ViewManager(viewManagerModel);
+            AddToQueueInputBoundary addToQueueInputBoundary = new AddToQueueInteractor(new AddToQueuePresenter(new AddToQueueViewModel(), viewManagerModel));
+            AddToQueueController addToQueueController = new AddToQueueController(addToQueueInputBoundary);
+            try {
+                addToQueueController.execute(addToQueueInputData);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            } catch (JavaLayerException ex) {
+                throw new RuntimeException(ex);
             }
         }
     };

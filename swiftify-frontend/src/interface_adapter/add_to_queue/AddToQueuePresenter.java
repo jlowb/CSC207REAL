@@ -1,6 +1,5 @@
 package interface_adapter.add_to_queue;
 
-import interface_adapter.SongPlaybackState;
 import interface_adapter.ViewManagerModel;
 import use_case.add_to_queue.AddToQueueOutputBoundary;
 import use_case.add_to_queue.AddToQueueOutputData;

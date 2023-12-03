@@ -1,6 +1,5 @@
 package use_case.add_to_queue;
 
-import entity.PlayerState;
 import view.LoadSongsView;
 
 public class AddToQueueOutputData {

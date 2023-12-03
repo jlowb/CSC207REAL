@@ -1,8 +1,6 @@
 package use_case.add_to_queue;
 
-import data_access.URLSongLoader;
 import entity.MusicPlayerFacade;
-import entity.PlayerState;
 import javazoom.jl.decoder.JavaLayerException;
 
 import java.io.IOException;

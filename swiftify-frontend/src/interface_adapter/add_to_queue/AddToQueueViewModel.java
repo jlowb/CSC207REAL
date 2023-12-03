@@ -1,6 +1,5 @@
 package interface_adapter.add_to_queue;
 
-import interface_adapter.SongPlaybackState;
 import interface_adapter.State;
 import interface_adapter.ViewModel;
 
