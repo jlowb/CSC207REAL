@@ -1,8 +1,10 @@
 package view;
 
 import entity.Song;
+import interface_adapter.SongPlaybackState;
 import interface_adapter.ViewModel;
 import interface_adapter.load_album.LoadAlbumState;
+import interface_adapter.load_album.LoadAlbumViewModel;
 import interface_adapter.load_songs.LoadSongsState;
 
 import javax.swing.*;
@@ -19,12 +21,20 @@ public class ViewBuilder {
         if (this.viewModel.getViewName().equalsIgnoreCase("LoadSongsView")) {
             return buildAlbumSongsView();
         }
-
-        if (this.viewModel.getViewName().equalsIgnoreCase("All")) {
-            return buildAll();
+        if (this.viewModel.getViewName().equalsIgnoreCase("LoadAlbumView")) {
+            return buildAlbumView();
+        }
+        if (this.viewModel.getViewName().equalsIgnoreCase("PlaySongView")) {
+            return buildPlayingView();
+        }
+        if (this.viewModel.getViewName().equalsIgnoreCase("PauseSongView")) {
+            return buildPausedView();
+        }
+        if (this.viewModel.getViewName().equalsIgnoreCase("ResumeSongView")) {
+            return buildResumedView();
         }
 
-
+        // write switch case for other views later
         return new JFrame();
     }
 
@@ -37,45 +47,28 @@ public class ViewBuilder {
         return loadSongsView1;
     }
 
- //   private JFrame BuildAlbumView() {
-       // LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
-       // if (loadAlbumState.getAlbumType().equals("All")) {
-          //  LoadAlbumView1 LoadAlbumView1 = new LoadAlbumView1();
-         //   for (Album album : loadAlbumState.getAlbums()) {
-        //    LoadAlbumView1 page = new LoadAlbumView1();
-        //    page.setVisible(true);
-     //   LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
-     //   if (loadAlbumState.getAlbumType().equals("All")) {
-         //   return buildAll();
-
-
-       //     }
-      //  return buildAll();
-     //   }
-       // for (Album albumtype : loadAlbumState.getAlbums()) {
-       //
-
-      //  }
-
-    private LoadAlbumView buildAlbumView() {
-        LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
-        if (loadAlbumState.getAlbumType().equals("All")) {
-            return new LoadAlbumView();
-        }
-
-        return new LoadAlbumView(); // wont even just show the static screen
-    }
-
-
-
-    private JFrame buildAll() {
+    public LoadAlbumView buildAlbumView() {
         return new LoadAlbumView();
     }
 
+    public LoadSongsView buildPlayingView() {
+        SongPlaybackState songPlaybackState = (SongPlaybackState) this.viewModel.getState();
+        LoadSongsView view = songPlaybackState.getView();
+        view.setPlayingView(songPlaybackState);
+        return view;
+    }
 
+    public LoadSongsView buildPausedView() {
+        SongPlaybackState songPlaybackState = (SongPlaybackState) this.viewModel.getState();
+        LoadSongsView view = songPlaybackState.getView();
+        view.setPausedView(songPlaybackState);
+        return view;
+    }
 
-
-  //  public LoadAlbumView1 buildAlbumView() {
-   //     return new LoadAlbumView1();
-  //  }
+    public LoadSongsView buildResumedView() {
+        SongPlaybackState songPlaybackState = (SongPlaybackState) this.viewModel.getState();
+        LoadSongsView view = songPlaybackState.getView();
+        view.setResumedView(songPlaybackState);
+        return view;
+    }
 }

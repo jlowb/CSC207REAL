@@ -4,6 +4,7 @@ import data_access.URLSongLoader;
 import entity.Song;
 import entity.SongButton;
 import entity.SongPlaybackButton;
+import interface_adapter.SongPlaybackState;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.pause_song.PauseSongController;
 import interface_adapter.pause_song.PauseSongPresenter;
@@ -140,6 +141,24 @@ public class LoadSongsView extends JFrame {
             }
         }
     };
+
+    public void setPlayingView(SongPlaybackState songPlaybackState) {
+        PlayPauseButton.setText("▐▐ ");
+        PlayPauseButton.setSongPlaybackState(songPlaybackState);
+        PreviousSongButton.setSongPlaybackState(songPlaybackState);
+        NextSongButton.setSongPlaybackState(songPlaybackState);
+        CurrentSongField.setText("Currently Playing: " + songPlaybackState.getSongName());
+    }
+
+    public void setPausedView(SongPlaybackState songPlaybackState) {
+        PlayPauseButton.setText("▶");
+        CurrentSongField.setText("Currently Paused: " + songPlaybackState.getSongName());
+    }
+
+    public void setResumedView(SongPlaybackState songPlaybackState) {
+        PlayPauseButton.setText("▐▐ ");
+        CurrentSongField.setText("Currently Playing: " + songPlaybackState.getSongName());
+    }
 
     private void createUIComponents() {
         CoverPanel = new LoadAlbumView.ImagePanel("swiftify-frontend/src/pngs/taylor_swift.png");
