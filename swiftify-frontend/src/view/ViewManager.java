@@ -20,7 +20,7 @@ public class ViewManager implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("view")) {
             ViewModel viewModel = (ViewModel) evt.getNewValue();
-            ViewBuilder viewBuilder = new ViewBuilder(viewModel);
+            ViewBuilder viewBuilder = new ViewBuilder(this.viewManagerModel);
             viewBuilder.buildView().setVisible(true);
         }
     }
