@@ -1,29 +1,38 @@
 package interface_adapter.load_album;
 
+import interface_adapter.ViewModel;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class ViewManagerModel {
+
     private String activeViewName;
+    private ViewModel viewModel;
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public String getActiveView() {
-        return activeViewName;
+        return this.activeViewName;
     }
 
     public void setActiveView(String activeView) {
         this.activeViewName = activeView;
     }
 
-    // This is what the Signup Presenter will call to let the ViewModel know
-    // to alert the View
+    public ViewModel getViewModel() {
+        return this.viewModel;
+    }
+
+    public void setViewModel(ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
     public void firePropertyChanged() {
-        support.firePropertyChange("view", null, this.activeViewName);
+        support.firePropertyChange("view", null, this.viewModel);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
-
 }

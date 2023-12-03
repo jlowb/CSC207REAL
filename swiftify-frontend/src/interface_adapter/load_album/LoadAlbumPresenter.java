@@ -1,56 +1,53 @@
 package interface_adapter.load_album;
 
 
-import use_case.load_album.LoadAlbumsDataAccessUserInterface;
+import interface_adapter.ViewManagerModel;
 import use_case.load_album.LoadAlbumsOutputBoundary;
 import use_case.load_album.LoadAlbumsOutputData;
-import view.DeluxeVersion;
-import view.LoadAlbumView1;
-import view.TaylorVersion;
-import view.Vieww;
+
 
 import java.util.LinkedList;
 
 public class LoadAlbumPresenter implements LoadAlbumsOutputBoundary {
-    private final LoadAlbumView1 loadAlbumView;
-    private final Vieww view;
-    private ViewManagerModel viewManagerModel;
-    private LoadAlbumsDataAccessUserInterface dataAccessUserInterface;
 
+    private final LoadAlbumViewModel loadAlbumViewModel;
+    private final ViewManagerModel viewManagerModel;
 
-    public LoadAlbumPresenter(Vieww view, LoadAlbumView1 loadAlbumView, ViewManagerModel viewManagerModel) {
-        this.loadAlbumView = loadAlbumView;
+    public LoadAlbumPresenter(LoadAlbumViewModel loadAlbumViewModel, interface_adapter.ViewManagerModel viewManagerModel) {
+        this.loadAlbumViewModel = loadAlbumViewModel;
         this.viewManagerModel = viewManagerModel;
-        this.dataAccessUserInterface = dataAccessUserInterface;
-        this.view = view;
     }
 
-
-    public void presentAlbums(LinkedList<String> songs) {
-        // update viewmodel / gui form introduce the second gui
+    @Override
+    public void presentAlbums(LinkedList<String> albums) {
 
     }
 
-    public void displayView(String AlbumType) {
-        if ("All".equals(AlbumType)) {
-            LoadAlbumView1 page = new LoadAlbumView1();
-            page.setVisible(true);
-        } else if ("Deluxe / Deluxe Edition".equals(AlbumType)) {
-            DeluxeVersion page = new DeluxeVersion();
-            page.setVisible(true);
-        } else if ("Taylor's Version".equals(AlbumType)) {
-            TaylorVersion page = new TaylorVersion();
-            page.setVisible(true);
+    @Override
+    public void loadAlbums(LoadAlbumsOutputData loadAlbumsOutputData) {
+        LoadAlbumState loadAlbumState = (LoadAlbumState) loadAlbumViewModel.getState();
+        if (loadAlbumState == null) {
+            loadAlbumViewModel.setState(new LoadAlbumState(loadAlbumsOutputData.getAlbumType()));
+            loadAlbumViewModel.firePropertyChanged();
         }
+        viewManagerModel.setActiveView(loadAlbumViewModel.getViewName());
+        viewManagerModel.setViewModel(this.loadAlbumViewModel);
+        viewManagerModel.firePropertyChanged();
+
     }
+
+    @Override
+    public LoadAlbumViewModel getModel() {
+        return this.loadAlbumViewModel;
+    }
+
+    @Override
     public void prepareSuccessView(LoadAlbumsOutputData loadAlbumsOutputData) {
-        LinkedList<String> albums = loadAlbumsOutputData.getAlbums();
 
-        loadAlbumView.updateAlbums(albums);
     }
 
-    public void loadAlbums(String album) {
-
+    @Override
+    public void displayView(String albumType) {
 
     }
 }

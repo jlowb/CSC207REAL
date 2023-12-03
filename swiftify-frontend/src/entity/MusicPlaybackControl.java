@@ -1,10 +1,8 @@
 package entity;
 
-//import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.decoder.JavaLayerException;
 
 //Instead we're using player state, it does the exact same thing.
-
-import javazoom.jl.decoder.JavaLayerException;
 
 public class MusicPlaybackControl {
     private boolean playing;

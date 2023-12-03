@@ -1,6 +1,7 @@
 package view;
 
 import data_access.URLSongLoader;
+import data_access.URLSongLoader;
 import entity.MusicPlayerFacade;
 import entity.Song;
 import entity.SongButton;
@@ -53,9 +54,6 @@ import java.io.IOException;
 
 public class LoadSongsView extends JFrame {
     private JPanel LoadSongsViewPanel;
-    private JProgressBar SongProgressBar;
-    private JPanel ControlsPanel;
-    private JLabel CurrentSongField;
     private JPanel RightPanel;
     private JScrollPane LeftPanel;
     private JPanel SongListPanel;
@@ -64,10 +62,25 @@ public class LoadSongsView extends JFrame {
     private SongPlaybackButton PlayPauseButton;
     private SongPlaybackButton NextSongButton;
     private JButton ShuffleButton;
+    private JButton BackButton;
+    private JPanel CoverPanel;
+    private JProgressBar SongProgressBar;
+    private JPanel BackPanel;
+    private JPanel MusicPlayPanel;
+    private JPanel ControlPanel;
+    private JLabel CurrentSongField;
     private JPanel SongPanel;
     private JPanel AddToQueuePanel;
+    private PlaySongController playSongController;
+    private PauseSongController pauseSongController;
+    private ResumeSongController resumeSongController;
 
-    public LoadSongsView(String albumName) {
+    public LoadSongsView(String albumName, PlaySongController playSongController, PauseSongController pauseSongController, ResumeSongController resumeSongController) {
+        this.playSongController = playSongController;
+        this.pauseSongController = pauseSongController;
+        this.resumeSongController = resumeSongController;
+
+        createUIComponents();
         setContentPane(LoadSongsViewPanel);
         adjustUIComponents();
         setTitle("Swiftify Album - " + albumName);
@@ -79,7 +92,7 @@ public class LoadSongsView extends JFrame {
     }
 
     public static void main(String[] args) {
-        new LoadSongsView("Test");
+
     }
 
     public void addSong(Song song) {
@@ -104,10 +117,6 @@ public class LoadSongsView extends JFrame {
             musicPlayer.addToQueue(n-1);
             //
             PlaySongInputData playSongInputData = new PlaySongInputData(((SongButton) e.getSource()).getSongId(), ((SongButton) e.getSource()).getSongName(), LoadSongsView.this);
-            ViewManagerModel viewManagerModel = new ViewManagerModel();
-            new ViewManager(viewManagerModel);
-            PlaySongInputBoundary playSongInputBoundary = new PlaySongInteractor(new URLSongLoader(), new PlaySongPresenter(new PlaySongViewModel(), viewManagerModel));
-            PlaySongController playSongController = new PlaySongController(playSongInputBoundary);
             try {
                 playSongController.execute(playSongInputData);
             } catch (IOException ex) {
@@ -125,10 +134,6 @@ public class LoadSongsView extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (((SongPlaybackButton) e.getSource()).getSongPlaybackState().getPlaying()) {
-                ViewManagerModel viewManagerModel = new ViewManagerModel();
-                new ViewManager(viewManagerModel);
-                PauseSongInputBoundary pauseSongInputBoundary = new PauseSongInteractor(new PauseSongPresenter(new PauseSongViewModel(((SongPlaybackButton) e.getSource()).getSongPlaybackState()), viewManagerModel));
-                PauseSongController pauseSongController = new PauseSongController(pauseSongInputBoundary);
                 PauseSongInputData pauseSongInputData = new PauseSongInputData(((SongPlaybackButton) e.getSource()).getSongPlaybackState(), LoadSongsView.this);
                 try {
                     pauseSongController.execute(pauseSongInputData);
@@ -140,12 +145,8 @@ public class LoadSongsView extends JFrame {
                     throw new RuntimeException(ex);
                 }
             }
-
             else {
-                ViewManagerModel viewManagerModel = new ViewManagerModel();
-                new ViewManager(viewManagerModel);
-                ResumeSongInputBoundary resumeSongInputBoundary = new ResumeSongInteractor(new ResumeSongPresenter(new ResumeSongViewModel(((SongPlaybackButton) e.getSource()).getSongPlaybackState()), viewManagerModel));
-                ResumeSongController resumeSongController = new ResumeSongController(resumeSongInputBoundary);
+
                 ResumeSongInputData resumeSongInputData = new ResumeSongInputData(((SongPlaybackButton) e.getSource()).getSongPlaybackState(), LoadSongsView.this);
                 try {
                     resumeSongController.execute(resumeSongInputData);
@@ -285,11 +286,12 @@ public class LoadSongsView extends JFrame {
         SongListPanel.add(SongPanel, BorderLayout.WEST);
         SongListPanel.add(AddToQueuePanel, BorderLayout.EAST);
         PreviousSongButton = new SongPlaybackButton(null);
-        PreviousSongButton.setText("<");
+        PreviousSongButton.setText("⏮");
         PlayPauseButton = new SongPlaybackButton(null);
-        PlayPauseButton.setText("(>");
+        PlayPauseButton.setText("▶");
         NextSongButton = new SongPlaybackButton(null);
-        NextSongButton.setText(">");
+        NextSongButton.setText("⏭");
+        PlayPauseButton.addActionListener(pauseOrResumeSongActionListener);
         PreviousSongButton.setPreferredSize(new Dimension(50, 50));
         PlayPauseButton.setPreferredSize(new Dimension(100, 50));
         NextSongButton.setPreferredSize(new Dimension(50, 50));

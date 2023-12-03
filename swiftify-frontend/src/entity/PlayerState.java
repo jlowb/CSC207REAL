@@ -6,6 +6,9 @@ import javazoom.jl.player.Player;
 import javazoom.jl.player.AudioDevice;
 import javazoom.jl.decoder.JavaLayerException;
 
+/**
+ * Represents the state and control logic for playing audio using the JavaZoom JLayer library.
+ */
 public class PlayerState {
     private final static int NOTSTARTED = 0;
     private final static int PLAYING = 1;
@@ -15,15 +18,36 @@ public class PlayerState {
     private final Object playerLock = new Object();
     private int playerStatus = NOTSTARTED;
 
+    /**
+     * Constructs a new PlayerState instance with the given input stream.
+     *
+     * @param inputStream The input stream containing the audio data.
+     * @throws JavaLayerException If there is an error initializing the player.
+     */
+
     public PlayerState(final InputStream inputStream) throws JavaLayerException {
         this.player = new Player(inputStream);
     }
+
+    /**
+     * Constructs a new PlayerState instance with the given input stream and audio device.
+     *
+     * @param inputStream  The input stream containing the audio data.
+     * @param audioDevice  The audio device to use for playback.
+     * @throws JavaLayerException If there is an error initializing the player.
+     */
 
     public PlayerState(final InputStream inputStream, final AudioDevice audioDevice) throws JavaLayerException {
         this.player = new Player(inputStream, audioDevice);
     }
 
-    // Constructor for URL input
+    /**
+     * Constructs a new PlayerState instance for playing audio from a URL.
+     *
+     * @param url The URL of the audio resource to play.
+     * @throws JavaLayerException If there is an error initializing the player.
+     */
+
     public PlayerState(final String url) throws JavaLayerException {
         try {
             InputStream inputStream = new URL(url).openStream();
@@ -32,6 +56,12 @@ public class PlayerState {
             throw new JavaLayerException("Problem playing MP3 from URL", e);
         }
     }
+
+    /**
+     * Starts playing the audio.
+     *
+     * @throws JavaLayerException If there is an error during playback.
+     */
 
     public void play() throws JavaLayerException {
         synchronized (playerLock) {
@@ -57,6 +87,12 @@ public class PlayerState {
         }
     }
 
+    /**
+     * Pauses the audio playback.
+     *
+     * @return True if the audio was successfully paused, false otherwise.
+     */
+
     public boolean pause() {
         synchronized (playerLock) {
             if (playerStatus == PLAYING) {
@@ -65,6 +101,12 @@ public class PlayerState {
             return playerStatus == PAUSED;
         }
     }
+
+    /**
+     * Resumes audio playback from where it was paused.
+     *
+     * @return True if the audio was successfully resumed, false otherwise.
+     */
 
     public boolean resume() {
         synchronized (playerLock) {
@@ -75,6 +117,10 @@ public class PlayerState {
             return playerStatus == PLAYING;
         }
     }
+
+    /**
+     * Stops audio playback.
+     */
 
     public void stop() {
         synchronized (playerLock) {
@@ -105,6 +151,10 @@ public class PlayerState {
         close();
     }
 
+    /**
+     * Closes the player and releases associated resources.
+     */
+
     public void close() {
         synchronized (playerLock) {
             playerStatus = FINISHED;
@@ -116,9 +166,21 @@ public class PlayerState {
         }
     }
 
+    /**
+     * Checks if audio playback has finished.
+     *
+     * @return True if audio playback has finished, false otherwise.
+     */
+
     public boolean isFinished() {
         return playerStatus == FINISHED;
     }
+
+    /**
+     * Checks if audio is currently playing.
+     *
+     * @return True if audio is playing, false otherwise.
+     */
 
     public boolean isPlaying() {
         return playerStatus == PLAYING;
