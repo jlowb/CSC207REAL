@@ -1,14 +1,10 @@
 package view;
 
-import interface_adapter.ViewManagerModel;
+import entity.Album;
+import interface_adapter.load_album.LoadAlbumState;
 import interface_adapter.load_album.LoadAlbumViewModel;
 import interface_adapter.load_songs.LoadSongsController;
-import interface_adapter.load_songs.LoadSongsPresenter;
-import interface_adapter.load_songs.LoadSongsViewModel;
-import use_case.load_songs.LoadSongsInputBoundary;
 import use_case.load_songs.LoadSongsInputData;
-import use_case.load_songs.LoadSongsInteractor;
-import use_case.load_songs.LoadSongsOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,11 +12,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class LoadAlbumView extends JFrame implements ActionListener, PropertyChangeListener {
 
-    private JPanel panel;
+    private JPanel AlbumsPanel;
     private LoadAlbumViewModel loadAlbumViewModel;
     private JButton Album10;
     private JButton Album5;
@@ -42,13 +40,9 @@ public class LoadAlbumView extends JFrame implements ActionListener, PropertyCha
     private JPanel Panel7;
     private JPanel Panel8;
     private JPanel Panel9;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton backButton;
-    private JPanel panelmain;
+    private JPanel MainPanel;
     private LoadSongsController loadSongsController;
-
+    private List<JPanel> panelList;
 
     public LoadAlbumView(LoadSongsController loadSongsController) {
         LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
@@ -56,62 +50,50 @@ public class LoadAlbumView extends JFrame implements ActionListener, PropertyCha
 
         this.loadSongsController = loadSongsController;
         createUIComponents();
-        setContentPane(panelmain);
+        setContentPane(MainPanel);
         setTitle("Swiftify - Albums");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1080, 680);
         setLocationRelativeTo(null);
         setVisible(true);
-
-
-        ActionListener a = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() instanceof JButton) {
-
-                    //   loading_album page = new loading_album(e.getActionCommand());
-                    //  page.setVisible(true);
-                    //  LoadAlbumController controller = new LoadAlbumController();
-                    // controller.execute(e.getActionCommand());
-                    String album = e.getActionCommand();
-                    String albumName = convertFunc(album);
-
-                    LoadSongsInputData loadSongsInputData = new LoadSongsInputData(albumName);
-                    loadSongsController.execute(loadSongsInputData);
-                }
-            }
-
-            private String convertFunc(String albumName_Button) {
-                if (albumName_Button.endsWith("Button")) {
-                    String withoutButton = albumName_Button.substring(0, albumName_Button.length() - "Button".length());
-                    return withoutButton.replaceAll("([a-z])([A-Z])", "$1 $2");
-                } else {
-                    return albumName_Button;
-                }
-            }
-        };
-
-
-
-        Album10.addActionListener(a);
-        Album5.addActionListener(a);
-        Album4.addActionListener(a);
-        Album3.addActionListener(a);
-        Album9.addActionListener(a);
-        Album8.addActionListener(a);
-        Album7.addActionListener(a);
-        Album6.addActionListener(a);
-        Album2.addActionListener(a);
-        Album1.addActionListener(a);
-
     }
 
-    public JPanel getPanel() {
-            return panel;
+    ActionListener a = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() instanceof JButton) {
+
+                //   loading_album page = new loading_album(e.getActionCommand());
+                //  page.setVisible(true);
+                //  LoadAlbumController controller = new LoadAlbumController();
+                // controller.execute(e.getActionCommand());
+                String album = e.getActionCommand();
+                String albumName = convertFunc(album);
+
+                LoadSongsInputData loadSongsInputData = new LoadSongsInputData(albumName);
+                loadSongsController.execute(loadSongsInputData);
+            }
         }
+
+        private String convertFunc(String albumName_Button) {
+            if (albumName_Button.endsWith("Button")) {
+                String withoutButton = albumName_Button.substring(0, albumName_Button.length() - "Button".length());
+                return withoutButton.replaceAll("([a-z])([A-Z])", "$1 $2");
+            } else {
+                return albumName_Button;
+            }
+        }
+    };
 
     public static void main(String[] args) {
 
+    }
+
+    private void loadAlbums(LoadAlbumState loadAlbumState) {
+        List<JPanel> panels = new ArrayList<JPanel>();
+        for (Album album : loadAlbumState.getAlbums()) {
+            panels.add()
+        }
     }
 
     private void createUIComponents() {
@@ -148,19 +130,6 @@ public class LoadAlbumView extends JFrame implements ActionListener, PropertyCha
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-
-    }
-
-    public void updateAlbums(LinkedList<String> albums) {
-    }
-
     static class ImagePanel extends JPanel {
         private Image backgroundImage;
 
@@ -188,6 +157,5 @@ public class LoadAlbumView extends JFrame implements ActionListener, PropertyCha
             g.drawImage(backgroundImage, x, y, scaledWidth, scaledHeight, this);
         }
     }
-
 }
 

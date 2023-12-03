@@ -14,7 +14,7 @@ public class LoadAlbumViewModel extends ViewModel {
     private LoadAlbumState state;
 
     public LoadAlbumViewModel() {
-        super("LoadAlbumView", new State());
+        super("LoadAlbumsView", new State());
     }
 
     public LoadAlbumState setState(LoadAlbumState state) {

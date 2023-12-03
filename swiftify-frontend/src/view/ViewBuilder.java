@@ -42,6 +42,9 @@ public class ViewBuilder {
         if (this.viewModel.getViewName().equalsIgnoreCase("ResumeSongView")) {
             return buildResumedView();
         }
+        if (this.viewModel.getViewName().equalsIgnoreCase("LoadAlbumsView")) {
+            return buildAlbumsView();
+        }
 
         // write switch case for other views later
         return new JFrame();
@@ -59,8 +62,12 @@ public class ViewBuilder {
         return loadSongsView1;
     }
 
-    public LoadAlbumView buildAlbumView() {
-        return new LoadAlbumView(LoadSongsUseCaseFactory.createLoadSongsController(this.viewManagerModel));
+    public LoadAlbumView buildAlbumsView() {
+        LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
+        LoadAlbumView view = new LoadAlbumView(LoadSongsUseCaseFactory.createLoadSongsController(this.viewManagerModel));
+        if (loadAlbumState.getSelection().equalsIgnoreCase("Group 113's Favourites")) {
+
+        }
     }
 
     public LoadSongsView buildPlayingView() {
