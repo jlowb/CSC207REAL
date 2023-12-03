@@ -28,8 +28,7 @@ import use_case.resume_song.ResumeSongInteractor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.IOException;
 
 public class LoadSongsView extends JFrame {
@@ -64,7 +63,7 @@ public class LoadSongsView extends JFrame {
         setContentPane(LoadSongsViewPanel);
         adjustUIComponents();
         setTitle("Swiftify Album - " + albumName);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(1080, 680);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -130,6 +129,16 @@ public class LoadSongsView extends JFrame {
                 } catch (JavaLayerException ex) {
                     throw new RuntimeException(ex);
                 }
+            }
+        }
+    };
+
+    WindowListener ghettoBackButton = new WindowAdapter() {
+
+        @Override
+        public void windowClosing(WindowEvent e) {
+            if (PlayPauseButton.getSongPlaybackState() != null) {
+                PlayPauseButton.getSongPlaybackState().getMusicPlayer().stop();
             }
         }
     };

@@ -47,12 +47,14 @@ public class LoadAlbumView extends JFrame implements ActionListener, PropertyCha
     private JButton button3;
     private JButton backButton;
     private JPanel panelmain;
+    private LoadSongsController loadSongsController;
 
 
-    public LoadAlbumView() {
+    public LoadAlbumView(LoadSongsController loadSongsController) {
         LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
         loadAlbumViewModel.addPropertyChangeListener((PropertyChangeListener) this);
 
+        this.loadSongsController = loadSongsController;
         createUIComponents();
         setContentPane(panelmain);
         setTitle("Swiftify - Albums");
@@ -67,63 +69,16 @@ public class LoadAlbumView extends JFrame implements ActionListener, PropertyCha
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() instanceof JButton) {
 
-                 //   loading_album page = new loading_album(e.getActionCommand());
-                  //  page.setVisible(true);
-                  //  LoadAlbumController controller = new LoadAlbumController();
-                   // controller.execute(e.getActionCommand());
+                    //   loading_album page = new loading_album(e.getActionCommand());
+                    //  page.setVisible(true);
+                    //  LoadAlbumController controller = new LoadAlbumController();
+                    // controller.execute(e.getActionCommand());
                     String album = e.getActionCommand();
                     String albumName = convertFunc(album);
 
-                    // Create an instance of LoadAlbumsInteractor (or your actual implementation)
-                  //  LoadAlbumsInputBoundary loadAlbumsInputBoundary = new LoadAlbumInteractor();
-
-                    // Create an instance of LoadAlbumController, passing the LoadAlbumsInputBoundary
-                 //   LoadAlbumController controller = new LoadAlbumController(loadAlbumsInputBoundary);
-
-                    // Call the execute method in the controller, passing the album name
-                 //   controller.execute(albumName);
-
-                    // hagen code here
-                    /*
-                    ViewManagerModel viewManagerModel = new ViewManagerModel();
-                    LoadSongsInputBoundary loadSongsInputBoundary = new LoadSongsInteractor(
-                            new SongLoader(), new LoadSongsPresenter(new LoadSongsViewModel(), viewManagerModel)
-                    );
-                    new ViewManager(viewManagerModel);
-                    LoadSongsInputData inputData = new LoadSongsInputData(
-                            new Album(albumName, new ArrayList<Song>())
-                    );
-                    LoadSongsController controller = new LoadSongsController(loadSongsInputBoundary);
-                    controller.execute(inputData);
-
-                    LoadSongsViewModel loadSongsViewModel = controller.loadSongsInputBoundary.getOutputBoundary().getModel();
-                    LoadSongsView page = new LoadSongsView("testAlbum");
-                    for (Song song : loadSongsViewModel.getState().getSongs()) {
-                        page.addSong(song.getTitle());
-                    }
-                    // loading_album page = new loading_album(e.getActionCommand());
-                    page.setVisible(true);
-
-                     */
-                    LoadSongsViewModel loadSongsViewModel = new LoadSongsViewModel();
-                    ViewManagerModel viewManagerModel = new ViewManagerModel();
-                    new ViewManager(viewManagerModel);
-                    LoadSongsOutputBoundary loadSongsOutputBoundary = new LoadSongsPresenter(loadSongsViewModel, viewManagerModel);
-                    LoadSongsInputBoundary loadSongsInputBoundary = new LoadSongsInteractor(loadSongsOutputBoundary);
-                    LoadSongsController loadSongsController = new LoadSongsController(loadSongsInputBoundary);
                     LoadSongsInputData loadSongsInputData = new LoadSongsInputData(albumName);
                     loadSongsController.execute(loadSongsInputData);
-
-                   // LoadSongsViewModel loadSongsViewModel = new LoadSongsViewModel();
-                    // ViewManagerModel viewManagerModel = new ViewManagerModel();
-                    // new ViewManager(viewManagerModel);
-                    // LoadSongsOutputBoundary loadSongsOutputBoundary = new LoadSongsPresenter(loadSongsViewModel, viewManagerModel);
-                    // LoadSongsInputBoundary loadSongsInputBoundary = new LoadSongsInteractor(loadSongsOutputBoundary);
-                    // LoadSongsController loadSongsController = new LoadSongsController(loadSongsInputBoundary);
-                    // LoadSongsInputData loadSongsInputData = new LoadSongsInputData(albumName);
-                    // loadSongsController.execute(loadSongsInputData);
                 }
-                //dispose();
             }
 
             private String convertFunc(String albumName_Button) {
@@ -154,8 +109,9 @@ public class LoadAlbumView extends JFrame implements ActionListener, PropertyCha
     public JPanel getPanel() {
             return panel;
         }
+
     public static void main(String[] args) {
-        new LoadAlbumView();
+
     }
 
     private void createUIComponents() {
