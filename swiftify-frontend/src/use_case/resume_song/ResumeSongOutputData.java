@@ -1,16 +1,14 @@
-package use_case.pause_song;
+package use_case.resume_song;
 
-import entity.PlayerState;
-import entity.Song;
 import interface_adapter.SongPlaybackState;
 import view.LoadSongsView;
 
-public class PauseSongOutputData {
+public class ResumeSongOutputData {
 
     private final SongPlaybackState state;
     private final LoadSongsView loadSongsView;
 
-    public PauseSongOutputData(SongPlaybackState state, LoadSongsView loadSongsView) {
+    public ResumeSongOutputData(SongPlaybackState state, LoadSongsView loadSongsView) {
         this.state = state;
         this.loadSongsView = loadSongsView;
     }

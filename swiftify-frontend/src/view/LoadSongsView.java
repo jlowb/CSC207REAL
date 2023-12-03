@@ -36,6 +36,7 @@ public class LoadSongsView extends JFrame {
     }
 
     public static void main(String[] args) {
+
         new LoadSongsView("Test");
     }
 

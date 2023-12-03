@@ -23,6 +23,11 @@ public abstract class ViewModel {
     public State getState() {
         return this.state;
     }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
     public abstract void firePropertyChanged();
 
     public abstract void addPropertyChangeListener(PropertyChangeListener listener);

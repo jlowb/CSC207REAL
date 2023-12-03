@@ -1,24 +1,19 @@
 package interface_adapter.play_song;
 
-import entity.Song;
 import javazoom.jl.decoder.JavaLayerException;
-import use_case.play_song.SongInputBoundary;
-import use_case.play_song.SongInputData;
+import use_case.play_song.PlaySongInputBoundary;
+import use_case.play_song.PlaySongInputData;
 
 import java.io.IOException;
 
 public class PlaySongController {
-    final SongInputBoundary playSongInteractor;
+    private final PlaySongInputBoundary playSongInputBoundary;
 
-    public PlaySongController(SongInputBoundary playSongInteractor) {
-        this.playSongInteractor = playSongInteractor;
+    public PlaySongController(PlaySongInputBoundary songInputBoundary) {
+        this.playSongInputBoundary = songInputBoundary;
     }
 
-    public void execute(Song song) throws IOException, InterruptedException, JavaLayerException {
-        SongInputData songInputData = new SongInputData(song);
-
-        playSongInteractor.execute(songInputData);
+    public void execute(PlaySongInputData playSongInputData) throws IOException, InterruptedException, JavaLayerException {
+        playSongInputBoundary.execute(playSongInputData);
     }
-
-
 }
