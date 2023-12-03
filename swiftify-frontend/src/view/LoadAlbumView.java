@@ -1,6 +1,7 @@
 package view;
 
 import entity.Album;
+import entity.SongPlaybackButton;
 import interface_adapter.load_album.LoadAlbumState;
 import interface_adapter.load_album.LoadAlbumViewModel;
 import interface_adapter.load_songs.LoadSongsController;
@@ -10,48 +11,36 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class LoadAlbumView extends JFrame {
 
-    private JPanel AlbumsPanel;
     private LoadAlbumViewModel loadAlbumViewModel;
-    private JButton Album10;
-    private JButton Album5;
-    private JButton Album4;
-    private JButton Album3;
-    private JButton Album9;
-    private JButton Album8;
-    private JButton Album7;
-    private JButton Album6;
-    private JButton Album2;
-    private JButton Album1;
-    private JPanel Panel1;
-    private JPanel Panel6;
-    private JPanel Panel2;
-    private JPanel Panel3;
-    private JPanel Panel4;
-    private JPanel Panel5;
-    private JPanel Panel10;
-    private JPanel Panel7;
-    private JPanel Panel8;
-    private JPanel Panel9;
     private JPanel MainPanel;
-    private static LoadSongsController loadSongsController;
-    private List<JPanel> panelList;
+    private JPanel BackPanel;
+    private JPanel AlbumPanel1;
+    private JPanel AlbumPanel2;
+    private JPanel MusicPlaybackPanel;
+    private JButton ShuffleButton;
+    private JPanel ControlsPanel;
+    private JLabel CurrentSongField;
+    private JButton BackButton;
+    private SongPlaybackButton PreviousSongButton;
+    private SongPlaybackButton PlayPauseButton;
+    private SongPlaybackButton NextSongButton;
 
-    public LoadAlbumView(LoadSongsController loadSongsController, List<JPanel> panelList) {
+    private static LoadSongsController loadSongsController;
+
+
+    public LoadAlbumView(LoadSongsController loadSongsController) {
         //LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
         //loadAlbumViewModel.addPropertyChangeListener((PropertyChangeListener) this);
 
         this.loadSongsController = loadSongsController;
-        this.panelList = panelList;
-        createUIComponents();
+
         setContentPane(MainPanel);
+        adjustUIComponents();
         setTitle("Swiftify - Albums");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1080, 680);
@@ -85,15 +74,34 @@ public class LoadAlbumView extends JFrame {
 
     }
 
-    public static List<JPanel> loadAlbums(LoadAlbumState loadAlbumState) {
+    public void loadAlbumPanels(LoadAlbumState loadAlbumState) {
         List<JPanel> panels = new ArrayList<JPanel>();
+        int i = 1;
         for (Album album : loadAlbumState.getAlbums()) {
             JPanel panel = new ImagePanel(getAlbumCover(album.getName()));
-            JButton button = new JButton(getAlbumCover(album.getName()));
+            panel.setLayout(new BorderLayout());
+            JButton button = new JButton(album.getName());
             button.addActionListener(loadSongsActionListener);
-            panels.add(panel);
+            panel.add(button, BorderLayout.SOUTH);
+            if (i % 2 != 0) {
+                AlbumPanel1.add(panel);
+            }
+            else {
+                AlbumPanel2.add(panel);
+            }
+            i++;
         }
-        return panels;
+    }
+
+
+    public static List<JButton> loadAlbumButtons(LoadAlbumState loadAlbumState) {
+        List<JButton> buttons = new ArrayList<JButton>();
+        for (Album album : loadAlbumState.getAlbums()) {
+            JButton button = new JButton(album.getName());
+            button.addActionListener(loadSongsActionListener);
+            buttons.add(button);
+        }
+        return buttons;
     }
 
     private static String getAlbumCover(String albumName) {
@@ -111,58 +119,22 @@ public class LoadAlbumView extends JFrame {
         };
     }
 
-    private void createUIComponents() {
-        Panel1 = this.panelList.get(0);
-        setContentPane(Panel1);
-        Panel2 = this.panelList.get(1);
-        setContentPane(Panel2);
-        Panel3 = this.panelList.get(2);
-        setContentPane(Panel3);
-        Panel4 = this.panelList.get(3);
-        setContentPane(Panel4);
-        Panel5 = this.panelList.get(4);
-        setContentPane(Panel5);
-        Panel6 = this.panelList.get(5);
-        setContentPane(Panel6);
-        Panel7 = this.panelList.get(6);
-        setContentPane(Panel7);
-        Panel8 = this.panelList.get(7);
-        setContentPane(Panel8);
-        Panel9 = this.panelList.get(8);
-        setContentPane(Panel9);
-
-        /*
-        Panel1 = new ImagePanel("swiftify-frontend/src/pngs/taylor_swift.png");
-        setContentPane(Panel1);
-
-        Panel6 = new ImagePanel("swiftify-frontend/src/pngs/fearless.png");
-        setContentPane(Panel6);
-
-        Panel2 = new ImagePanel("swiftify-frontend/src/pngs/speak_now.png");
-        setContentPane(Panel2);
-
-        Panel3 = new ImagePanel("swiftify-frontend/src/pngs/1989.png");
-        setContentPane(Panel3);
-
-        Panel4 = new ImagePanel("swiftify-frontend/src/pngs/lover.png");
-        setContentPane(Panel4);
-
-        Panel5 = new ImagePanel("swiftify-frontend/src/pngs/evermore.png");
-        setContentPane(Panel5);
-
-        Panel10 = new ImagePanel("swiftify-frontend/src/pngs/midnights.png");
-        setContentPane(Panel10);
-
-        Panel7 = new ImagePanel("swiftify-frontend/src/pngs/red.png");
-        setContentPane(Panel7);
-
-        Panel9 = new ImagePanel("swiftify-frontend/src/pngs/folklore.png");
-        setContentPane(Panel9);
-
-        Panel8 = new ImagePanel("swiftify-frontend/src/pngs/reputation.png");
-        setContentPane(Panel8);
-
-         */
+    private void adjustUIComponents() {
+        AlbumPanel1.setLayout(new GridLayout(5, 1));
+        AlbumPanel2.setLayout(new GridLayout(5, 1));
+        PreviousSongButton = new SongPlaybackButton(null);
+        PreviousSongButton.setText("⏮");
+        PlayPauseButton = new SongPlaybackButton(null);
+        PlayPauseButton.setText("▶");
+        NextSongButton = new SongPlaybackButton(null);
+        NextSongButton.setText("⏭");
+        PreviousSongButton.setPreferredSize(new Dimension(50, 50));
+        PlayPauseButton.setPreferredSize(new Dimension(100, 50));
+        NextSongButton.setPreferredSize(new Dimension(50, 50));
+        ShuffleButton.setPreferredSize(new Dimension(50, 50));
+        ControlsPanel.add(PreviousSongButton, 0);
+        ControlsPanel.add(PlayPauseButton, 1);
+        ControlsPanel.add(NextSongButton, 2);
     }
 
     static class ImagePanel extends JPanel {

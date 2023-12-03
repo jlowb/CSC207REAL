@@ -8,7 +8,6 @@ import interface_adapter.SongPlaybackState;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewModel;
 import interface_adapter.load_album.LoadAlbumState;
-import interface_adapter.load_album.LoadAlbumViewModel;
 import interface_adapter.load_songs.LoadSongsController;
 import interface_adapter.load_songs.LoadSongsState;
 import interface_adapter.pause_song.PauseSongController;
@@ -69,10 +68,12 @@ public class ViewBuilder {
         LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
         LoadSongsController loadSongsController = LoadSongsUseCaseFactory.createLoadSongsController(this.viewManagerModel);
         if (loadAlbumState.getSelection().equalsIgnoreCase("Group 113's Favourites")) {
-            return new LoadAlbumView(loadSongsController, new ArrayList<JPanel>());
+            return new LoadAlbumView(loadSongsController);
         }
         else {
-            return new LoadAlbumView(loadSongsController, LoadAlbumView.loadAlbums(loadAlbumState));
+            LoadAlbumView view = new LoadAlbumView(loadSongsController);
+            view.loadAlbumPanels(loadAlbumState);
+            return view;
         }
     }
 
