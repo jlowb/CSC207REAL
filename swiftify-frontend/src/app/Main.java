@@ -2,6 +2,7 @@ package app;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.load_album.LoadAlbumViewModel;
+import view.MainView;
 import view.ViewManager;
 
 public class Main {
@@ -10,8 +11,7 @@ public class Main {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(viewManagerModel);
 
-        LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
-        viewManagerModel.setViewModel(loadAlbumViewModel);
-        viewManagerModel.firePropertyChanged();
+        MainView mainView = new MainView(LoadAlbumsUseCaseFactory.createLoadAlbumsController(viewManagerModel));
+        mainView.setVisible(true);
     }
 }

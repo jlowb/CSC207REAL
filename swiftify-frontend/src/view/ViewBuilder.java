@@ -9,12 +9,15 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewModel;
 import interface_adapter.load_album.LoadAlbumState;
 import interface_adapter.load_album.LoadAlbumViewModel;
+import interface_adapter.load_songs.LoadSongsController;
 import interface_adapter.load_songs.LoadSongsState;
 import interface_adapter.pause_song.PauseSongController;
 import interface_adapter.play_song.PlaySongController;
 import interface_adapter.resume_song.ResumeSongController;
 
 import javax.swing.*;
+import java.sql.Array;
+import java.util.ArrayList;
 
 public class ViewBuilder {
 
@@ -31,7 +34,7 @@ public class ViewBuilder {
             return buildAlbumSongsView();
         }
         if (this.viewModel.getViewName().equalsIgnoreCase("LoadAlbumView")) {
-            return buildAlbumView();
+            return buildAlbumsView();
         }
         if (this.viewModel.getViewName().equalsIgnoreCase("PlaySongView")) {
             return buildPlayingView();
@@ -64,9 +67,12 @@ public class ViewBuilder {
 
     public LoadAlbumView buildAlbumsView() {
         LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
-        LoadAlbumView view = new LoadAlbumView(LoadSongsUseCaseFactory.createLoadSongsController(this.viewManagerModel));
+        LoadSongsController loadSongsController = LoadSongsUseCaseFactory.createLoadSongsController(this.viewManagerModel);
         if (loadAlbumState.getSelection().equalsIgnoreCase("Group 113's Favourites")) {
-
+            return new LoadAlbumView(loadSongsController, new ArrayList<JPanel>());
+        }
+        else {
+            return new LoadAlbumView(loadSongsController, LoadAlbumView.loadAlbums(loadAlbumState));
         }
     }
 

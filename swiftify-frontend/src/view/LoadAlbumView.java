@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LoadAlbumView extends JFrame implements ActionListener, PropertyChangeListener {
+public class LoadAlbumView extends JFrame {
 
     private JPanel AlbumsPanel;
     private LoadAlbumViewModel loadAlbumViewModel;
@@ -41,14 +41,15 @@ public class LoadAlbumView extends JFrame implements ActionListener, PropertyCha
     private JPanel Panel8;
     private JPanel Panel9;
     private JPanel MainPanel;
-    private LoadSongsController loadSongsController;
+    private static LoadSongsController loadSongsController;
     private List<JPanel> panelList;
 
-    public LoadAlbumView(LoadSongsController loadSongsController) {
-        LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
-        loadAlbumViewModel.addPropertyChangeListener((PropertyChangeListener) this);
+    public LoadAlbumView(LoadSongsController loadSongsController, List<JPanel> panelList) {
+        //LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
+        //loadAlbumViewModel.addPropertyChangeListener((PropertyChangeListener) this);
 
         this.loadSongsController = loadSongsController;
+        this.panelList = panelList;
         createUIComponents();
         setContentPane(MainPanel);
         setTitle("Swiftify - Albums");
@@ -58,15 +59,10 @@ public class LoadAlbumView extends JFrame implements ActionListener, PropertyCha
         setVisible(true);
     }
 
-    ActionListener a = new ActionListener() {
+    static ActionListener loadSongsActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() instanceof JButton) {
-
-                //   loading_album page = new loading_album(e.getActionCommand());
-                //  page.setVisible(true);
-                //  LoadAlbumController controller = new LoadAlbumController();
-                // controller.execute(e.getActionCommand());
                 String album = e.getActionCommand();
                 String albumName = convertFunc(album);
 
@@ -89,15 +85,53 @@ public class LoadAlbumView extends JFrame implements ActionListener, PropertyCha
 
     }
 
-    private void loadAlbums(LoadAlbumState loadAlbumState) {
+    public static List<JPanel> loadAlbums(LoadAlbumState loadAlbumState) {
         List<JPanel> panels = new ArrayList<JPanel>();
         for (Album album : loadAlbumState.getAlbums()) {
-            panels.add()
+            JPanel panel = new ImagePanel(getAlbumCover(album.getName()));
+            JButton button = new JButton(getAlbumCover(album.getName()));
+            button.addActionListener(loadSongsActionListener);
+            panels.add(panel);
         }
+        return panels;
+    }
+
+    private static String getAlbumCover(String albumName) {
+        return switch (albumName) {
+            case ("Speak Now (Deluxe Edition)") -> "swiftify-frontend/src/pngs/speak_now.png";
+            case ("folklore") -> "swiftify-frontend/src/pngs/folklore.png";
+            case ("Lover") -> "swiftify-frontend/src/pngs/lover.png";
+            case ("Red (Taylor's Version)") -> "swiftify-frontend/src/pngs/red.png";
+            case ("Fearless (Taylor's Version)") -> "swiftify-frontend/src/pngs/fearless.png";
+            case ("evermore") -> "swiftify-frontend/src/pngs/evermore.png";
+            case ("Reputation") -> "swiftify-frontend/src/pngs/reputation.png";
+            case ("1989 (Deluxe)") -> "swiftify-frontend/src/pngs/1989.png";
+            case ("Midnights") -> "swiftify-frontend/src/pngs/midnights.png";
+            default -> "";
+        };
     }
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
+        Panel1 = this.panelList.get(0);
+        setContentPane(Panel1);
+        Panel2 = this.panelList.get(1);
+        setContentPane(Panel2);
+        Panel3 = this.panelList.get(2);
+        setContentPane(Panel3);
+        Panel4 = this.panelList.get(3);
+        setContentPane(Panel4);
+        Panel5 = this.panelList.get(4);
+        setContentPane(Panel5);
+        Panel6 = this.panelList.get(5);
+        setContentPane(Panel6);
+        Panel7 = this.panelList.get(6);
+        setContentPane(Panel7);
+        Panel8 = this.panelList.get(7);
+        setContentPane(Panel8);
+        Panel9 = this.panelList.get(8);
+        setContentPane(Panel9);
+
+        /*
         Panel1 = new ImagePanel("swiftify-frontend/src/pngs/taylor_swift.png");
         setContentPane(Panel1);
 
@@ -128,6 +162,7 @@ public class LoadAlbumView extends JFrame implements ActionListener, PropertyCha
         Panel8 = new ImagePanel("swiftify-frontend/src/pngs/reputation.png");
         setContentPane(Panel8);
 
+         */
     }
 
     static class ImagePanel extends JPanel {

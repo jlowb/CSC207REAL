@@ -17,13 +17,14 @@ public class LoadAlbumViewModel extends ViewModel {
         super("LoadAlbumsView", new State());
     }
 
-    public LoadAlbumState setState(LoadAlbumState state) {
-        return this.state;
-    }
-
     public LoadAlbumState getState() {
         return this.state;
     }
+
+    public void setState(LoadAlbumState state) {
+        this.state = state;
+    }
+
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     // This is what the Signup Presenter will call to let the ViewModel know
