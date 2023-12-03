@@ -1,12 +1,11 @@
 package entity;
 
 import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 public class MusicPlayerFacade {
     private static MusicPlayerFacade instance;
     private MusicQueue queue;
-
-    private PlayerState playbackControl; // implement methods for this if needed
 
     private MusicPlayerFacade(boolean shuffled, int discographyLength) {
         this.queue = new MusicQueue(shuffled, discographyLength);
@@ -21,18 +20,47 @@ public class MusicPlayerFacade {
     }
 
     // QUEUE ONLY
+
+    public MusicQueue getQueue() {
+        return this.queue;
+    }
     public void toggleShuffle() {
         queue.toggleShuffle();
     }
-    public int getCurrentSong() {
-        return queue.getCurrentID();
+
+    public void addToQueue(int n) {
+        queue.add(n);
     }
-    public int getPrevSong() {
+
+    public Song getCurrentSong() {
+        MusicLibrary library = MusicLibrary.getInstance();
+        int n = queue.getCurrentID();
+        if (n != -1) {
+            return library.getSongs().get(n);
+        }
+        return null;
+    }
+    public Song getPrevSong() {
+        MusicLibrary library = MusicLibrary.getInstance();
         queue.previous();
-        return queue.getCurrentID();
+        int n = queue.getCurrentID();
+        if (n != -1) {
+            return library.getSongs().get(n);
+        }
+        return null;
     }
-    public int getNextSong() {
+    public Song getNextSong() {
+        MusicLibrary library = MusicLibrary.getInstance();
         queue.next();
-        return queue.getCurrentID();
+        int n = queue.getCurrentID();
+        if (n != -1) {
+            return library.getSongs().get(n);
+        }
+        return null;
+    }
+
+    // STATE
+    public PlayerState makeState(String songURL) throws JavaLayerException {
+        return new PlayerState(songURL);
     }
 }
