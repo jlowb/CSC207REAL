@@ -80,6 +80,7 @@ public class LoadAlbumView extends JFrame {
         for (Album album : loadAlbumState.getAlbums()) {
             JPanel panel = new ImagePanel(getAlbumCover(album.getName()));
             panel.setLayout(new BorderLayout());
+            panel.setBackground(new Color(99, 93, 133));
             JButton button = new JButton(album.getName());
             button.addActionListener(loadSongsActionListener);
             panel.add(button, BorderLayout.SOUTH);
