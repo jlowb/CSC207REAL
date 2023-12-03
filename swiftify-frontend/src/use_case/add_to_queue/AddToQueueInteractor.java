@@ -16,6 +16,7 @@ public class AddToQueueInteractor implements AddToQueueInputBoundary {
     public void execute(AddToQueueInputData addToQueueInputData) throws IOException, InterruptedException, JavaLayerException {
         MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
         musicPlayer.addToQueue(addToQueueInputData.getSongId());
+
         AddToQueueOutputData addToQueueOutputData = new AddToQueueOutputData(addToQueueInputData.getView());
         this.addToQueueOutputBoundary.prepareQueueView(addToQueueOutputData);
     }

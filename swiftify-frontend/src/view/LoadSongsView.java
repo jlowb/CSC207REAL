@@ -163,7 +163,11 @@ public class LoadSongsView extends JFrame {
     ActionListener addToQueueActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            AddToQueueInputData addToQueueInputData = new AddToQueueInputData(((AddToQueueButton) e.getSource()).getSongId(), LoadSongsView.this);
+            MusicPlayerFacade musicPlayerFacade = MusicPlayerFacade.getInstance();
+            if (!musicPlayerFacade.getQueue().isNotEmpty()) {
+                musicPlayerFacade.addToQueue(-1);
+            }
+            AddToQueueInputData addToQueueInputData = new AddToQueueInputData(((AddToQueueButton) e.getSource()).getSongId() -1, LoadSongsView.this);
             ViewManagerModel viewManagerModel = new ViewManagerModel();
             new ViewManager(viewManagerModel);
             AddToQueueInputBoundary addToQueueInputBoundary = new AddToQueueInteractor(new AddToQueuePresenter(new AddToQueueViewModel(), viewManagerModel));
