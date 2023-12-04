@@ -26,6 +26,7 @@ public class LoadAlbumView extends JFrame {
     private JPanel ControlsPanel;
     private JLabel CurrentSongField;
     private JButton BackButton;
+    private JButton button1;
     private SongPlaybackButton PreviousSongButton;
     private SongPlaybackButton PlayPauseButton;
     private SongPlaybackButton NextSongButton;
