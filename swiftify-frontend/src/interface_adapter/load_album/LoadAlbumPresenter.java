@@ -18,16 +18,16 @@ public class LoadAlbumPresenter implements LoadAlbumsOutputBoundary {
         this.viewManagerModel = viewManagerModel;
     }
 
-    @Override
-    public void presentAlbums(LinkedList<String> albums) {
 
-    }
-
-    @Override
     public void loadAlbums(LoadAlbumsOutputData loadAlbumsOutputData) {
         LoadAlbumState loadAlbumState = (LoadAlbumState) loadAlbumViewModel.getState();
         if (loadAlbumState == null) {
-            loadAlbumViewModel.setState(new LoadAlbumState(loadAlbumsOutputData.getAlbumType()));
+            switch (loadAlbumsOutputData.getSelection()) {
+                case ("Other") :
+                    loadAlbumViewModel.setState(new LoadAlbumState("OtherView", loadAlbumsOutputData.getAlbums()));
+                case ("All")  :
+                    loadAlbumViewModel.setState(new LoadAlbumState("LoadAllAlbumsView", loadAlbumsOutputData.getAlbums()));
+            }
             loadAlbumViewModel.firePropertyChanged();
         }
         viewManagerModel.setActiveView(loadAlbumViewModel.getViewName());
@@ -36,18 +36,4 @@ public class LoadAlbumPresenter implements LoadAlbumsOutputBoundary {
 
     }
 
-    @Override
-    public LoadAlbumViewModel getModel() {
-        return this.loadAlbumViewModel;
-    }
-
-    @Override
-    public void prepareSuccessView(LoadAlbumsOutputData loadAlbumsOutputData) {
-
-    }
-
-    @Override
-    public void displayView(String albumType) {
-
-    }
 }
