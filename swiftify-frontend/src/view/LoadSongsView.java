@@ -247,13 +247,14 @@ public class LoadSongsView extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
-            musicPlayer.toggleShuffle();
             if (musicPlayer.getQueue().shuffled()) {
-                ShuffleButton.setText("◡̈");
-            }
-            else {
                 ShuffleButton.setText("˙ᵕ˙");
             }
+            else {
+                ShuffleButton.setText("◡̈");
+            }
+            musicPlayer.toggleShuffle();
+
         }
     };
 
