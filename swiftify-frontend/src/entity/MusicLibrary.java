@@ -30,6 +30,8 @@ public class MusicLibrary {
         return albums;
     }
 
+    public int getLength() {return songs.size();}
+
     public static void main(String[] args) {
         MusicLibrary library = MusicLibrary.getInstance();
         List<Song> songs = library.getSongs();
