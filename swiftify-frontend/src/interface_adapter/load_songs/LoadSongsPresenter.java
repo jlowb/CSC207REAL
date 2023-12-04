@@ -18,7 +18,6 @@ public class LoadSongsPresenter implements LoadSongsOutputBoundary {
         LoadSongsState loadSongsState = loadSongsViewModel.getState();
         loadSongsViewModel.setState(new LoadSongsState(loadSongsOutputData.getAlbumName(), loadSongsOutputData.getSongs()));
         loadSongsViewModel.firePropertyChanged();
-
         viewManagerModel.setActiveView(loadSongsViewModel.getViewName());
         viewManagerModel.setViewModel(this.loadSongsViewModel);
         viewManagerModel.firePropertyChanged();
