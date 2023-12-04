@@ -61,11 +61,13 @@ public class LoadSongsView extends JFrame {
     private PlaySongController playSongController;
     private PauseSongController pauseSongController;
     private ResumeSongController resumeSongController;
+    private String albumCover;
 
-    public LoadSongsView(String albumName, PlaySongController playSongController, PauseSongController pauseSongController, ResumeSongController resumeSongController) {
+    public LoadSongsView(String albumName, PlaySongController playSongController, PauseSongController pauseSongController, ResumeSongController resumeSongController, String albumCover) {
         this.playSongController = playSongController;
         this.pauseSongController = pauseSongController;
         this.resumeSongController = resumeSongController;
+        this.albumCover = albumCover;
 
         createUIComponents();
         setContentPane(LoadSongsViewPanel);
@@ -292,7 +294,7 @@ public class LoadSongsView extends JFrame {
     }
 
     private void createUIComponents() {
-        CoverPanel = new LoadAlbumView.ImagePanel("swiftify-frontend/src/pngs/taylor_swift.png");
+        CoverPanel = new LoadAlbumView.ImagePanel(albumCover);
         setContentPane(CoverPanel);
     }
 }

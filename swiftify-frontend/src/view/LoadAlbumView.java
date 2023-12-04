@@ -105,7 +105,7 @@ public class LoadAlbumView extends JFrame {
         return buttons;
     }
 
-    private static String getAlbumCover(String albumName) {
+    public static String getAlbumCover(String albumName) {
         return switch (albumName) {
             case ("Speak Now (Deluxe Edition)") -> "swiftify-frontend/src/pngs/speak_now.png";
             case ("folklore") -> "swiftify-frontend/src/pngs/folklore.png";
