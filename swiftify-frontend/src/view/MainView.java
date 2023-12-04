@@ -1,22 +1,19 @@
 package view;
 
-import interface_adapter.load_album.LoadAlbumController;
-import interface_adapter.load_album.LoadAlbumViewModel;
-import use_case.load_album.LoadAlbumInteractor;
-import use_case.load_album.LoadAlbumsInputData;
+import interface_adapter.load_albums.LoadAlbumsController;
+import use_case.load_albums.LoadAlbumsInputData;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
 
 public class MainView extends JFrame {
     private static JPanel panel;
     private static JComboBox<String> comb;
-    private LoadAlbumController loadAlbumController;
+    private LoadAlbumsController loadAlbumController;
 
-    public MainView(LoadAlbumController loadAlbumController) {
+    public MainView(LoadAlbumsController loadAlbumController) {
         this.loadAlbumController = loadAlbumController;
         JFrame frame = new JFrame("Swiftify");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

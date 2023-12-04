@@ -2,8 +2,8 @@ package view;
 
 import entity.Album;
 import entity.SongPlaybackButton;
-import interface_adapter.load_album.LoadAlbumState;
-import interface_adapter.load_album.LoadAlbumViewModel;
+import interface_adapter.load_albums.LoadAlbumsState;
+import interface_adapter.load_albums.LoadAlbumsViewModel;
 import interface_adapter.load_songs.LoadSongsController;
 import use_case.load_songs.LoadSongsInputData;
 
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class LoadAlbumsView extends JFrame {
 
-    private LoadAlbumViewModel loadAlbumViewModel;
+    private LoadAlbumsViewModel loadAlbumViewModel;
     private JPanel MainPanel;
     private JPanel AlbumPanel1;
     private JPanel AlbumPanel2;
@@ -68,7 +68,7 @@ public class LoadAlbumsView extends JFrame {
 
     }
 
-    public void loadAlbumPanels(LoadAlbumState loadAlbumState) {
+    public void loadAlbumPanels(LoadAlbumsState loadAlbumState) {
         List<JPanel> panels = new ArrayList<JPanel>();
         int i = 1;
         for (Album album : loadAlbumState.getAlbums()) {
@@ -89,7 +89,7 @@ public class LoadAlbumsView extends JFrame {
     }
 
 
-    public List<JButton> loadAlbumButtons(LoadAlbumState loadAlbumState) {
+    public List<JButton> loadAlbumButtons(LoadAlbumsState loadAlbumState) {
         List<JButton> buttons = new ArrayList<JButton>();
         for (Album album : loadAlbumState.getAlbums()) {
             JButton button = new JButton(album.getName());

@@ -9,14 +9,14 @@ import entity.SongPlaybackButton;
 import interface_adapter.SongPlaybackState;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.add_to_queue.AddToQueueController;
-import interface_adapter.load_album.LoadAlbumController;
+import interface_adapter.load_albums.LoadAlbumsController;
 import interface_adapter.next_song.NextSongController;
 import interface_adapter.pause_song.PauseSongController;
 import interface_adapter.play_song.PlaySongController;
 import interface_adapter.prev_song.PrevSongController;
 import interface_adapter.resume_song.ResumeSongController;
 import javazoom.jl.decoder.JavaLayerException;
-import use_case.load_album.LoadAlbumsInputData;
+import use_case.load_albums.LoadAlbumsInputData;
 import use_case.next_song.NextSongInputData;
 import use_case.pause_song.PauseSongInputData;
 import use_case.play_song.PlaySongInputData;
@@ -111,7 +111,7 @@ public class LoadSongsView extends JFrame {
             MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
             musicPlayer.removeInstance();
 
-            LoadAlbumController loadAlbumController = LoadAlbumsUseCaseFactory.createLoadAlbumsController(LoadSongsView.this.viewManagerModel);
+            LoadAlbumsController loadAlbumController = LoadAlbumsUseCaseFactory.createLoadAlbumsController(LoadSongsView.this.viewManagerModel);
             LoadAlbumsInputData loadAlbumsInputData = new LoadAlbumsInputData("Taylor Swift");
             loadAlbumController.execute(loadAlbumsInputData);
             LoadSongsView.this.setVisible(false);

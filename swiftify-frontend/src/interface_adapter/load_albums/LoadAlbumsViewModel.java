@@ -1,4 +1,4 @@
-package interface_adapter.load_album;
+package interface_adapter.load_albums;
 
 
 // import main.java.com.group113.swiftify.entity.Album;
@@ -9,19 +9,19 @@ import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class LoadAlbumViewModel extends ViewModel {
+public class LoadAlbumsViewModel extends ViewModel {
 
-    private LoadAlbumState state;
+    private LoadAlbumsState state;
 
-    public LoadAlbumViewModel() {
+    public LoadAlbumsViewModel() {
         super("LoadAlbumsView", new State());
     }
 
-    public LoadAlbumState getState() {
+    public LoadAlbumsState getState() {
         return this.state;
     }
 
-    public void setState(LoadAlbumState state) {
+    public void setState(LoadAlbumsState state) {
         this.state = state;
     }
 

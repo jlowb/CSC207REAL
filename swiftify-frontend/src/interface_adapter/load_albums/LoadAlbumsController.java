@@ -1,13 +1,13 @@
-package interface_adapter.load_album;
+package interface_adapter.load_albums;
 
-import use_case.load_album.LoadAlbumsInputBoundary;
-import use_case.load_album.LoadAlbumsInputData;
+import use_case.load_albums.LoadAlbumsInputBoundary;
+import use_case.load_albums.LoadAlbumsInputData;
 
 // controller
-public class LoadAlbumController {
+public class LoadAlbumsController {
     private final LoadAlbumsInputBoundary loadAlbumsInputBoundary;
 
-    public LoadAlbumController(LoadAlbumsInputBoundary loadAlbumsInputBoundary) {
+    public LoadAlbumsController(LoadAlbumsInputBoundary loadAlbumsInputBoundary) {
         this.loadAlbumsInputBoundary = loadAlbumsInputBoundary;
     }
 

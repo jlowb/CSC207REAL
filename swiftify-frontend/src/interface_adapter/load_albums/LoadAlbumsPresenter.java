@@ -1,30 +1,27 @@
-package interface_adapter.load_album;
+package interface_adapter.load_albums;
 
 
 import interface_adapter.ViewManagerModel;
-import use_case.load_album.LoadAlbumsOutputBoundary;
-import use_case.load_album.LoadAlbumsOutputData;
+import use_case.load_albums.LoadAlbumsOutputBoundary;
+import use_case.load_albums.LoadAlbumsOutputData;
 
+public class LoadAlbumsPresenter implements LoadAlbumsOutputBoundary {
 
-import java.util.LinkedList;
-
-public class LoadAlbumPresenter implements LoadAlbumsOutputBoundary {
-
-    private final LoadAlbumViewModel loadAlbumViewModel;
+    private final LoadAlbumsViewModel loadAlbumViewModel;
     private final ViewManagerModel viewManagerModel;
 
-    public LoadAlbumPresenter(LoadAlbumViewModel loadAlbumViewModel, interface_adapter.ViewManagerModel viewManagerModel) {
+    public LoadAlbumsPresenter(LoadAlbumsViewModel loadAlbumViewModel, interface_adapter.ViewManagerModel viewManagerModel) {
         this.loadAlbumViewModel = loadAlbumViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
 
     public void loadAlbums(LoadAlbumsOutputData loadAlbumsOutputData) {
-        LoadAlbumState loadAlbumState = (LoadAlbumState) loadAlbumViewModel.getState();
+        LoadAlbumsState loadAlbumState = (LoadAlbumsState) loadAlbumViewModel.getState();
         if (loadAlbumState == null) {
             switch (loadAlbumsOutputData.getSelection()) {
                 case ("Taylor Swift") :
-                    loadAlbumViewModel.setState(new LoadAlbumState("TaylorSwift", loadAlbumsOutputData.getAlbums()));
+                    loadAlbumViewModel.setState(new LoadAlbumsState("TaylorSwift", loadAlbumsOutputData.getAlbums()));
             }
             loadAlbumViewModel.firePropertyChanged();
         }

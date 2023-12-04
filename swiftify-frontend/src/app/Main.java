@@ -1,7 +1,6 @@
 package app;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.load_album.LoadAlbumViewModel;
 import view.MainView;
 import view.ViewManager;
 
