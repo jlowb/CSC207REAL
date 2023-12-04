@@ -12,27 +12,14 @@ public class LoadAlbumInteractor implements LoadAlbumsInputBoundary {
 
     public LoadAlbumInteractor(LoadAlbumsOutputBoundary loadAlbumsOutputBoundary) {
         this.loadAlbumsOutputBoundary = loadAlbumsOutputBoundary;
-
     }
 
     public void execute(LoadAlbumsInputData loadAlbumsInputData) {
-        String albumType = loadAlbumsInputData.getAlbumType();
-        List<Album> AlbumList = new ArrayList<Album>();
-        for (Album album: MusicLibrary.getInstance().getAlbums()) {
-            if (album.getName().contains(loadAlbumsInputData.getAlbumType())) {
-                AlbumList.add(album);
-            }
+        List<Album> albumList = new ArrayList<Album>();
+        for (Album album : MusicLibrary.getInstance().getAlbums()) {
+            albumList.add(album);
         }
-
-        LoadAlbumsOutputData loadAlbumsOutputData = new LoadAlbumsOutputData(albumType, AlbumList, false);
+        LoadAlbumsOutputData loadAlbumsOutputData = new LoadAlbumsOutputData(loadAlbumsInputData.getSelection(), albumList);
         loadAlbumsOutputBoundary.loadAlbums(loadAlbumsOutputData);
-
     }
-
-    @Override
-    public LoadAlbumsOutputBoundary getOutputBoundary() {
-        return this.loadAlbumsOutputBoundary;
-    }
-
-
 }

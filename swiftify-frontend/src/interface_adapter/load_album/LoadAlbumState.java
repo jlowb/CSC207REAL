@@ -6,21 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoadAlbumState extends State {
-    private String albumType;
+    private String selection;
     private List<Album> albums = new ArrayList<Album>();
 
-    public LoadAlbumState(String albumType) {
-        this.albumType = albumType;
+    public LoadAlbumState(String selection, List<Album> albums) {
+        this.selection = selection;
+        this.albums = albums;
     }
 
     public LoadAlbumState(){
 
     }
 
-    public String getAlbumType() {
-        return albumType;
+    public String getSelection() {
+        return selection;
     }
-
 
     public List<Album> getAlbums() {
         return this.albums;
