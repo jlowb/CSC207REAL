@@ -20,6 +20,9 @@ import interface_adapter.pause_song.PauseSongViewModel;
 import interface_adapter.play_song.PlaySongController;
 import interface_adapter.play_song.PlaySongPresenter;
 import interface_adapter.play_song.PlaySongViewModel;
+import interface_adapter.prev_song.PrevSongController;
+import interface_adapter.prev_song.PrevSongPresenter;
+import interface_adapter.prev_song.PrevSongViewModel;
 import interface_adapter.resume_song.ResumeSongController;
 import javazoom.jl.decoder.JavaLayerException;
 import use_case.next_song.NextSongInputBoundary;
@@ -62,8 +65,10 @@ public class LoadSongsView extends JFrame {
     private PlaySongController playSongController;
     private PauseSongController pauseSongController;
     private ResumeSongController resumeSongController;
+    private String albumName;
 
     public LoadSongsView(String albumName, PlaySongController playSongController, PauseSongController pauseSongController, ResumeSongController resumeSongController) {
+        this.albumName = albumName;
         this.playSongController = playSongController;
         this.pauseSongController = pauseSongController;
         this.resumeSongController = resumeSongController;
@@ -77,6 +82,10 @@ public class LoadSongsView extends JFrame {
         setSize(1080, 680);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public String getAlbumName() {
+        return this.albumName;
     }
 
     public static void main(String[] args) {
@@ -100,7 +109,7 @@ public class LoadSongsView extends JFrame {
                 PlayPauseButton.getSongPlaybackState().getMusicPlayer().stop();
             }
             // BELOW IS SHADY
-            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
+            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
             int n = ((SongButton) e.getSource()).getSongId();
             musicPlayer.addToQueue(n-1);
             //
@@ -152,7 +161,7 @@ public class LoadSongsView extends JFrame {
     ActionListener addToQueueActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            MusicPlayerFacade musicPlayerFacade = MusicPlayerFacade.getInstance();
+            MusicPlayerFacade musicPlayerFacade = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
             if (!musicPlayerFacade.getQueue().isNotEmpty()) {
                 musicPlayerFacade.addToQueue(-1);
             }
@@ -176,7 +185,7 @@ public class LoadSongsView extends JFrame {
     ActionListener nextSongActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
+            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
             Song nextSong = musicPlayer.getNextSong();
             if (nextSong != null) {
                 if (PlayPauseButton.getSongPlaybackState() != null) {
@@ -204,7 +213,7 @@ public class LoadSongsView extends JFrame {
     ActionListener prevSongActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
+            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
             Song prevSong = musicPlayer.getPrevSong();
             if (prevSong != null) {
                 if (PlayPauseButton.getSongPlaybackState() != null) {
@@ -232,7 +241,7 @@ public class LoadSongsView extends JFrame {
     ActionListener shuffleActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
+            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
             musicPlayer.toggleShuffle();
         }
     };

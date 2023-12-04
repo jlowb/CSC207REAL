@@ -26,7 +26,7 @@ public class NextSongInteractor implements NextSongInputBoundary {
         this.nextSongOutputBoundary = nextSongOutputBoundary;
     }
     public void execute(NextSongInputData nextSongInputData) throws IOException, InterruptedException, JavaLayerException {
-        MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
+        MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(nextSongInputData.getView().getAlbumName());
         Song nextSong = nextSongInputData.getSong();
         String songURL = songLoader.fetchPresignedURL(nextSong.getSongID());
         PlayerState audioPlayer = musicPlayer.makeState(songURL);

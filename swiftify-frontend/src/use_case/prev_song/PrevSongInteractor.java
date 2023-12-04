@@ -22,7 +22,7 @@ public class PrevSongInteractor implements PrevSongInputBoundary {
         this.prevSongOutputBoundary = prevSongOutputBoundary;
     }
     public void execute(PrevSongInputData prevSongInputData) throws IOException, InterruptedException, JavaLayerException {
-        MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
+        MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(prevSongInputData.getView().getAlbumName());
         Song prevSong = prevSongInputData.getSong();
         String songURL = songLoader.fetchPresignedURL(prevSong.getSongID());
         PlayerState audioPlayer = musicPlayer.makeState(songURL);

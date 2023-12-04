@@ -7,14 +7,14 @@ public class MusicPlayerFacade {
     private static MusicPlayerFacade instance;
     private MusicQueue queue;
 
-    private MusicPlayerFacade(boolean shuffled, int discographyLength) {
-        this.queue = new MusicQueue(shuffled, discographyLength);
+    private MusicPlayerFacade(boolean shuffled, int discographyLength, String albumName) {
+        this.queue = new MusicQueue(shuffled, discographyLength, albumName);
     }
 
-    public static synchronized MusicPlayerFacade getInstance() {
+    public static synchronized MusicPlayerFacade getInstance(String albumName) {
         if (instance == null) {
             MusicLibrary library = MusicLibrary.getInstance();
-            instance = new MusicPlayerFacade(false, library.getLength());
+            instance = new MusicPlayerFacade(false, library.getLength(), albumName);
         }
         return instance;
     }
