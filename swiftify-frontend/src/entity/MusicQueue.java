@@ -275,6 +275,10 @@ public class MusicQueue implements Iterable<Integer> {
         }
     }
 
+    public boolean shuffled() {
+        return shuffled;
+    }
+
     public static void main(String[] args) {
         MusicQueue musicQueue = new MusicQueue(true, 107, "");
 

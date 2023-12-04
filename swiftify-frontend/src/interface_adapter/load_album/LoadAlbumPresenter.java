@@ -23,10 +23,8 @@ public class LoadAlbumPresenter implements LoadAlbumsOutputBoundary {
         LoadAlbumState loadAlbumState = (LoadAlbumState) loadAlbumViewModel.getState();
         if (loadAlbumState == null) {
             switch (loadAlbumsOutputData.getSelection()) {
-                case ("Other") :
-                    loadAlbumViewModel.setState(new LoadAlbumState("OtherView", loadAlbumsOutputData.getAlbums()));
-                case ("All")  :
-                    loadAlbumViewModel.setState(new LoadAlbumState("LoadAllAlbumsView", loadAlbumsOutputData.getAlbums()));
+                case ("Taylor Swift") :
+                    loadAlbumViewModel.setState(new LoadAlbumState("TaylorSwift", loadAlbumsOutputData.getAlbums()));
             }
             loadAlbumViewModel.firePropertyChanged();
         }

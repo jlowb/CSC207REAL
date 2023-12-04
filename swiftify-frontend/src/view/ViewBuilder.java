@@ -8,7 +8,6 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewModel;
 import interface_adapter.add_to_queue.AddToQueueController;
 import interface_adapter.load_album.LoadAlbumState;
-import interface_adapter.load_album.LoadAlbumViewModel;
 import interface_adapter.load_songs.LoadSongsController;
 import interface_adapter.load_songs.LoadSongsState;
 import interface_adapter.next_song.NextSongController;
@@ -18,7 +17,6 @@ import interface_adapter.prev_song.PrevSongController;
 import interface_adapter.resume_song.ResumeSongController;
 
 import javax.swing.*;
-import java.net.URL;
 
 public class ViewBuilder {
 
@@ -34,7 +32,7 @@ public class ViewBuilder {
         if (this.viewModel.getViewName().equalsIgnoreCase("LoadSongsView")) {
             return buildAlbumSongsView();
         }
-        if (this.viewModel.getViewName().equalsIgnoreCase("LoadAlbumView")) {
+        if (this.viewModel.getViewName().equalsIgnoreCase("LoadAlbumsView")) {
             return buildAlbumsView();
         }
         if (this.viewModel.getViewName().equalsIgnoreCase("PlaySongView")) {
@@ -48,9 +46,6 @@ public class ViewBuilder {
         }
         if (this.viewModel.getViewName().equalsIgnoreCase("AddToQueueView")) {
             return buildAddToQueueView();
-        }
-        if (this.viewModel.getViewName().equalsIgnoreCase("LoadAlbumsView")) {
-            return buildAlbumsView();
         }
 
         // write switch case for other views later
@@ -66,23 +61,23 @@ public class ViewBuilder {
         NextSongController nextSongController = NextSongUseCaseFactory.createNextSongController(this.viewManagerModel, songLoader);
         PrevSongController prevSongController = PrevSongUseCaseFactory.createPrevSongController(this.viewManagerModel, songLoader);
         AddToQueueController addToQueueController = AddToQueueUseCaseFactory.createAddToQueueController(this.viewManagerModel);
-        LoadSongsView loadSongsView1 = new LoadSongsView(loadSongsState.getAlbumName(), playSongController, pauseSongController, resumeSongController, nextSongController, prevSongController, addToQueueController);
+        LoadSongsView loadSongsView1 = new LoadSongsView(loadSongsState.getAlbumName(), playSongController, pauseSongController, resumeSongController, nextSongController, prevSongController, addToQueueController, this.viewManagerModel);
         for (Song song : loadSongsState.getSongs()) {
             loadSongsView1.addSong(song);
         }
         return loadSongsView1;
     }
 
-    public LoadAlbumView buildAlbumsView() {
+    public LoadAlbumsView buildAlbumsView() {
         LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
         LoadSongsController loadSongsController = LoadSongsUseCaseFactory.createLoadSongsController(this.viewManagerModel);
-        if (loadAlbumState.getSelection().equalsIgnoreCase("Taylor Swift")) {
-            return new LoadAlbumView(loadSongsController);
-        }
-        else {
-            LoadAlbumView view = new LoadAlbumView(loadSongsController);
+        if (loadAlbumState.getSelection().equalsIgnoreCase("TaylorSwift")) {
+            LoadAlbumsView view = new LoadAlbumsView(loadSongsController);
             view.loadAlbumPanels(loadAlbumState);
             return view;
+        }
+        else {
+            return new LoadAlbumsView(loadSongsController);
         }
     }
 

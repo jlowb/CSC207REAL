@@ -17,17 +17,15 @@ public class MainView extends JFrame {
     private LoadAlbumController loadAlbumController;
 
     public MainView(LoadAlbumController loadAlbumController) {
-        //LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
-        //loadAlbumViewModel.addPropertyChangeListener((PropertyChangeListener) this);
         this.loadAlbumController = loadAlbumController;
         JFrame frame = new JFrame("Swiftify");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1080, 680);
-        frame.getContentPane().setBackground(new Color(99, 93, 133));
+        frame.getContentPane().setBackground(new Color(223, 225, 229));
 
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(99, 93, 133));
+        panel.setBackground(new Color(223, 225, 229));
 
         frame.add(panel);
 
@@ -46,6 +44,7 @@ public class MainView extends JFrame {
         b.addActionListener(loadAlbumsActionListener);
         panel.add(b);
 
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -80,7 +79,7 @@ public class MainView extends JFrame {
 
     ActionListener loadAlbumsActionListener = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            LoadAlbumsInputData loadAlbumsInputData = new LoadAlbumsInputData("All");
+            LoadAlbumsInputData loadAlbumsInputData = new LoadAlbumsInputData("Taylor Swift");
             MainView.this.loadAlbumController.execute(loadAlbumsInputData);
         }
     };

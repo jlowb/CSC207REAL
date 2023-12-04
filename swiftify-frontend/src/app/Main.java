@@ -12,6 +12,5 @@ public class Main {
         new ViewManager(viewManagerModel);
 
         MainView mainView = new MainView(LoadAlbumsUseCaseFactory.createLoadAlbumsController(viewManagerModel));
-        mainView.setVisible(true);
     }
 }
