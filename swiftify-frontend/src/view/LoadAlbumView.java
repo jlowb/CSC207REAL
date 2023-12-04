@@ -18,15 +18,14 @@ public class LoadAlbumView extends JFrame {
 
     private LoadAlbumViewModel loadAlbumViewModel;
     private JPanel MainPanel;
-    private JPanel BackPanel;
     private JPanel AlbumPanel1;
     private JPanel AlbumPanel2;
     private JPanel MusicPlaybackPanel;
     private JButton ShuffleButton;
+    private JPanel BackPanel;
     private JPanel ControlsPanel;
     private JLabel CurrentSongField;
     private JButton BackButton;
-    private JButton button1;
     private SongPlaybackButton PreviousSongButton;
     private SongPlaybackButton PlayPauseButton;
     private SongPlaybackButton NextSongButton;
@@ -135,6 +134,8 @@ public class LoadAlbumView extends JFrame {
         ControlsPanel.add(PlayPauseButton, 1);
         ControlsPanel.add(NextSongButton, 2);
     }
+
+
 
     static class ImagePanel extends JPanel {
         private Image backgroundImage;
