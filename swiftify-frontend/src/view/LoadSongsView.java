@@ -73,7 +73,7 @@ public class LoadSongsView extends JFrame {
         this.pauseSongController = pauseSongController;
         this.resumeSongController = resumeSongController;
 
-        createUIComponents();
+
         setContentPane(LoadSongsViewPanel);
         adjustUIComponents();
         setTitle("Swiftify Album - " + albumName);
@@ -301,10 +301,6 @@ public class LoadSongsView extends JFrame {
         ControlsPanel.add(PreviousSongButton, 0);
         ControlsPanel.add(PlayPauseButton, 1);
         ControlsPanel.add(NextSongButton, 2);
-    }
-
-    private void createUIComponents() {
-        CoverPanel = new LoadAlbumView.ImagePanel("swiftify-frontend/src/pngs/taylor_swift.png");
-        setContentPane(CoverPanel);
+        CoverPanel.add(new LoadAlbumView.ImagePanel(LoadAlbumView.getAlbumCover(this.albumName)));
     }
 }
