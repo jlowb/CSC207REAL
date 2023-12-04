@@ -93,7 +93,4 @@ public class MusicPlayerFacadeTest {
             fail("Exception not expected");
         }
     }
-
-    // Add more tests as needed for other methods and edge cases
-
 }

@@ -13,7 +13,7 @@ public class AddToQueueButtonTest {
 
         assertNotNull(button);
         assertEquals("Test Song", button.getText());
-        assertEquals(Integer.valueOf(1), button.getSongId());
+        assertEquals(1, button.getSongId());
     }
 
     @Test
