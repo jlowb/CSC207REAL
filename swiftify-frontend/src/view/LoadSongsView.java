@@ -283,7 +283,6 @@ public class LoadSongsView extends JFrame {
         PlayPauseButton.setPreferredSize(new Dimension(100, 50));
         NextSongButton.setPreferredSize(new Dimension(50, 50));
         ShuffleButton.setPreferredSize(new Dimension(50, 50));
-        PlayPauseButton.addActionListener(pauseOrResumeSongActionListener);
         NextSongButton.addActionListener(nextSongActionListener);
         PreviousSongButton.addActionListener(prevSongActionListener);
         ShuffleButton.addActionListener(shuffleActionListener);
