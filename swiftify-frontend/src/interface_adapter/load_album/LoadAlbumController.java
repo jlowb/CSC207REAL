@@ -5,7 +5,7 @@ import use_case.load_album.LoadAlbumsInputData;
 
 // controller
 public class LoadAlbumController {
-    final LoadAlbumsInputBoundary loadAlbumsInputBoundary;
+    private final LoadAlbumsInputBoundary loadAlbumsInputBoundary;
 
     public LoadAlbumController(LoadAlbumsInputBoundary loadAlbumsInputBoundary) {
         this.loadAlbumsInputBoundary = loadAlbumsInputBoundary;

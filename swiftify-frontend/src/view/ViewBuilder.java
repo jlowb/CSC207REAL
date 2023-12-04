@@ -9,6 +9,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewModel;
 import interface_adapter.load_album.LoadAlbumState;
 import interface_adapter.load_album.LoadAlbumViewModel;
+import interface_adapter.load_songs.LoadSongsController;
 import interface_adapter.load_songs.LoadSongsState;
 import interface_adapter.pause_song.PauseSongController;
 import interface_adapter.play_song.PlaySongController;
@@ -31,7 +32,7 @@ public class ViewBuilder {
             return buildAlbumSongsView();
         }
         if (this.viewModel.getViewName().equalsIgnoreCase("LoadAlbumView")) {
-            return buildAlbumView();
+            return buildAlbumsView();
         }
         if (this.viewModel.getViewName().equalsIgnoreCase("PlaySongView")) {
             return buildPlayingView();
@@ -44,6 +45,9 @@ public class ViewBuilder {
         }
         if (this.viewModel.getViewName().equalsIgnoreCase("AddToQueueView")) {
             return buildAddToQueueView();
+        }
+        if (this.viewModel.getViewName().equalsIgnoreCase("LoadAlbumsView")) {
+            return buildAlbumsView();
         }
 
         // write switch case for other views later
@@ -62,8 +66,17 @@ public class ViewBuilder {
         return loadSongsView1;
     }
 
-    public LoadAlbumView buildAlbumView() {
-        return new LoadAlbumView(LoadSongsUseCaseFactory.createLoadSongsController(this.viewManagerModel));
+    public LoadAlbumView buildAlbumsView() {
+        LoadAlbumState loadAlbumState = (LoadAlbumState) this.viewModel.getState();
+        LoadSongsController loadSongsController = LoadSongsUseCaseFactory.createLoadSongsController(this.viewManagerModel);
+        if (loadAlbumState.getSelection().equalsIgnoreCase("Taylor Swift")) {
+            return new LoadAlbumView(loadSongsController);
+        }
+        else {
+            LoadAlbumView view = new LoadAlbumView(loadSongsController);
+            view.loadAlbumPanels(loadAlbumState);
+            return view;
+        }
     }
 
     public LoadSongsView buildPlayingView() {
