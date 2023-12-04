@@ -1,21 +1,24 @@
 package view;
 
-import app.LoadSongsUseCaseFactory;
-import app.SongPlaybackUseCaseFactory;
+import app.*;
 import data_access.URLSongLoader;
 import entity.Song;
 import interface_adapter.SongPlaybackState;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewModel;
+import interface_adapter.add_to_queue.AddToQueueController;
 import interface_adapter.load_album.LoadAlbumState;
 import interface_adapter.load_album.LoadAlbumViewModel;
 import interface_adapter.load_songs.LoadSongsController;
 import interface_adapter.load_songs.LoadSongsState;
+import interface_adapter.next_song.NextSongController;
 import interface_adapter.pause_song.PauseSongController;
 import interface_adapter.play_song.PlaySongController;
+import interface_adapter.prev_song.PrevSongController;
 import interface_adapter.resume_song.ResumeSongController;
 
 import javax.swing.*;
+import java.net.URL;
 
 public class ViewBuilder {
 
@@ -56,10 +59,14 @@ public class ViewBuilder {
 
     private LoadSongsView buildAlbumSongsView() {
         LoadSongsState loadSongsState = (LoadSongsState) this.viewModel.getState();
-        PlaySongController playSongController = SongPlaybackUseCaseFactory.createPlaySongController(this.viewManagerModel, new URLSongLoader());
+        URLSongLoader songLoader = new URLSongLoader();
+        PlaySongController playSongController = SongPlaybackUseCaseFactory.createPlaySongController(this.viewManagerModel, songLoader);
         PauseSongController pauseSongController = SongPlaybackUseCaseFactory.createPauseSongController(this.viewManagerModel, null);
         ResumeSongController resumeSongController = SongPlaybackUseCaseFactory.createResumeSongController(this.viewManagerModel, null);
-        LoadSongsView loadSongsView1 = new LoadSongsView(loadSongsState.getAlbumName(), playSongController, pauseSongController, resumeSongController);
+        NextSongController nextSongController = NextSongUseCaseFactory.createNextSongController(this.viewManagerModel, songLoader);
+        PrevSongController prevSongController = PrevSongUseCaseFactory.createPrevSongController(this.viewManagerModel, songLoader);
+        AddToQueueController addToQueueController = AddToQueueUseCaseFactory.createAddToQueueController(this.viewManagerModel);
+        LoadSongsView loadSongsView1 = new LoadSongsView(loadSongsState.getAlbumName(), playSongController, pauseSongController, resumeSongController, nextSongController, prevSongController, addToQueueController);
         for (Song song : loadSongsState.getSongs()) {
             loadSongsView1.addSong(song);
         }

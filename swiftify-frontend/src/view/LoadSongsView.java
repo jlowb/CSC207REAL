@@ -33,6 +33,7 @@ import use_case.play_song.PlaySongInputData;
 import use_case.prev_song.PrevSongInputBoundary;
 import use_case.prev_song.PrevSongInputData;
 import use_case.prev_song.PrevSongInteractor;
+import use_case.prev_song.PrevSongOutputBoundary;
 import use_case.resume_song.ResumeSongInputData;
 import use_case.add_to_queue.AddToQueueInputBoundary;
 import use_case.add_to_queue.AddToQueueInputData;
@@ -65,14 +66,25 @@ public class LoadSongsView extends JFrame {
     private PlaySongController playSongController;
     private PauseSongController pauseSongController;
     private ResumeSongController resumeSongController;
+    private NextSongController nextSongController;
+    private PrevSongController prevSongController;
+    private AddToQueueController addToQueueController;
     private String albumName;
 
-    public LoadSongsView(String albumName, PlaySongController playSongController, PauseSongController pauseSongController, ResumeSongController resumeSongController) {
+    public LoadSongsView(String albumName,
+                         PlaySongController playSongController,
+                         PauseSongController pauseSongController,
+                         ResumeSongController resumeSongController,
+                         NextSongController nextSongController,
+                         PrevSongController prevSongController,
+                         AddToQueueController addToQueueController) {
         this.albumName = albumName;
         this.playSongController = playSongController;
         this.pauseSongController = pauseSongController;
         this.resumeSongController = resumeSongController;
-
+        this.nextSongController = nextSongController;
+        this.prevSongController = prevSongController;
+        this.addToQueueController = addToQueueController;
 
         setContentPane(LoadSongsViewPanel);
         adjustUIComponents();
@@ -166,10 +178,6 @@ public class LoadSongsView extends JFrame {
                 musicPlayerFacade.addToQueue(-1);
             }
             AddToQueueInputData addToQueueInputData = new AddToQueueInputData(((AddToQueueButton) e.getSource()).getSongId() -1, LoadSongsView.this);
-            ViewManagerModel viewManagerModel = new ViewManagerModel();
-            new ViewManager(viewManagerModel);
-            AddToQueueInputBoundary addToQueueInputBoundary = new AddToQueueInteractor(new AddToQueuePresenter(new AddToQueueViewModel(), viewManagerModel));
-            AddToQueueController addToQueueController = new AddToQueueController(addToQueueInputBoundary);
             try {
                 addToQueueController.execute(addToQueueInputData);
             } catch (IOException ex) {
@@ -192,10 +200,6 @@ public class LoadSongsView extends JFrame {
                     PlayPauseButton.getSongPlaybackState().getMusicPlayer().stop();
                 }
                 NextSongInputData nextSongInputData = new NextSongInputData(nextSong, LoadSongsView.this);
-                ViewManagerModel viewManagerModel = new ViewManagerModel();
-                new ViewManager(viewManagerModel);
-                NextSongInputBoundary nextSongInputBoundary = new NextSongInteractor(new URLSongLoader(), new NextSongPresenter(new NextSongViewModel(), viewManagerModel));
-                NextSongController nextSongController = new NextSongController(nextSongInputBoundary);
                 try {
                     nextSongController.execute(nextSongInputData);
                 } catch (IOException ex) {
@@ -220,10 +224,6 @@ public class LoadSongsView extends JFrame {
                     PlayPauseButton.getSongPlaybackState().getMusicPlayer().stop();
                 }
                 PrevSongInputData prevSongInputData = new PrevSongInputData(prevSong, LoadSongsView.this);
-                ViewManagerModel viewManagerModel = new ViewManagerModel();
-                new ViewManager(viewManagerModel);
-                PrevSongInputBoundary prevSongInputBoundary = new PrevSongInteractor(new URLSongLoader(), new PrevSongPresenter(new PrevSongViewModel(), viewManagerModel));
-                PrevSongController prevSongController = new PrevSongController(prevSongInputBoundary);
                 try {
                     prevSongController.execute(prevSongInputData);
                 } catch (IOException ex) {
