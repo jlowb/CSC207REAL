@@ -15,10 +15,11 @@ import interface_adapter.next_song.NextSongController;
 import interface_adapter.next_song.NextSongPresenter;
 import interface_adapter.next_song.NextSongViewModel;
 import interface_adapter.pause_song.PauseSongController;
+import interface_adapter.pause_song.PauseSongPresenter;
+import interface_adapter.pause_song.PauseSongViewModel;
 import interface_adapter.play_song.PlaySongController;
-import interface_adapter.prev_song.PrevSongController;
-import interface_adapter.prev_song.PrevSongPresenter;
-import interface_adapter.prev_song.PrevSongViewModel;
+import interface_adapter.play_song.PlaySongPresenter;
+import interface_adapter.play_song.PlaySongViewModel;
 import interface_adapter.resume_song.ResumeSongController;
 import javazoom.jl.decoder.JavaLayerException;
 import use_case.next_song.NextSongInputBoundary;
@@ -247,7 +248,7 @@ public class LoadSongsView extends JFrame {
     };
 
     public void setPlayingView(SongPlaybackState songPlaybackState) {
-        PlayPauseButton.setText("||");
+        PlayPauseButton.setText("▐▐ ");
         PlayPauseButton.setSongPlaybackState(songPlaybackState);
         PreviousSongButton.setSongPlaybackState(songPlaybackState);
         NextSongButton.setSongPlaybackState(songPlaybackState);
@@ -255,12 +256,12 @@ public class LoadSongsView extends JFrame {
     }
 
     public void setPausedView(SongPlaybackState songPlaybackState) {
-        PlayPauseButton.setText("(>");
+        PlayPauseButton.setText("▶");
         CurrentSongField.setText("Currently Paused: " + songPlaybackState.getSongName());
     }
 
     public void setResumedView(SongPlaybackState songPlaybackState) {
-        PlayPauseButton.setText("||");
+        PlayPauseButton.setText("▐▐ ");
         CurrentSongField.setText("Currently Playing: " + songPlaybackState.getSongName());
     }
 
