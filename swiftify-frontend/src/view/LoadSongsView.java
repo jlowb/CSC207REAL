@@ -164,7 +164,7 @@ public class LoadSongsView extends JFrame {
     }
 
     private void createUIComponents() {
-        CoverPanel = new LoadAlbumView.ImagePanel("swiftify-frontend/src/pngs/swifty.png");
+        CoverPanel = new LoadAlbumView.ImagePanel("swiftify-frontend/src/pngs/swifty2.png");
         setContentPane(CoverPanel);
     }
 
