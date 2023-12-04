@@ -19,6 +19,10 @@ public class MusicPlayerFacade {
         return instance;
     }
 
+    public static synchronized void removeInstance() {
+        instance = null;
+    }
+
     // QUEUE ONLY
 
     public MusicQueue getQueue() {

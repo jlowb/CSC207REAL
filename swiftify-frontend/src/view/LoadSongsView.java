@@ -253,6 +253,8 @@ public class LoadSongsView extends JFrame {
             if (PlayPauseButton.getSongPlaybackState() != null) {
                 PlayPauseButton.getSongPlaybackState().getMusicPlayer().stop();
             }
+            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
+            musicPlayer.removeInstance();
         }
     };
 
