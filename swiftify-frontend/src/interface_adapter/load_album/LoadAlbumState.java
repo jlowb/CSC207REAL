@@ -22,7 +22,6 @@ public class LoadAlbumState extends State {
         return selection;
     }
 
-
     public List<Album> getAlbums() {
         return this.albums;
     }

@@ -18,11 +18,11 @@ public class LoadAlbumView extends JFrame {
 
     private LoadAlbumViewModel loadAlbumViewModel;
     private JPanel MainPanel;
+    private JPanel BackPanel;
     private JPanel AlbumPanel1;
     private JPanel AlbumPanel2;
     private JPanel MusicPlaybackPanel;
     private JButton ShuffleButton;
-    private JPanel BackPanel;
     private JPanel ControlsPanel;
     private JLabel CurrentSongField;
     private JButton BackButton;
@@ -34,6 +34,8 @@ public class LoadAlbumView extends JFrame {
 
 
     public LoadAlbumView(LoadSongsController loadSongsController) {
+        //LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
+        //loadAlbumViewModel.addPropertyChangeListener((PropertyChangeListener) this);
 
         this.loadSongsController = loadSongsController;
 
@@ -92,6 +94,7 @@ public class LoadAlbumView extends JFrame {
         }
     }
 
+
     public static List<JButton> loadAlbumButtons(LoadAlbumState loadAlbumState) {
         List<JButton> buttons = new ArrayList<JButton>();
         for (Album album : loadAlbumState.getAlbums()) {
@@ -134,8 +137,6 @@ public class LoadAlbumView extends JFrame {
         ControlsPanel.add(PlayPauseButton, 1);
         ControlsPanel.add(NextSongButton, 2);
     }
-
-
 
     static class ImagePanel extends JPanel {
         private Image backgroundImage;

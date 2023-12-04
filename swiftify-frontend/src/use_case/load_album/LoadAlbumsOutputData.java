@@ -2,6 +2,10 @@ package use_case.load_album;
 import entity.Album;
 import java.util.List;
 
+import entity.Album;
+
+import java.util.List;
+
 public class LoadAlbumsOutputData {
 
     private final String selection;
