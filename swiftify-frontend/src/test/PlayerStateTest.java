@@ -38,7 +38,7 @@ public class PlayerStateTest {
     }
 
     @Test
-    public void testPlay() {
+    public void testPlay() throws JavaLayerException {
         // Test if the player starts playing
         assertFalse(player.isPlaying());  // Player should not be playing initially
         player.play();
@@ -46,7 +46,7 @@ public class PlayerStateTest {
     }
 
     @Test
-    public void testPauseAndResume() {
+    public void testPauseAndResume() throws JavaLayerException {
         // Test if the player can be paused and resumed
         assertFalse(player.isPlaying());  // Player should not be playing initially
         player.play();
@@ -60,7 +60,7 @@ public class PlayerStateTest {
     }
 
     @Test
-    public void testStop() {
+    public void testStop() throws JavaLayerException {
         // Test if the player can be stopped
         assertFalse(player.isFinished()); // Player should not be finished initially
         player.play();
@@ -71,7 +71,7 @@ public class PlayerStateTest {
     }
 
     @Test
-    public void testIsFinished() {
+    public void testIsFinished() throws JavaLayerException {
         // Test if isFinished() returns true after the player finishes
         assertFalse(player.isFinished()); // Player should not be finished initially
         player.play();

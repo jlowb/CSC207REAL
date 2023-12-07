@@ -1,5 +1,6 @@
 package test;
 
+import data_access.SongBuilder;
 import entity.Song;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
@@ -12,11 +13,7 @@ public class SongBuilderTest {
     public void testFetchSongsFromApi() {
         // Test if fetchSongs method retrieves songs from the API
         List<Song> songs = null;
-        try {
-            songs = SongBuilder.fetchSongs();
-        } catch (IOException e) {
-            fail("Exception thrown while fetching songs from API: " + e.getMessage());
-        }
+        songs = SongBuilder.fetchSongs();
 
         assertNotNull(songs);
         assertTrue(songs.size() == 175);

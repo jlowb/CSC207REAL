@@ -23,8 +23,4 @@ public class LoadSongsPresenter implements LoadSongsOutputBoundary {
         viewManagerModel.setViewModel(this.loadSongsViewModel);
         viewManagerModel.firePropertyChanged();
     }
-
-    public LoadSongsViewModel getModel() {
-        return this.loadSongsViewModel;
-    }
 }
