@@ -1,3 +1,13 @@
+/**
+ * The {@code PlaySongPresenter} class is responsible for presenting the view
+ * and managing the state when playing a song. It implements the
+ * {PlaySongOutputBoundary} interface to handle the output from the
+ * "Play Song" use case.
+ * Provides the Prepare view and to get the playSongViewModel
+ * @author [Malaika]
+ *
+ */
+
 package interface_adapter.play_song;
 
 import interface_adapter.SongPlaybackState;

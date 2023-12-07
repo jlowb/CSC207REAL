@@ -8,11 +8,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+/**
+ * The main view class representing the GUI of the application.
+ */
+
 public class MainView extends JFrame {
     private static JPanel selectionPanel;
     private static JLabel label;
     private static JComboBox<String> comb;
     private LoadAlbumsController loadAlbumController;
+
+    /**
+     * Constructs a new MainView with the specified LoadAlbumsController.
+     *
+     * @param loadAlbumController The controller responsible for handling album loading.
+     */
 
     public MainView(LoadAlbumsController loadAlbumController) {
         this.loadAlbumController = loadAlbumController;
@@ -45,6 +56,11 @@ public class MainView extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+    /**
+     * The main method to launch the application and display the main view.
+     *
+     *
+     */
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Swiftify");
@@ -74,6 +90,9 @@ public class MainView extends JFrame {
 
         frame.setVisible(true);
     }
+    /**
+     * ActionListener for handling the "OK" button click event.
+     */
 
     ActionListener loadAlbumsActionListener = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
