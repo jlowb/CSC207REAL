@@ -1,4 +1,7 @@
-package entity;
+package data_access;
+
+import entity.Album;
+import entity.Song;
 
 import java.util.List;
 

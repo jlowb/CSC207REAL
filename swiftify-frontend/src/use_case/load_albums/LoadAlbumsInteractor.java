@@ -1,7 +1,7 @@
 package use_case.load_albums;
 
 import entity.Album;
-import entity.MusicLibrary;
+import data_access.MusicLibrary;
 
 import java.util.ArrayList;
 import java.util.List;

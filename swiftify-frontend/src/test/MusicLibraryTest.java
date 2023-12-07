@@ -1,7 +1,7 @@
 package test;
 
 import entity.Album;
-import entity.MusicLibrary;
+import data_access.MusicLibrary;
 import entity.Song;
 import org.junit.Before;
 import org.junit.Test;

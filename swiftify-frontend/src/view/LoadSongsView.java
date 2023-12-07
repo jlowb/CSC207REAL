@@ -1,7 +1,7 @@
 package view;
 
 import app.LoadAlbumsUseCaseFactory;
-import entity.MusicPlayerFacade;
+import data_access.MusicPlayerFacade;
 import entity.Song;
 import entity.SongButton;
 import entity.AddToQueueButton;
@@ -254,7 +254,6 @@ public class LoadSongsView extends JFrame {
                 ShuffleButton.setText("◡̈");
             }
             musicPlayer.toggleShuffle();
-
         }
     };
 

@@ -1,6 +1,6 @@
 package use_case.load_songs;
 
-import entity.MusicLibrary;
+import data_access.MusicLibrary;
 import entity.Song;
 
 import java.util.ArrayList;

@@ -88,7 +88,6 @@ public class LoadAlbumsView extends JFrame {
         }
     }
 
-
     public List<JButton> loadAlbumButtons(LoadAlbumsState loadAlbumState) {
         List<JButton> buttons = new ArrayList<JButton>();
         for (Album album : loadAlbumState.getAlbums()) {
@@ -117,22 +116,6 @@ public class LoadAlbumsView extends JFrame {
     private void adjustUIComponents() {
         AlbumPanel1.setLayout(new GridLayout(5, 1));
         AlbumPanel2.setLayout(new GridLayout(5, 1));
-        /*
-        PreviousSongButton = new SongPlaybackButton(null);
-        PreviousSongButton.setText("⏮");
-        PlayPauseButton = new SongPlaybackButton(null);
-        PlayPauseButton.setText("▶");
-        NextSongButton = new SongPlaybackButton(null);
-        NextSongButton.setText("⏭");
-        PreviousSongButton.setPreferredSize(new Dimension(50, 50));
-        PlayPauseButton.setPreferredSize(new Dimension(100, 50));
-        NextSongButton.setPreferredSize(new Dimension(50, 50));
-        ShuffleButton.setPreferredSize(new Dimension(50, 50));
-        ControlsPanel.add(PreviousSongButton, 0);
-        ControlsPanel.add(PlayPauseButton, 1);
-        ControlsPanel.add(NextSongButton, 2);
-
-         */
     }
 
     static class ImagePanel extends JPanel {

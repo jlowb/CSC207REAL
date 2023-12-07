@@ -9,7 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainView extends JFrame {
-    private static JPanel panel;
+    private static JPanel selectionPanel;
+    private static JLabel label;
     private static JComboBox<String> comb;
     private LoadAlbumsController loadAlbumController;
 
@@ -20,26 +21,26 @@ public class MainView extends JFrame {
         frame.setSize(1080, 680);
         frame.getContentPane().setBackground(new Color(223, 225, 229));
 
-        panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(223, 225, 229));
+        selectionPanel = new JPanel();
+        selectionPanel.setLayout(new BoxLayout(selectionPanel, BoxLayout.Y_AXIS));
+        selectionPanel.setBackground(new Color(223, 225, 229));
 
-        frame.add(panel);
+        frame.add(selectionPanel);
 
-        JLabel label = new JLabel("Select Artist");
+        label = new JLabel("Select Artist");
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(label);
+        selectionPanel.add(label);
 
         String[] choices = {"Taylor Swift"};
         comb = new JComboBox<>(choices);
         comb.setMaximumSize(comb.getPreferredSize());
         comb.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(comb);
+        selectionPanel.add(comb);
 
-        JButton b = new JButton("OK");
-        b.setAlignmentX(Component.CENTER_ALIGNMENT);
-        b.addActionListener(loadAlbumsActionListener);
-        panel.add(b);
+        JButton selectionConfirmButton = new JButton("OK");
+        selectionConfirmButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        selectionConfirmButton.addActionListener(loadAlbumsActionListener);
+        selectionPanel.add(selectionConfirmButton);
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -51,32 +52,33 @@ public class MainView extends JFrame {
         frame.setSize(1080, 680);
         frame.getContentPane().setBackground(new Color(99, 93, 133));
 
-        panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(99, 93, 133));
+        selectionPanel = new JPanel();
+        selectionPanel.setLayout(new BoxLayout(selectionPanel, BoxLayout.Y_AXIS));
+        selectionPanel.setBackground(new Color(99, 93, 133));
 
-        frame.add(panel);
+        frame.add(selectionPanel);
 
         JLabel label = new JLabel("Select album type");
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(label);
+        selectionPanel.add(label);
 
         String[] choices = {"Group 113's favourites", "All"};
         comb = new JComboBox<>(choices);
         comb.setMaximumSize(comb.getPreferredSize());
         comb.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(comb);
+        selectionPanel.add(comb);
 
         JButton b = new JButton("OK");
         b.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(b);
+        selectionPanel.add(b);
 
         frame.setVisible(true);
     }
 
     ActionListener loadAlbumsActionListener = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            LoadAlbumsInputData loadAlbumsInputData = new LoadAlbumsInputData("Taylor Swift");
+            e.setSource(comb);
+            LoadAlbumsInputData loadAlbumsInputData = new LoadAlbumsInputData(((JComboBox) e.getSource()).getSelectedItem().toString());
             MainView.this.loadAlbumController.execute(loadAlbumsInputData);
         }
     };

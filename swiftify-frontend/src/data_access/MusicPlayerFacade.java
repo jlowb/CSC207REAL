@@ -1,7 +1,9 @@
-package entity;
+package data_access;
 
+import entity.MusicQueue;
+import entity.PlayerState;
+import entity.Song;
 import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
 
 public class MusicPlayerFacade {
     private static MusicPlayerFacade instance;
@@ -44,6 +46,7 @@ public class MusicPlayerFacade {
         }
         return null;
     }
+
     public Song getPrevSong() {
         MusicLibrary library = MusicLibrary.getInstance();
         queue.previous();
@@ -53,6 +56,7 @@ public class MusicPlayerFacade {
         }
         return null;
     }
+
     public Song getNextSong() {
         MusicLibrary library = MusicLibrary.getInstance();
         queue.next();

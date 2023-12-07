@@ -1,18 +1,10 @@
 package use_case.next_song;
 
 import data_access.URLSongLoader;
-import entity.MusicPlayerFacade;
+import data_access.MusicPlayerFacade;
 import entity.PlayerState;
 import entity.Song;
-import interface_adapter.ViewManagerModel;
-import interface_adapter.play_song.PlaySongController;
-import interface_adapter.play_song.PlaySongPresenter;
-import interface_adapter.play_song.PlaySongViewModel;
 import javazoom.jl.decoder.JavaLayerException;
-import use_case.play_song.PlaySongInputBoundary;
-import use_case.play_song.PlaySongInputData;
-import use_case.play_song.PlaySongInteractor;
-import view.ViewManager;
 
 import java.io.IOException;
 
