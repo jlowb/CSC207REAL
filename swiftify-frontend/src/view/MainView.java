@@ -93,6 +93,7 @@ public class MainView extends JFrame {
         loadSongsView.setVisible(true);
     }
 
+    /*
     public static void main(String[] args) {
         JFrame frame = new JFrame("Swiftify");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -121,6 +122,8 @@ public class MainView extends JFrame {
 
         frame.setVisible(true);
     }
+
+     */
 
     public ActionListener loadAlbumsActionListener = new ActionListener() {
         public void actionPerformed(ActionEvent e) {

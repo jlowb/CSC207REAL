@@ -52,7 +52,7 @@ public class ViewBuilder {
         return new JFrame();
     }
 
-    private LoadSongsView buildAlbumSongsView() {
+    public LoadSongsView buildAlbumSongsView() {
         LoadSongsState loadSongsState = (LoadSongsState) this.viewModel.getState();
         URLSongLoader songLoader = new URLSongLoader();
         PlaySongController playSongController = SongPlaybackUseCaseFactory.createPlaySongController(this.viewManagerModel, songLoader);

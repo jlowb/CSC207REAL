@@ -187,6 +187,7 @@ public class PlayerState {
     }
 
 
+    /*
     // demo how to use with URL
     public static void main(String[] argv) {
         try {
@@ -216,5 +217,6 @@ public class PlayerState {
         }
     }
 
+     */
 }
 

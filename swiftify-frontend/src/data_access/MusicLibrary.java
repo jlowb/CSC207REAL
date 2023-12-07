@@ -35,6 +35,7 @@ public class MusicLibrary {
 
     public int getLength() {return songs.size();}
 
+    /*
     public static void main(String[] args) {
         MusicLibrary library = MusicLibrary.getInstance();
         List<Song> songs = library.getSongs();
@@ -51,4 +52,6 @@ public class MusicLibrary {
             }
         }
     }
+
+     */
 }
