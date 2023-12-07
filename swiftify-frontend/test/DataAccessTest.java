@@ -1,5 +1,3 @@
-package test;
-
 import data_access.*;
 import entity.Album;
 import entity.PlayerState;

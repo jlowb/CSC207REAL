@@ -1,5 +1,3 @@
-package test;
-
 import app.LoadAlbumsUseCaseFactory;
 import app.LoadSongsUseCaseFactory;
 import app.SongPlaybackUseCaseFactory;

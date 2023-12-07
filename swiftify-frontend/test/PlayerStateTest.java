@@ -1,5 +1,3 @@
-package test;
-
 import entity.PlayerState;
 import javazoom.jl.decoder.JavaLayerException;
 import org.junit.jupiter.api.AfterEach;
@@ -10,7 +8,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PlayerStateTest {
 

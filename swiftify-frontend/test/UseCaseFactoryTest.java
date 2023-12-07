@@ -1,5 +1,3 @@
-package test;
-
 import app.LoadAlbumsUseCaseFactory;
 import app.LoadSongsUseCaseFactory;
 import app.SongPlaybackUseCaseFactory;
@@ -17,7 +15,7 @@ import interface_adapter.resume_song.ResumeSongController;
 import org.junit.Test;
 import view.ViewManager;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class UseCaseFactoryTest {
 
