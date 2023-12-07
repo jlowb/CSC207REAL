@@ -20,8 +20,8 @@ import javax.swing.*;
 
 public class ViewBuilder {
 
-    private final ViewModel viewModel;
-    private final ViewManagerModel viewManagerModel;
+    protected final ViewModel viewModel;
+    protected final ViewManagerModel viewManagerModel;
 
     public ViewBuilder(ViewManagerModel viewManagerModel) {
         this.viewManagerModel = viewManagerModel;
@@ -49,6 +49,10 @@ public class ViewBuilder {
         }
 
         // write switch case for other views later
+        return new JFrame();
+    }
+
+    public JFrame buildView(String viewName) {
         return new JFrame();
     }
 
