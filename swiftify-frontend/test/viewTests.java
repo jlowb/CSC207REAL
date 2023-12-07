@@ -58,6 +58,7 @@ public class viewTests {
         assertNotNull(viewManagerModel);
 
     }
+
     @Test
     public void testViewManagerInit() {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
