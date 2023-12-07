@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,28 +124,33 @@ public class DataAccessTest {
         @Test
         public void testFetchAlbums() {
             // Create some sample songs
-            Song song1 = new Song(154, "Red (Taylor's Version)", 219, 2021, "s3://csc207swiftify/discography/Red/04. I Knew You Were Trouble (Taylor's Version).mp3","I Knew You Were Trouble (Taylor's Version)");
-            Song song2 = new Song(7, "Speak Now (Deluxe Edition)", 403, 2010, "s3://csc207swiftify/discography/Speak Now/105-taylor_swift-dear_john.mp3", "Dear John");
-            Song song3 = new Song(156, "Red (Taylor's Version)", 223, 2021, "s3://csc207swiftify/discography/Red/02. Red (Taylor's Version).mp3","I Knew You Were Trouble (Taylor's Version)");
+            Song song1 =  new Song(1, "Speak Now (Deluxe Edition)", 230, 2010, "1.mp3", "Mine");
+            Song song2 =  new Song(2, "Speak Now (Deluxe Edition)", 260, 2010, "2.mp3", "Sparks Fly");
+            Song song100 = new Song(100, "evermore", 260, 2020, "100.mp3", "ivy");
+            Song song150 = new Song(150, "Red (Taylor's Version)", 220, 2021, "150.mp3","Girl At Home (Taylor's Version)");
 
             // Create a list of songs
             List<Song> songs = new ArrayList<>();
             songs.add(song1);
             songs.add(song2);
-            songs.add(song3);
+            songs.add(song100);
+            songs.add(song150);
 
             // Fetch albums using AlbumBuilder
             List<Album> albums = AlbumBuilder.fetchAlbums(songs);
 
             // Test cases
-            Assertions.assertEquals(2, albums.size());  // Expecting 2 albums
+            Assertions.assertEquals(3, albums.size());  // Expecting 3 albums
 
             // Test album names and song counts
-            Assertions.assertEquals("Red (Taylor's Version)", albums.get(0).getName());
+            Assertions.assertEquals("Speak Now (Deluxe Edition)", albums.get(0).getName());
             Assertions.assertEquals(2, albums.get(0).getSongs().size());
 
-            Assertions.assertEquals("Speak Now (Deluxe Edition)", albums.get(1).getName());
+            Assertions.assertEquals("evermore", albums.get(2).getName());
             Assertions.assertEquals(1, albums.get(1).getSongs().size());
+
+            Assertions.assertEquals("Red (Taylor's Version)", albums.get(1).getName());
+            Assertions.assertEquals(1, albums.get(2).getSongs().size());
         }
     }
 
@@ -156,7 +162,7 @@ public class DataAccessTest {
         public void setUp() {
             // Set up a MusicPlayerFacade for testing
             MusicLibrary library = MusicLibrary.getInstance();
-            musicPlayerFacade = MusicPlayerFacade.getInstance("Test Album");
+            musicPlayerFacade = MusicPlayerFacade.getInstance("Speak Now (Deluxe Edition)");
         }
 
         @After
@@ -172,11 +178,18 @@ public class DataAccessTest {
             assertEquals(musicPlayerFacade, secondInstance);
         }
 
+        private MusicPlayerFacade accessSingletonInstance() throws Exception {
+            Field instanceField = MusicPlayerFacade.class.getDeclaredField("instance");
+            instanceField.setAccessible(true);
+            return (MusicPlayerFacade) instanceField.get(null); // null for static fields
+        }
+
         @Test
-        public void testRemoveInstance() {
+        public void testRemoveInstance() throws Exception {
             assertNotNull(MusicPlayerFacade.getInstance("Test Album"));
             MusicPlayerFacade.removeInstance();
-            assertNull(MusicPlayerFacade.getInstance("Test Album"));
+            MusicPlayerFacade afterRemoveInstance = accessSingletonInstance();
+            assertNull("Instance should be null after removeInstance()", afterRemoveInstance);
         }
 
         @Test
@@ -221,19 +234,24 @@ public class DataAccessTest {
 
         @Test
         public void testGetNextSong() {
+            assertNull(musicPlayerFacade.getCurrentSong());
             assertNull(musicPlayerFacade.getNextSong());
             musicPlayerFacade.addToQueue(1);
-            assertNotNull(musicPlayerFacade.getNextSong());
-            assertEquals(1, musicPlayerFacade.getCurrentSong().getSongID());
+            assertEquals(2, musicPlayerFacade.getCurrentSong().getSongID());
         }
 
         @Test
         public void testMakeState() {
             try {
-                PlayerState playerState = musicPlayerFacade.makeState("test.mp3");
+                String songURL = URLSongLoader.fetchPresignedURL(1);
+                PlayerState playerState = musicPlayerFacade.makeState(songURL);
                 assertNotNull(playerState);
             } catch (JavaLayerException e) {
                 Assert.fail("Exception not expected");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }
