@@ -12,8 +12,8 @@ The program is a music player that allows users to listen to Taylor Swift's enti
 
 We hypothesize that the key features of a music player (that would need to be implemented) are:
 1. Artist Selection (Open for extension, we will just have Taylor Swift for now) 
-   2. Choice of artist list (needs a frontend)
-   3. Once artist is selected, then user will be met with page of their albums, with the respective songs in each album
+   1. Choice of artist list (needs a frontend)
+   2. Once artist is selected, then user will be met with page of their albums, with the respective songs in each album
 2. Music Database
 3. Music Player
    1. Music Player Component (essential)
