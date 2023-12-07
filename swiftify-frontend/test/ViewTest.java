@@ -1,7 +1,8 @@
 import app.LoadAlbumsUseCaseFactory;
 import app.Main;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.load_album.LoadAlbumController;
+import interface_adapter.load_albums.LoadAlbumsController;
+import interface_adapter.load_albums.LoadAlbumsController;
 import org.junit.Test;
 import view.MainView;
 import view.ViewManager;
@@ -39,6 +40,7 @@ public class ViewTest {
 
         });
     }
+
     @Test
     public void testMainMethod() {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
@@ -61,7 +63,7 @@ public class ViewTest {
         SwingUtilities.invokeLater(() -> {
             Main main = new Main();
 
-            LoadAlbumController loadAlbumController = LoadAlbumsUseCaseFactory.createLoadAlbumsController(new ViewManagerModel());
+            LoadAlbumsController loadAlbumController = LoadAlbumsUseCaseFactory.createLoadAlbumsController(new ViewManagerModel());
             MainView mainView = new MainView(loadAlbumController);
             mainView.setVisible(true);
 
@@ -76,7 +78,7 @@ public class ViewTest {
     public void testAlbumChangePage() {
         SwingUtilities.invokeLater(() -> {
             Main main = new Main();
-            LoadAlbumController loadAlbumController = LoadAlbumsUseCaseFactory.createLoadAlbumsController(new ViewManagerModel());
+            LoadAlbumsController loadAlbumController = LoadAlbumsUseCaseFactory.createLoadAlbumsController(new ViewManagerModel());
             MainView mainView = new MainView(loadAlbumController);
             mainView.pressOkButton();
 
@@ -87,3 +89,4 @@ public class ViewTest {
 
         });
     }
+}
