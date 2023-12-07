@@ -88,6 +88,7 @@ public class LoadAlbumsView extends JFrame {
         }
     }
 
+    /*
     public List<JButton> loadAlbumButtons(LoadAlbumsState loadAlbumState) {
         List<JButton> buttons = new ArrayList<JButton>();
         for (Album album : loadAlbumState.getAlbums()) {
@@ -97,6 +98,8 @@ public class LoadAlbumsView extends JFrame {
         }
         return buttons;
     }
+
+     */
 
     public static String getAlbumCover(String albumName) {
         return switch (albumName) {
