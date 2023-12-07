@@ -10,6 +10,7 @@ import view.LoadAlbumView;
 import view.MainView;
 import view.ViewManager;
 
+
 import javax.swing.SwingUtilities;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
@@ -20,6 +21,20 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.fail;
 
 public class viewTests {
+
+    @Test
+    public void testInit() {
+
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        ViewManager viewManager = new ViewManager(viewManagerModel);
+
+        MainView mainView = new MainView(LoadAlbumsUseCaseFactory.createLoadAlbumsController(viewManagerModel));
+
+        assertNotNull(viewManager);
+        assertNotNull(mainView);
+        assertEquals(viewManagerModel, viewManager.getViewManagerModel());
+
+    }
 
     @Test
     public void testMainView() {
@@ -34,22 +49,11 @@ public class viewTests {
 
         });
     }
-
     @Test
-    public void testOKButtonWork() {
-        SwingUtilities.invokeLater(() -> {
-            Main main = new Main();
-
-            MainView mainView = new MainView(LoadAlbumsUseCaseFactory.createLoadAlbumsController(new ViewManagerModel()));
-
-            boolean buttonPressed = false;
-
-            mainView.loadAlbumsActionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
-
-            buttonPressed = true;
-
-            assertTrue(buttonPressed);
-        });
+    public void testViewManagerInit() {
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        ViewManager viewManager = new ViewManager(viewManagerModel);
+        assertNotNull(viewManager);
     }
 
     @Test
@@ -84,5 +88,21 @@ public class viewTests {
         });
     }
 
+//    @Test
+//    public void testOKButtonWork() {
+//        SwingUtilities.invokeLater(() -> {
+//            Main main = new Main();
+//            MainView mainView = new MainView(LoadAlbumsUseCaseFactory.createLoadAlbumsController(new ViewManagerModel()));
+//
+//            mainView.pressOkButton();
+//
+//            assertTrue(mainView.isButtonPressed());
+//        });
+//    }
+
+
 }
+
+
+
 

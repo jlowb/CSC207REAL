@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.load_album.LoadAlbumController;
 import interface_adapter.load_album.LoadAlbumViewModel;
 import interface_adapter.load_songs.LoadSongsController;
@@ -21,6 +22,9 @@ public class MainView extends JFrame {
     private LoadAlbumController loadAlbumController;
     private LoadAlbumView loadAlbumView;
     LoadSongsView loadSongsView;
+    private boolean buttonPressed = false;
+
+    private ViewManagerModel viewManagerModel;
 
 
     public MainView(LoadAlbumController loadAlbumController) {
@@ -64,9 +68,23 @@ public class MainView extends JFrame {
         loadAlbumController.execute(loadAlbumsInputData);
         loadAlbumView.setVisible(true);
     }
+    public void buttonPressed() {
+        loadAlbumsActionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+        buttonPressed = true;
+    }
 
     public LoadSongsView getSongView() {
         return loadSongsView;
+    }
+    public LoadAlbumController getLoadAlbumController() {
+        return loadAlbumController;
+    }
+
+    public ViewManagerModel getViewManagerModel() {
+        return viewManagerModel;
+    }
+    public boolean isButtonPressed() {
+        return buttonPressed;
     }
     public void pressAlbumButton(String albumName) {
         LoadSongsInputData loadSongsInputData = new LoadSongsInputData(albumName);
