@@ -7,9 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class EntityTest {
 
@@ -134,11 +132,50 @@ public class EntityTest {
         }
 
         @Test
+        public void testGetDiscographyLength() {
+            musicQueue = new MusicQueue(false, 10, "Test Album");
+            assertEquals(musicQueue.getDiscographyLength(), 176);
+        }
+
+        @Test
         public void testMusicQueueInitialization() {
             assertFalse("Queue should be empty initially", musicQueue.isNotEmpty());
             assertFalse("Shuffle should be initially off", musicQueue.shuffled());
             assertEquals("Initial album name should match", "Test Album", musicQueue.getAlbumName());
             assertEquals("Discography length should match", 10, musicQueue.getDiscographyLength());
+        }
+
+        @Test
+        public void testShuffle() {
+            MusicQueue musicQueue = new MusicQueue(false, 5, "Test Album");
+
+            // Adding songs to the queue
+            musicQueue.add(1);
+            musicQueue.add(2);
+            musicQueue.add(3);
+            musicQueue.add(4);
+            musicQueue.add(5);
+
+            // Get the original order of songs before shuffling
+            List<Integer> originalOrder = new ArrayList<>();
+            for (Integer songId : musicQueue) {
+                originalOrder.add(songId);
+            }
+
+            musicQueue.toggleShuffle(); // Enable shuffle
+
+            // Get the shuffled order after shuffling
+            List<Integer> shuffledOrder = new ArrayList<>();
+            for (Integer songId : musicQueue) {
+                shuffledOrder.add(songId);
+            }
+
+            assertNotEquals("Order should change after shuffling", originalOrder, shuffledOrder);
+
+            // Ensure that all songs are still in the queue after shuffling
+            Set<Integer> originalSet = new HashSet<>(originalOrder);
+            Set<Integer> shuffledSet = new HashSet<>(shuffledOrder);
+            assertEquals("All songs should be present after shuffling", originalSet, shuffledSet);
         }
 
         @Test
