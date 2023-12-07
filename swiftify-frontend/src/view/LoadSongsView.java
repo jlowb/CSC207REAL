@@ -1,3 +1,14 @@
+/**
+ * The {@code LoadSongsView} class is responsible for presenting the view
+ * and managing the songs of designated albums. It extends to
+ * {@link JFrame} handle view objects and such.
+ * "Load Songs" use case.
+ * Imports were added as they were missing
+ * Room for improvement: The Back Button implementation
+ * @author [Malaika]
+ *
+ */
+
 package view;
 
 import data_access.URLSongLoader;
@@ -20,6 +31,9 @@ import interface_adapter.pause_song.PauseSongViewModel;
 import interface_adapter.play_song.PlaySongController;
 import interface_adapter.play_song.PlaySongPresenter;
 import interface_adapter.play_song.PlaySongViewModel;
+import interface_adapter.prev_song.PrevSongController; //imported
+import interface_adapter.prev_song.PrevSongPresenter;
+import interface_adapter.prev_song.PrevSongViewModel;
 import interface_adapter.resume_song.ResumeSongController;
 import javazoom.jl.decoder.JavaLayerException;
 import use_case.next_song.NextSongInputBoundary;
@@ -72,7 +86,7 @@ public class LoadSongsView extends JFrame {
         setContentPane(LoadSongsViewPanel);
         adjustUIComponents();
         setTitle("Swiftify Album - " + albumName);
-        addWindowListener(ghettoBackButton);
+        addWindowListener(BackButton2);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(1080, 680);
         setLocationRelativeTo(null);
@@ -99,11 +113,10 @@ public class LoadSongsView extends JFrame {
             if (PlayPauseButton.getSongPlaybackState() != null) {
                 PlayPauseButton.getSongPlaybackState().getMusicPlayer().stop();
             }
-            // BELOW IS SHADY
             MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
             int n = ((SongButton) e.getSource()).getSongId();
             musicPlayer.addToQueue(n-1);
-            //
+
             PlaySongInputData playSongInputData = new PlaySongInputData(((SongButton) e.getSource()).getSongId(), ((SongButton) e.getSource()).getSongName(), LoadSongsView.this);
             try {
                 playSongController.execute(playSongInputData);
@@ -237,7 +250,7 @@ public class LoadSongsView extends JFrame {
         }
     };
 
-    WindowListener ghettoBackButton = new WindowAdapter() {
+    WindowListener BackButton2 = new WindowAdapter() {
 
         @Override
         public void windowClosing(WindowEvent e) {
@@ -274,11 +287,11 @@ public class LoadSongsView extends JFrame {
         SongListPanel.add(SongPanel, BorderLayout.WEST);
         SongListPanel.add(AddToQueuePanel, BorderLayout.EAST);
         PreviousSongButton = new SongPlaybackButton(null);
-        PreviousSongButton.setText("⏮");
+        PreviousSongButton.setText("⏮"); // previous button
         PlayPauseButton = new SongPlaybackButton(null);
-        PlayPauseButton.setText("▶");
+        PlayPauseButton.setText("▶"); //play button
         NextSongButton = new SongPlaybackButton(null);
-        NextSongButton.setText("⏭");
+        NextSongButton.setText("⏭"); // next button
         PlayPauseButton.addActionListener(pauseOrResumeSongActionListener);
         PreviousSongButton.setPreferredSize(new Dimension(50, 50));
         PlayPauseButton.setPreferredSize(new Dimension(100, 50));
@@ -295,5 +308,6 @@ public class LoadSongsView extends JFrame {
     private void createUIComponents() {
         CoverPanel = new LoadAlbumView.ImagePanel("swiftify-frontend/src/pngs/taylor_swift.png");
         setContentPane(CoverPanel);
+        // The main panel which changes depending on artist, still to be implemented
     }
 }
