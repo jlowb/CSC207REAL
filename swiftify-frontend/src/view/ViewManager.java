@@ -24,4 +24,8 @@ public class ViewManager implements PropertyChangeListener {
             viewBuilder.buildView().setVisible(true);
         }
     }
+
+    public ViewManagerModel getViewManagerModel() {
+        return viewManagerModel;
+    }
 }
