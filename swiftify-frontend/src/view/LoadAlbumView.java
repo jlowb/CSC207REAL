@@ -14,6 +14,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The LoadAlbumView class represents the graphical user interface for loading albums
+ * in the Swiftify application. It extends JFrame and includes panels for displaying
+ * album covers, song playback controls, and other UI components.
+ */
 public class LoadAlbumView extends JFrame {
 
     private LoadAlbumViewModel loadAlbumViewModel;
@@ -32,6 +37,11 @@ public class LoadAlbumView extends JFrame {
 
     private static LoadSongsController loadSongsController;
 
+    /**
+     * Constructor for LoadAlbumView.
+     *
+     * @param loadSongsController The controller responsible for handling song loading actions.
+     */
 
     public LoadAlbumView(LoadSongsController loadSongsController) {
         //LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
@@ -74,6 +84,11 @@ public class LoadAlbumView extends JFrame {
 
     }
 
+    /**
+     * Method for loading album panels based on the provided LoadAlbumState.
+     *
+     * @param loadAlbumState The state containing information about the loaded albums.
+     */
     public void loadAlbumPanels(LoadAlbumState loadAlbumState) {
         List<JPanel> panels = new ArrayList<JPanel>();
         int i = 1;
@@ -94,6 +109,12 @@ public class LoadAlbumView extends JFrame {
         }
     }
 
+    /**
+     * Method for loading album buttons based on the provided LoadAlbumState.
+     *
+     * @param loadAlbumState The state containing information about the loaded albums.
+     * @return List of JButton objects representing album buttons.
+     */
 
     public static List<JButton> loadAlbumButtons(LoadAlbumState loadAlbumState) {
         List<JButton> buttons = new ArrayList<JButton>();
@@ -138,6 +159,10 @@ public class LoadAlbumView extends JFrame {
         ControlsPanel.add(NextSongButton, 2);
     }
 
+
+    /**
+     * ImagePanel is an inner class that represents a panel with a background image.
+     */
     static class ImagePanel extends JPanel {
         private Image backgroundImage;
 
@@ -146,6 +171,11 @@ public class LoadAlbumView extends JFrame {
             setPreferredSize(new Dimension(backgroundImage.getWidth(this), backgroundImage.getHeight(this)));
         }
 
+        /**
+         * Constructor for ImagePanel.
+         *
+         * @param imagePath The path to the image file for the background.
+         */
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
