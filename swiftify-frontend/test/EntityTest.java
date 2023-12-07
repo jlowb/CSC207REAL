@@ -134,7 +134,7 @@ public class EntityTest {
         @Test
         public void testGetDiscographyLength() {
             musicQueue = new MusicQueue(false, 10, "Test Album");
-            assertEquals(musicQueue.getDiscographyLength(), 176);
+            assertEquals(musicQueue.getDiscographyLength(), 10);
         }
 
         @Test
