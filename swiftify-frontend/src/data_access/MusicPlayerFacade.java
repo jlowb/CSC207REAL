@@ -30,6 +30,7 @@ public class MusicPlayerFacade {
     public MusicQueue getQueue() {
         return this.queue;
     }
+
     public void toggleShuffle() {
         queue.toggleShuffle();
     }
