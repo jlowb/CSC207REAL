@@ -18,6 +18,7 @@ import java.util.List;
  * The LoadAlbumView class represents the graphical user interface for loading albums
  * in the Swiftify application. It extends JFrame and includes panels for displaying
  * album covers, song playback controls, and other UI components.
+ * @author [Vincent Kosterin]
  */
 public class LoadAlbumView extends JFrame {
 
@@ -41,6 +42,7 @@ public class LoadAlbumView extends JFrame {
      * Constructor for LoadAlbumView.
      *
      * @param loadSongsController The controller responsible for handling song loading actions.
+     * @author [Vincent Kosterin]
      */
 
     public LoadAlbumView(LoadSongsController loadSongsController) {
@@ -88,6 +90,7 @@ public class LoadAlbumView extends JFrame {
      * Method for loading album panels based on the provided LoadAlbumState.
      *
      * @param loadAlbumState The state containing information about the loaded albums.
+     * @author [Vincent Kosterin]
      */
     public void loadAlbumPanels(LoadAlbumState loadAlbumState) {
         List<JPanel> panels = new ArrayList<JPanel>();
@@ -114,6 +117,7 @@ public class LoadAlbumView extends JFrame {
      *
      * @param loadAlbumState The state containing information about the loaded albums.
      * @return List of JButton objects representing album buttons.
+     * @author [Vincent Kosterin]
      */
 
     public static List<JButton> loadAlbumButtons(LoadAlbumState loadAlbumState) {
@@ -175,6 +179,8 @@ public class LoadAlbumView extends JFrame {
          * Constructor for ImagePanel.
          *
          * @param imagePath The path to the image file for the background.
+         *
+         * @author [Vincent Kosterin]
          */
         @Override
         protected void paintComponent(Graphics g) {
