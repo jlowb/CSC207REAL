@@ -1,3 +1,14 @@
+/**
+ * The {@code LoadSongsView} class is responsible for presenting the view
+ * and managing the songs of designated albums. It extends to
+ * {@link JFrame} handle view objects and such.
+ * "Load Songs" use case.
+ * Imports were added as they were missing
+ * Room for improvement: The Back Button implementation
+ * @author [Malaika]
+ *
+ */
+
 package view;
 
 import app.LoadAlbumsUseCaseFactory;

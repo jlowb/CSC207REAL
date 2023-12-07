@@ -10,24 +10,21 @@ After the brainstorming session in our tutorial, our team has tentatively decide
 This decision was motivated by the abundance of features that could be implemented,
 ensuring that the project would be interesting for every single group member.
 
+The program is a music player that allows users to listen to Taylor Swift's entire discography. Users will be able to enjoy a seamless interface with features such as playback, shuffle, add to queue, and effortless navigation through songs, similar to the music websites SoundCloud and Genius. Crucially, our code is optimized for an internet-based interface. This means users can always enjoy the most up-to-date Taylor Swift songs and albums directly from the web. 
+
 ## 1. Project Description
 
 We hypothesize that the key features of a music player (that would need to be implemented) are:
-1. Login System
-   1. User creation/management (probably via an API like Oauth)
-   2. Login screen (needs a frontend)
-   3. Routing/auth flow (probably via an API like Oauth)
-2. User Customization System
-   1. Friends list (optional)
-   2. Profile customization (optional)
-   3. Personal music collection, i.e. playlists etc. (essential)
-3. Music Database
-4. Music Player
+1. Artist Selection (Open for extension, we will just have Taylor Swift for now) 
+   1. Choice of artist list (needs a frontend)
+   2. Once artist is selected, then user will be met with page of their albums, with the respective songs in each album
+2. Music Database
+3. Music Player
    1. Music Player Component (essential)
    2. Music Lyrics (optional) 
-   3. Music Queue/Recommender/Shuffle/History (essential)
-   4. Discussion feature
-5. Front End
+   3. Music Queue/Playback/Shuffle/History (essential)
+4. Front End
+   1. GUI of the Artist Selection Page, Load Albums Page, Load Songs Page (all essential) 
 
 As this is quite ambitious, we may remove features depending on the rate of progress, but this is more or less the big picture.
 
@@ -35,6 +32,12 @@ As this is quite ambitious, we may remove features depending on the rate of prog
 
 The following API can be used to implement feature 4.ii above: 
 https://developer.musixmatch.com/documentation
+
+AWS (API Gateway + Lambda + DynamoDB) - Music Metadata
+
+AWS (API Gateway + Lambda + S3) - Music Static Files
+
+JLayer - Audio Player
 
 ## 3. A screenshot of using a tool to try out the API
 

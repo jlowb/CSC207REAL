@@ -2,8 +2,8 @@ package view;
 
 import entity.Album;
 import entity.SongPlaybackButton;
-import interface_adapter.load_albums.LoadAlbumsState;
-import interface_adapter.load_albums.LoadAlbumsViewModel;
+import interface_adapter.load_album.LoadAlbumState;
+import interface_adapter.load_album.LoadAlbumViewModel;
 import interface_adapter.load_songs.LoadSongsController;
 import use_case.load_songs.LoadSongsInputData;
 
@@ -14,7 +14,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoadAlbumsView extends JFrame {
+/**
+ * The LoadAlbumView class represents the graphical user interface for loading albums
+ * in the Swiftify application. It extends JFrame and includes panels for displaying
+ * album covers, song playback controls, and other UI components.
+ * @author [Vincent Kosterin]
+ */
+public class LoadAlbumView extends JFrame {
 
     private LoadAlbumsViewModel loadAlbumViewModel;
     private JPanel MainPanel;
@@ -28,6 +34,12 @@ public class LoadAlbumsView extends JFrame {
 
     private static LoadSongsController loadSongsController;
 
+    /**
+     * Constructor for LoadAlbumView.
+     *
+     * @param loadSongsController The controller responsible for handling song loading actions.
+     * @author [Vincent Kosterin]
+     */
 
     public LoadAlbumsView(LoadSongsController loadSongsController) {
         this.loadSongsController = loadSongsController;
@@ -69,6 +81,13 @@ public class LoadAlbumsView extends JFrame {
     }
 
     public void loadAlbumPanels(LoadAlbumsState loadAlbumState) {
+    /**
+     * Method for loading album panels based on the provided LoadAlbumState.
+     *
+     * @param loadAlbumState The state containing information about the loaded albums.
+     * @author [Vincent Kosterin]
+     */
+    public void loadAlbumPanels(LoadAlbumState loadAlbumState) {
         List<JPanel> panels = new ArrayList<JPanel>();
         int i = 1;
         for (Album album : loadAlbumState.getAlbums()) {
@@ -121,6 +140,10 @@ public class LoadAlbumsView extends JFrame {
         AlbumPanel2.setLayout(new GridLayout(5, 1));
     }
 
+
+    /**
+     * ImagePanel is an inner class that represents a panel with a background image.
+     */
     static class ImagePanel extends JPanel {
         private Image backgroundImage;
 
@@ -129,6 +152,13 @@ public class LoadAlbumsView extends JFrame {
             setPreferredSize(new Dimension(backgroundImage.getWidth(this), backgroundImage.getHeight(this)));
         }
 
+        /**
+         * Constructor for ImagePanel.
+         *
+         * @param imagePath The path to the image file for the background.
+         *
+         * @author [Vincent Kosterin]
+         */
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
