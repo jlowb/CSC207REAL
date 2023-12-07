@@ -50,6 +50,15 @@ public class viewTests {
         });
     }
     @Test
+    public void testMainMethod() {
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+
+        Main.main(null);
+
+        assertNotNull(viewManagerModel);
+
+    }
+    @Test
     public void testViewManagerInit() {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         ViewManager viewManager = new ViewManager(viewManagerModel);
@@ -88,7 +97,6 @@ public class viewTests {
         });
     }
 
-//    @Test
 //    public void testOKButtonWork() {
 //        SwingUtilities.invokeLater(() -> {
 //            Main main = new Main();
