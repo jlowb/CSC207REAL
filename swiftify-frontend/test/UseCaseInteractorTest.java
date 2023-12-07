@@ -1,6 +1,7 @@
 import app.LoadAlbumsUseCaseFactory;
 import app.LoadSongsUseCaseFactory;
 import app.SongPlaybackUseCaseFactory;
+import data_access.MusicPlayerFacade;
 import data_access.URLSongLoader;
 import entity.PlayerState;
 import entity.Song;
@@ -9,6 +10,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.add_to_queue.AddToQueueController;
 import interface_adapter.load_albums.LoadAlbumsController;
 import interface_adapter.load_songs.LoadSongsController;
+import interface_adapter.load_songs.LoadSongsState;
 import interface_adapter.next_song.NextSongController;
 import interface_adapter.pause_song.PauseSongController;
 import interface_adapter.play_song.PlaySongController;
@@ -16,9 +18,7 @@ import interface_adapter.prev_song.PrevSongController;
 import interface_adapter.resume_song.ResumeSongController;
 import javazoom.jl.decoder.JavaLayerException;
 import org.junit.Test;
-import use_case.add_to_queue.AddToQueueInputData;
-import use_case.add_to_queue.AddToQueueOutputBoundary;
-import use_case.add_to_queue.AddToQueueOutputData;
+import use_case.add_to_queue.*;
 import use_case.load_albums.LoadAlbumsInputData;
 import use_case.load_albums.LoadAlbumsOutputBoundary;
 import use_case.load_albums.LoadAlbumsOutputData;
@@ -41,6 +41,8 @@ import use_case.prev_song.PrevSongOutputData;
 import use_case.resume_song.ResumeSongInputData;
 import use_case.resume_song.ResumeSongOutputBoundary;
 import use_case.resume_song.ResumeSongOutputData;
+import view.LoadSongsView;
+import view.ViewBuilder;
 
 import java.io.IOException;
 
@@ -48,7 +50,21 @@ import static org.junit.Assert.*;
 
 public class UseCaseInteractorTest {
 
-    private final String url = "https://csc207swiftify.s3.amazonaws.com/120.mp3?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHUaCXVzLWVhc3QtMSJHMEUCIQDNA4T5OUWVjFF0%2Bwr7r7PDIZ5PjtUoHftDud%2BeSVrUBAIgXUvwMibTqOA%2FchfhG%2FGsnoKyBg9uW%2Bea3sMvyEKzIcoq%2FQIIzv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw4NzM4NDY2MTcxNzkiDJf36wsoF0Mq7%2BBJMSrRAo%2Fkw4rBt5clqfPqKqYRrlkWYmK10LCs3JUjAZkMdUBtxNslRYUsr%2B0zZmAF6uYgsVQiFjHuKd3zsSHi%2Bgk1i9SIZT5QHHtMATysf2%2BACe8ED3jGjdiT0T6OzMb89Tn0ncb9NxJXzMxI%2BsFNM0AsE1hJEwk7jYU4son6c8cjy0Vc83%2Fb6fEuB%2Fzx6cyYrC%2FWmnqti94rRAavgdPwyw20YIEwf5TPjuEqw9EsbQZK1jh6jNbdGxqpHC88Cy3j8ffY8OyBsr1Dg7cXsb%2Bvf8SuzvslGILrspM1lLzIDf0eMVZ556SpWq0jlnVb6%2BBOGxg7QlES6oxU6h9T6671sIR%2FWgRpipIbj8WGBu7AWqIPjdTCaPwIEkIK4GHusJYmGH33pZtGv5ZLy6AmYB64Em8veD5QdUgF22s7b7urz%2FyQvlWISWyje9EJLjWG%2BunHXNknC30wpoCbqwY6ngG285F%2BqL0bGJw8u86Acx4NUto%2BEHAsp68n4YdQj9Tl1kRfU2bEIcOkiN08TJIZmHZhh3EAr4rh%2B0AmCbAC8QoRuJr2K1wAqlcKx1lB8hjTMgCsi5Hv06jeAxcUtU0l4Beu2d0Z6WKN3ktIrAhm6ivgXXylhBgeZv50T6zCz4y4gX%2F81obWK2Y9WL27hOjnWD0%2BsaNAZkp91s%2FbNelrBg%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20231129T043958Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIA4W5KRGRNUV5SJPNI%2F20231129%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f49fc8cc981cffbf3be7c559dc6738e701c5ea036f606141ca651a37de61e3f3";
+    private final String url = "https://samplelib.com/lib/preview/mp3/sample-15s.mp3";
+
+    private LoadSongsView buildAlbumSongsView() {
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        LoadSongsState loadSongsState = new LoadSongsState("Test", null);
+        URLSongLoader songLoader = new URLSongLoader();
+        PlaySongController playSongController = SongPlaybackUseCaseFactory.createPlaySongController(viewManagerModel, songLoader);
+        PauseSongController pauseSongController = SongPlaybackUseCaseFactory.createPauseSongController(viewManagerModel, null);
+        ResumeSongController resumeSongController = SongPlaybackUseCaseFactory.createResumeSongController(viewManagerModel, null);
+        NextSongController nextSongController = SongPlaybackUseCaseFactory.createNextSongController(viewManagerModel, songLoader);
+        PrevSongController prevSongController = SongPlaybackUseCaseFactory.createPrevSongController(viewManagerModel, songLoader);
+        AddToQueueController addToQueueController = SongPlaybackUseCaseFactory.createAddToQueueController(viewManagerModel);
+        LoadSongsView loadSongsView1 = new LoadSongsView(loadSongsState.getAlbumName(), playSongController, pauseSongController, resumeSongController, nextSongController, prevSongController, addToQueueController, viewManagerModel);
+        return loadSongsView1;
+    }
 
     @Test
     public void loadAlbumsInteractorTest() {
@@ -138,7 +154,7 @@ public class UseCaseInteractorTest {
             }
         };
 
-        NextSongInputData nextSongInputData = new NextSongInputData(new Song(1, "test", 1, 1, "test", "test"), null);
+        NextSongInputData nextSongInputData = new NextSongInputData(new Song(1, "Test", 1, 1, "Test", "Test"), buildAlbumSongsView());
         NextSongController nextSongController = SongPlaybackUseCaseFactory.createNextSongController(new ViewManagerModel(), new URLSongLoader());
         nextSongController.execute(nextSongInputData);
     }
@@ -153,7 +169,7 @@ public class UseCaseInteractorTest {
             }
         };
 
-        PrevSongInputData prevSongInputData = new PrevSongInputData(new Song(1, "test", 1, 1, "test", "test"), null);
+        PrevSongInputData prevSongInputData = new PrevSongInputData(new Song(1, "Test", 1, 1, "Test", "Test"), buildAlbumSongsView());
         PrevSongController prevSongController = SongPlaybackUseCaseFactory.createPrevSongController(new ViewManagerModel(), new URLSongLoader());
         prevSongController.execute(prevSongInputData);
     }
@@ -167,7 +183,7 @@ public class UseCaseInteractorTest {
             }
         };
 
-        AddToQueueInputData addToQueueInputData = new AddToQueueInputData(1, null);
+        AddToQueueInputData addToQueueInputData = new AddToQueueInputData(1, buildAlbumSongsView());
         AddToQueueController addToQueueController = SongPlaybackUseCaseFactory.createAddToQueueController(new ViewManagerModel());
         addToQueueController.execute(addToQueueInputData);
     }
