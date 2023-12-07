@@ -29,7 +29,7 @@ public class viewTests {
             MainView mainView = new MainView(LoadAlbumsUseCaseFactory.createLoadAlbumsController(new ViewManagerModel()));
             mainView.setVisible(true);
 
-            assert mainView != null : "MainView is not null";
+            assert mainView != null : "MainView isn't null";
             assert mainView.isVisible() : "MainView is visible";
 
         });
@@ -68,92 +68,21 @@ public class viewTests {
         });
     }
 
+    @Test
+    public void testAlbumChangePage() {
+        SwingUtilities.invokeLater(() -> {
+            Main main = new Main();
+            LoadAlbumController loadAlbumController = LoadAlbumsUseCaseFactory.createLoadAlbumsController(new ViewManagerModel());
+            MainView mainView = new MainView(loadAlbumController);
+            mainView.pressOkButton();
+
+            mainView.pressAlbumButton("evermore");
+
+            assertNotNull(mainView.getSongView());
+            assertTrue(mainView.getSongView().isVisible());
+
+        });
+    }
+
 }
 
-//
-//import org.junit.Before;
-//        import org.junit.Test;
-//        import java.util.NoSuchElementException;
-//        import java.util.Iterator;
-//
-//        import static org.junit.Assert.*;
-//
-//
-//public class WeekTest {
-//
-//    private Week week;
-//    private Iterator<String> days;
-//
-//    @Before
-//    public void init() {
-//        week = new Week();
-//        days = week.iterator();
-//    }
-//
-//    @Test
-//    public void testMainRuns() {
-//        Week.main(new String[]{});
-//    }
-//
-//    @Test
-//    public void testForEachLoop() {
-//        int iterations = 0;
-//        for (String s :
-//                week) {
-//            iterations += 1;
-//        }
-//        assertEquals(7, iterations);
-//    }
-//
-//    @Test
-//    public void getDay() {
-//        assertEquals("Sunday", week.getDay(0));
-//        assertEquals("Saturday", week.getDay(6));
-//    }
-//
-//    @Test
-//    public void testFirst() {
-//        assertTrue(days.hasNext());
-//        assertEquals("Sunday", days.next());
-//    }
-//
-//    @Test
-//    public void testHasNextTwice() {
-//        assertTrue(days.hasNext());
-//        assertTrue(days.hasNext());
-//        assertEquals("Sunday", days.next());
-//    }
-//
-//    @Test
-//    public void testNextAndGetDay() {
-//        for (int i = 0; i != 7; i++) {
-//            assertEquals(week.getDay(i), days.next());
-//        }
-//    }
-//
-//    @Test
-//    public void testHasNextWhenFalse() {
-//        for (int i = 0; i != 7; i++) {
-//            days.next();
-//        }
-//        assertFalse(days.hasNext());
-//    }
-//
-//     TODO: Task 2 Add a test as outlined in the readme
-//    @Test
-//    public void testNoSuchElementExceptionIndex() {
-//        Week week = new Week();
-//        Iterator<String> iterator = week.iterator();
-//
-//        for (int i = 0; i < 7; i++) {
-//            iterator.next();
-//        }
-//
-//        try {
-//            iterator.next();
-//            fail("Expected NoSuchElementException but failed");
-//        } catch (NoSuchElementException e) {
-//        }
-//    }
-//
-//}

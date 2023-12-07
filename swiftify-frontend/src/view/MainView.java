@@ -5,12 +5,14 @@ import interface_adapter.load_album.LoadAlbumViewModel;
 import interface_adapter.load_songs.LoadSongsController;
 import use_case.load_album.LoadAlbumInteractor;
 import use_case.load_album.LoadAlbumsInputData;
+import use_case.load_songs.LoadSongsInputData;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
+import java.util.concurrent.Executor;
 
 
 public class MainView extends JFrame {
@@ -18,6 +20,7 @@ public class MainView extends JFrame {
     private static JComboBox<String> comb;
     private LoadAlbumController loadAlbumController;
     private LoadAlbumView loadAlbumView;
+    LoadSongsView loadSongsView;
 
 
     public MainView(LoadAlbumController loadAlbumController) {
@@ -60,6 +63,16 @@ public class MainView extends JFrame {
         LoadAlbumsInputData loadAlbumsInputData = new LoadAlbumsInputData("All");
         loadAlbumController.execute(loadAlbumsInputData);
         loadAlbumView.setVisible(true);
+    }
+
+    public LoadSongsView getSongView() {
+        return loadSongsView;
+    }
+    public void pressAlbumButton(String albumName) {
+        LoadSongsInputData loadSongsInputData = new LoadSongsInputData(albumName);
+        LoadSongsController loadSongsController = null;
+        loadSongsController.execute(loadSongsInputData);
+        loadSongsView.setVisible(true);
     }
 
     public static void main(String[] args) {
