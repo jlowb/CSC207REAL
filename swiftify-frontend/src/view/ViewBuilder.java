@@ -1,3 +1,11 @@
+/**
+ * The {@code ViewBuilder} class (utilizes design pattern) is responsible for constructing Swing views
+ * based on the current state of the application. It uses a {@link ViewModel}
+ * and {@link ViewManagerModel} to determine the type of view to build.
+ *
+ * @author [Malaika]
+ *
+ */
 package view;
 
 import app.LoadSongsUseCaseFactory;
