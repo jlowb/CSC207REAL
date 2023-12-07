@@ -1,4 +1,4 @@
-package use_case.load_album;
+package use_case.load_albums;
 
 import entity.Album;
 

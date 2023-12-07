@@ -1,14 +1,10 @@
 package use_case.prev_song;
 
 import data_access.URLSongLoader;
-import entity.MusicPlayerFacade;
+import data_access.MusicPlayerFacade;
 import entity.PlayerState;
 import entity.Song;
 import javazoom.jl.decoder.JavaLayerException;
-import use_case.prev_song.PrevSongInputBoundary;
-import use_case.prev_song.PrevSongInputData;
-import use_case.prev_song.PrevSongOutputBoundary;
-import use_case.prev_song.PrevSongOutputData;
 
 import java.io.IOException;
 
@@ -22,7 +18,7 @@ public class PrevSongInteractor implements PrevSongInputBoundary {
         this.prevSongOutputBoundary = prevSongOutputBoundary;
     }
     public void execute(PrevSongInputData prevSongInputData) throws IOException, InterruptedException, JavaLayerException {
-        MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
+        MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(prevSongInputData.getView().getAlbumName());
         Song prevSong = prevSongInputData.getSong();
         String songURL = songLoader.fetchPresignedURL(prevSong.getSongID());
         PlayerState audioPlayer = musicPlayer.makeState(songURL);

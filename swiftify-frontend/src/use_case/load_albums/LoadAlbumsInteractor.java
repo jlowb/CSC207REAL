@@ -1,16 +1,16 @@
-package use_case.load_album;
+package use_case.load_albums;
 
 import entity.Album;
-import entity.MusicLibrary;
+import data_access.MusicLibrary;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoadAlbumInteractor implements LoadAlbumsInputBoundary {
+public class LoadAlbumsInteractor implements LoadAlbumsInputBoundary {
 
     private final LoadAlbumsOutputBoundary loadAlbumsOutputBoundary;
 
-    public LoadAlbumInteractor(LoadAlbumsOutputBoundary loadAlbumsOutputBoundary) {
+    public LoadAlbumsInteractor(LoadAlbumsOutputBoundary loadAlbumsOutputBoundary) {
         this.loadAlbumsOutputBoundary = loadAlbumsOutputBoundary;
     }
 

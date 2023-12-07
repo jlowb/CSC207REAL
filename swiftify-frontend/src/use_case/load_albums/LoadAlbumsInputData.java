@@ -1,4 +1,4 @@
-package use_case.load_album;
+package use_case.load_albums;
 
 public class LoadAlbumsInputData {
     private String selection;

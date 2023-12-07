@@ -1,9 +1,5 @@
-package use_case.load_album;
+package use_case.load_albums;
 import entity.Album;
-import java.util.List;
-
-import entity.Album;
-
 import java.util.List;
 
 public class LoadAlbumsOutputData {

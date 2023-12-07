@@ -1,21 +1,21 @@
 Project Specification  - Group 113
 
 Team Name:
-Swiftify
+Swiftify, Group 113
 
 Domain:
-Music Player web app.
+Music Player
 
 Software Specification:
 The program is a social music player that allows users to listen to Taylor Swift's entire discography and interact with other Swifties. Users will be able to make profiles, customize their profiles, make playlists of their favourite songs, share these playlists, and add comments to their favourite songs similar to the music websites SoundCloud and Genius.
 
 User Stories:
 - Janice is a new Swiftify user and has no playlists. She should be able to: (i) listen to Taylor's entire discography as one playlist, (ii) listen to each album as one playlist and (iii) listen to other people's playlists.
-- Bob wants to create an account on Swiftify. He enters a username (example: BobLovesSwift), which is checked for uniqueness. He proceeds to enter his personal name ÒBobÓ and his optional last name in the respective text fields. He then adds his email, which is checked to be valid and not already in use. If all the previous entries are successful, Swiftify creates an account for Bob.
-- John (an already existing user) is on a current playlist, ÒEnchantedÓ and would like to switch to the song ÒLove storyÓ, not in the ÒEnchantedÓ playlist. He decides to add this song to his playlist using the "add song to playlistÓ option. He then listens to his song ÒLove storyÓ within his ÒEnchantedÓ playlist successfully.
+- Bob wants to create an account on Swiftify. He enters a username (example: BobLovesSwift), which is checked for uniqueness. He proceeds to enter his personal name ï¿½Bobï¿½ and his optional last name in the respective text fields. He then adds his email, which is checked to be valid and not already in use. If all the previous entries are successful, Swiftify creates an account for Bob.
+- John (an already existing user) is on a current playlist, ï¿½Enchantedï¿½ and would like to switch to the song ï¿½Love storyï¿½, not in the ï¿½Enchantedï¿½ playlist. He decides to add this song to his playlist using the "add song to playlistï¿½ option. He then listens to his song ï¿½Love storyï¿½ within his ï¿½Enchantedï¿½ playlist successfully.
 - Alice is a Taylor Swift superfan, and would like to share her knowledge with other Swifties. She uses the "annotate song" feature of Swiftify to add behind the scenes knowledge to every song page.
-- Taylor wants to add her bestie on Swiftify, she searches up her alleged username, ÒDieHardSwiftie123Ó on the Swiftify friend system, but to no avail. Turns out her friend doesnÕt even have an account on the Swiftify app yet (fake Swiftie), so she has to go create an account through the registration page.
-- Larry is a depressed 19 year old male in college. But, last month he discovered an amazing new passion. Taylor Swift! Larry has always known of Taylor Swift, but was never able to embrace TaylorÕs greatness due to patriarchal and societal pressures on masculinity. However, down on his luck, he finally decided to bite the bullet and listened to "Shake it Off." The lyrics spoke deeply to Larry, especially the part where she said "Baby, I'm just gonna shake, shake, shake, shake, shake," which is a commentary on late stage capitalism and its impact on the flexibility of modern man in life. Larry seeks a place where he can freely express his love for the goddess that is the Swift, without being shunned by society. Swiftify, as an anonymous music player and discussion board for her Swiftness, is just the place for Larry, as not only can he listen to the Swifter, but he can also discuss her with fellow Swifties. Larry's main use case would be the discussions on each song.
+- Taylor wants to add her bestie on Swiftify, she searches up her alleged username, ï¿½DieHardSwiftie123ï¿½ on the Swiftify friend system, but to no avail. Turns out her friend doesnï¿½t even have an account on the Swiftify app yet (fake Swiftie), so she has to go create an account through the registration page.
+- Larry is a depressed 19 year old male in college. But, last month he discovered an amazing new passion. Taylor Swift! Larry has always known of Taylor Swift, but was never able to embrace Taylorï¿½s greatness due to patriarchal and societal pressures on masculinity. However, down on his luck, he finally decided to bite the bullet and listened to "Shake it Off." The lyrics spoke deeply to Larry, especially the part where she said "Baby, I'm just gonna shake, shake, shake, shake, shake," which is a commentary on late stage capitalism and its impact on the flexibility of modern man in life. Larry seeks a place where he can freely express his love for the goddess that is the Swift, without being shunned by society. Swiftify, as an anonymous music player and discussion board for her Swiftness, is just the place for Larry, as not only can he listen to the Swifter, but he can also discuss her with fellow Swifties. Larry's main use case would be the discussions on each song.
 
 Proposed Entities 
 Songs:

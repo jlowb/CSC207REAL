@@ -2,8 +2,8 @@ package view;
 
 import entity.Album;
 import entity.SongPlaybackButton;
-import interface_adapter.load_album.LoadAlbumState;
-import interface_adapter.load_album.LoadAlbumViewModel;
+import interface_adapter.load_albums.LoadAlbumsState;
+import interface_adapter.load_albums.LoadAlbumsViewModel;
 import interface_adapter.load_songs.LoadSongsController;
 import use_case.load_songs.LoadSongsInputData;
 
@@ -14,53 +14,34 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The LoadAlbumView class represents the graphical user interface for loading albums
- * in the Swiftify application. It extends JFrame and includes panels for displaying
- * album covers, song playback controls, and other UI components.
- * @author [Vincent Kosterin]
- */
-public class LoadAlbumView extends JFrame {
+public class LoadAlbumsView extends JFrame {
 
-    private LoadAlbumViewModel loadAlbumViewModel;
+    private LoadAlbumsViewModel loadAlbumViewModel;
     private JPanel MainPanel;
-    private JPanel BackPanel;
     private JPanel AlbumPanel1;
     private JPanel AlbumPanel2;
-    private JPanel MusicPlaybackPanel;
     private JButton ShuffleButton;
     private JPanel ControlsPanel;
-    private JLabel CurrentSongField;
-    private JButton BackButton;
     private SongPlaybackButton PreviousSongButton;
     private SongPlaybackButton PlayPauseButton;
     private SongPlaybackButton NextSongButton;
 
     private static LoadSongsController loadSongsController;
 
-    /**
-     * Constructor for LoadAlbumView.
-     *
-     * @param loadSongsController The controller responsible for handling song loading actions.
-     * @author [Vincent Kosterin]
-     */
 
-    public LoadAlbumView(LoadSongsController loadSongsController) {
-        //LoadAlbumViewModel loadAlbumViewModel = new LoadAlbumViewModel();
-        //loadAlbumViewModel.addPropertyChangeListener((PropertyChangeListener) this);
-
+    public LoadAlbumsView(LoadSongsController loadSongsController) {
         this.loadSongsController = loadSongsController;
 
         setContentPane(MainPanel);
         adjustUIComponents();
         setTitle("Swiftify - Albums");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(1080, 680);
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    static ActionListener loadSongsActionListener = new ActionListener() {
+    ActionListener loadSongsActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() instanceof JButton) {
@@ -69,6 +50,7 @@ public class LoadAlbumView extends JFrame {
 
                 LoadSongsInputData loadSongsInputData = new LoadSongsInputData(albumName);
                 loadSongsController.execute(loadSongsInputData);
+                LoadAlbumsView.this.setVisible(false);
             }
         }
 
@@ -86,19 +68,13 @@ public class LoadAlbumView extends JFrame {
 
     }
 
-    /**
-     * Method for loading album panels based on the provided LoadAlbumState.
-     *
-     * @param loadAlbumState The state containing information about the loaded albums.
-     * @author [Vincent Kosterin]
-     */
-    public void loadAlbumPanels(LoadAlbumState loadAlbumState) {
+    public void loadAlbumPanels(LoadAlbumsState loadAlbumState) {
         List<JPanel> panels = new ArrayList<JPanel>();
         int i = 1;
         for (Album album : loadAlbumState.getAlbums()) {
             JPanel panel = new ImagePanel(getAlbumCover(album.getName()));
             panel.setLayout(new BorderLayout());
-            panel.setBackground(new Color(99, 93, 133));
+            panel.setBackground(new Color(223, 225, 229));
             JButton button = new JButton(album.getName());
             button.addActionListener(loadSongsActionListener);
             panel.add(button, BorderLayout.SOUTH);
@@ -112,15 +88,8 @@ public class LoadAlbumView extends JFrame {
         }
     }
 
-    /**
-     * Method for loading album buttons based on the provided LoadAlbumState.
-     *
-     * @param loadAlbumState The state containing information about the loaded albums.
-     * @return List of JButton objects representing album buttons.
-     * @author [Vincent Kosterin]
-     */
-
-    public static List<JButton> loadAlbumButtons(LoadAlbumState loadAlbumState) {
+    /*
+    public List<JButton> loadAlbumButtons(LoadAlbumsState loadAlbumState) {
         List<JButton> buttons = new ArrayList<JButton>();
         for (Album album : loadAlbumState.getAlbums()) {
             JButton button = new JButton(album.getName());
@@ -130,7 +99,9 @@ public class LoadAlbumView extends JFrame {
         return buttons;
     }
 
-    private static String getAlbumCover(String albumName) {
+     */
+
+    public static String getAlbumCover(String albumName) {
         return switch (albumName) {
             case ("Speak Now (Deluxe Edition)") -> "swiftify-frontend/src/pngs/speak_now.png";
             case ("folklore") -> "swiftify-frontend/src/pngs/folklore.png";
@@ -148,25 +119,8 @@ public class LoadAlbumView extends JFrame {
     private void adjustUIComponents() {
         AlbumPanel1.setLayout(new GridLayout(5, 1));
         AlbumPanel2.setLayout(new GridLayout(5, 1));
-        PreviousSongButton = new SongPlaybackButton(null);
-        PreviousSongButton.setText("⏮");
-        PlayPauseButton = new SongPlaybackButton(null);
-        PlayPauseButton.setText("▶");
-        NextSongButton = new SongPlaybackButton(null);
-        NextSongButton.setText("⏭");
-        PreviousSongButton.setPreferredSize(new Dimension(50, 50));
-        PlayPauseButton.setPreferredSize(new Dimension(100, 50));
-        NextSongButton.setPreferredSize(new Dimension(50, 50));
-        ShuffleButton.setPreferredSize(new Dimension(50, 50));
-        ControlsPanel.add(PreviousSongButton, 0);
-        ControlsPanel.add(PlayPauseButton, 1);
-        ControlsPanel.add(NextSongButton, 2);
     }
 
-
-    /**
-     * ImagePanel is an inner class that represents a panel with a background image.
-     */
     static class ImagePanel extends JPanel {
         private Image backgroundImage;
 
@@ -175,13 +129,6 @@ public class LoadAlbumView extends JFrame {
             setPreferredSize(new Dimension(backgroundImage.getWidth(this), backgroundImage.getHeight(this)));
         }
 
-        /**
-         * Constructor for ImagePanel.
-         *
-         * @param imagePath The path to the image file for the background.
-         *
-         * @author [Vincent Kosterin]
-         */
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);

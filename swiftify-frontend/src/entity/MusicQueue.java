@@ -1,5 +1,7 @@
 package entity;
 
+import data_access.MusicLibrary;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -16,6 +18,7 @@ public class MusicQueue implements Iterable<Integer> {
     private final Random random;
     private boolean shuffled;
     private int discographyLength;
+    private String albumName;
 
     /**
      * Represents a node within the music queue.
@@ -38,13 +41,34 @@ public class MusicQueue implements Iterable<Integer> {
      * @param discographyLength The total length of the music discography.
      */
 
-    public MusicQueue(boolean shuffled, int discographyLength) {
+    public MusicQueue(boolean shuffled, int discographyLength, String albumName) {
         this.head = null;
         this.tail = null;
         this.current = null;
         this.random = new Random();
         this.shuffled = shuffled;
         this.discographyLength = discographyLength;
+        this.albumName = albumName;
+    }
+
+    /**
+     * Gets the albumName of the MusicQueue object.
+     *
+     * @return Return the String albumName of the given MusicQueue.
+     */
+
+    public String getAlbumName() {
+        return this.albumName;
+    }
+
+    /**
+     * Gets the discographyLength of the MusicQueue object.
+     *
+     * @return Return the int discographyLength of the given MusicQueue.
+     */
+
+    public int getDiscographyLength() {
+        return this.discographyLength;
     }
 
     /**
@@ -187,7 +211,7 @@ public class MusicQueue implements Iterable<Integer> {
         int nextSongId;
         do {
             nextSongId = random.nextInt(discographyLength);
-        } while (hasSongBeenPlayed(nextSongId));
+        } while (hasSongBeenPlayed(nextSongId) || !MusicLibrary.getInstance().getSongs().get(nextSongId).getAlbum().equals(this.albumName));
 
         return nextSongId;
     }
@@ -273,8 +297,13 @@ public class MusicQueue implements Iterable<Integer> {
         }
     }
 
+    public boolean shuffled() {
+        return shuffled;
+    }
+
+    /*
     public static void main(String[] args) {
-        MusicQueue musicQueue = new MusicQueue(true, 107);
+        MusicQueue musicQueue = new MusicQueue(true, 107, "");
 
         // Add some songs to the queue
         for (int i = 1; i <= 5; i++) {
@@ -358,4 +387,6 @@ public class MusicQueue implements Iterable<Integer> {
         musicQueue.previous();
         System.out.println(musicQueue.getCurrentID());
     }
+
+     */
 }

@@ -1,18 +1,7 @@
-/**
- * The {@code LoadSongsView} class is responsible for presenting the view
- * and managing the songs of designated albums. It extends to
- * {@link JFrame} handle view objects and such.
- * "Load Songs" use case.
- * Imports were added as they were missing
- * Room for improvement: The Back Button implementation
- * @author [Malaika]
- *
- */
-
 package view;
 
-import data_access.URLSongLoader;
-import entity.MusicPlayerFacade;
+import app.LoadAlbumsUseCaseFactory;
+import data_access.MusicPlayerFacade;
 import entity.Song;
 import entity.SongButton;
 import entity.AddToQueueButton;
@@ -20,38 +9,20 @@ import entity.SongPlaybackButton;
 import interface_adapter.SongPlaybackState;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.add_to_queue.AddToQueueController;
-import interface_adapter.add_to_queue.AddToQueuePresenter;
-import interface_adapter.add_to_queue.AddToQueueViewModel;
+import interface_adapter.load_albums.LoadAlbumsController;
 import interface_adapter.next_song.NextSongController;
-import interface_adapter.next_song.NextSongPresenter;
-import interface_adapter.next_song.NextSongViewModel;
 import interface_adapter.pause_song.PauseSongController;
-import interface_adapter.pause_song.PauseSongPresenter;
-import interface_adapter.pause_song.PauseSongViewModel;
 import interface_adapter.play_song.PlaySongController;
-import interface_adapter.play_song.PlaySongPresenter;
-import interface_adapter.play_song.PlaySongViewModel;
-
-import interface_adapter.prev_song.PrevSongController; //imported
-
 import interface_adapter.prev_song.PrevSongController;
-
-import interface_adapter.prev_song.PrevSongPresenter;
-import interface_adapter.prev_song.PrevSongViewModel;
 import interface_adapter.resume_song.ResumeSongController;
 import javazoom.jl.decoder.JavaLayerException;
-import use_case.next_song.NextSongInputBoundary;
+import use_case.load_albums.LoadAlbumsInputData;
 import use_case.next_song.NextSongInputData;
-import use_case.next_song.NextSongInteractor;
 import use_case.pause_song.PauseSongInputData;
 import use_case.play_song.PlaySongInputData;
-import use_case.prev_song.PrevSongInputBoundary;
 import use_case.prev_song.PrevSongInputData;
-import use_case.prev_song.PrevSongInteractor;
 import use_case.resume_song.ResumeSongInputData;
-import use_case.add_to_queue.AddToQueueInputBoundary;
 import use_case.add_to_queue.AddToQueueInputData;
-import use_case.add_to_queue.AddToQueueInteractor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -80,21 +51,41 @@ public class LoadSongsView extends JFrame {
     private PlaySongController playSongController;
     private PauseSongController pauseSongController;
     private ResumeSongController resumeSongController;
+    private NextSongController nextSongController;
+    private PrevSongController prevSongController;
+    private AddToQueueController addToQueueController;
+    private String albumName;
+    private ViewManagerModel viewManagerModel;
 
-    public LoadSongsView(String albumName, PlaySongController playSongController, PauseSongController pauseSongController, ResumeSongController resumeSongController) {
+    public LoadSongsView(String albumName,
+                         PlaySongController playSongController,
+                         PauseSongController pauseSongController,
+                         ResumeSongController resumeSongController,
+                         NextSongController nextSongController,
+                         PrevSongController prevSongController,
+                         AddToQueueController addToQueueController,
+                         ViewManagerModel viewManagerModel) {
+        this.albumName = albumName;
         this.playSongController = playSongController;
         this.pauseSongController = pauseSongController;
         this.resumeSongController = resumeSongController;
+        this.nextSongController = nextSongController;
+        this.prevSongController = prevSongController;
+        this.addToQueueController = addToQueueController;
+        this.viewManagerModel = viewManagerModel;
 
-        createUIComponents();
         setContentPane(LoadSongsViewPanel);
         adjustUIComponents();
         setTitle("Swiftify Album - " + albumName);
-        addWindowListener(BackButton2);
+        addWindowListener(ghettoBackButton);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(1080, 680);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public String getAlbumName() {
+        return this.albumName;
     }
 
     public static void main(String[] args) {
@@ -110,6 +101,23 @@ public class LoadSongsView extends JFrame {
         AddToQueuePanel.add(addToQueueButton);
     }
 
+    ActionListener backActionListener = new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (PlayPauseButton.getSongPlaybackState() != null) {
+                PlayPauseButton.getSongPlaybackState().getMusicPlayer().stop();
+            }
+            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
+            musicPlayer.removeInstance();
+
+            LoadAlbumsController loadAlbumController = LoadAlbumsUseCaseFactory.createLoadAlbumsController(LoadSongsView.this.viewManagerModel);
+            LoadAlbumsInputData loadAlbumsInputData = new LoadAlbumsInputData("Taylor Swift");
+            loadAlbumController.execute(loadAlbumsInputData);
+            LoadSongsView.this.setVisible(false);
+        }
+    };
+
     ActionListener playSongActionListener = new ActionListener() {
 
         @Override
@@ -117,10 +125,11 @@ public class LoadSongsView extends JFrame {
             if (PlayPauseButton.getSongPlaybackState() != null) {
                 PlayPauseButton.getSongPlaybackState().getMusicPlayer().stop();
             }
-            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
+            // BELOW IS SHADY
+            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
             int n = ((SongButton) e.getSource()).getSongId();
             musicPlayer.addToQueue(n-1);
-
+            //
             PlaySongInputData playSongInputData = new PlaySongInputData(((SongButton) e.getSource()).getSongId(), ((SongButton) e.getSource()).getSongName(), LoadSongsView.this);
             try {
                 playSongController.execute(playSongInputData);
@@ -169,15 +178,11 @@ public class LoadSongsView extends JFrame {
     ActionListener addToQueueActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            MusicPlayerFacade musicPlayerFacade = MusicPlayerFacade.getInstance();
+            MusicPlayerFacade musicPlayerFacade = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
             if (!musicPlayerFacade.getQueue().isNotEmpty()) {
                 musicPlayerFacade.addToQueue(-1);
             }
             AddToQueueInputData addToQueueInputData = new AddToQueueInputData(((AddToQueueButton) e.getSource()).getSongId() -1, LoadSongsView.this);
-            ViewManagerModel viewManagerModel = new ViewManagerModel();
-            new ViewManager(viewManagerModel);
-            AddToQueueInputBoundary addToQueueInputBoundary = new AddToQueueInteractor(new AddToQueuePresenter(new AddToQueueViewModel(), viewManagerModel));
-            AddToQueueController addToQueueController = new AddToQueueController(addToQueueInputBoundary);
             try {
                 addToQueueController.execute(addToQueueInputData);
             } catch (IOException ex) {
@@ -193,17 +198,13 @@ public class LoadSongsView extends JFrame {
     ActionListener nextSongActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
+            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
             Song nextSong = musicPlayer.getNextSong();
             if (nextSong != null) {
                 if (PlayPauseButton.getSongPlaybackState() != null) {
                     PlayPauseButton.getSongPlaybackState().getMusicPlayer().stop();
                 }
                 NextSongInputData nextSongInputData = new NextSongInputData(nextSong, LoadSongsView.this);
-                ViewManagerModel viewManagerModel = new ViewManagerModel();
-                new ViewManager(viewManagerModel);
-                NextSongInputBoundary nextSongInputBoundary = new NextSongInteractor(new URLSongLoader(), new NextSongPresenter(new NextSongViewModel(), viewManagerModel));
-                NextSongController nextSongController = new NextSongController(nextSongInputBoundary);
                 try {
                     nextSongController.execute(nextSongInputData);
                 } catch (IOException ex) {
@@ -221,17 +222,13 @@ public class LoadSongsView extends JFrame {
     ActionListener prevSongActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
+            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
             Song prevSong = musicPlayer.getPrevSong();
             if (prevSong != null) {
                 if (PlayPauseButton.getSongPlaybackState() != null) {
                     PlayPauseButton.getSongPlaybackState().getMusicPlayer().stop();
                 }
                 PrevSongInputData prevSongInputData = new PrevSongInputData(prevSong, LoadSongsView.this);
-                ViewManagerModel viewManagerModel = new ViewManagerModel();
-                new ViewManager(viewManagerModel);
-                PrevSongInputBoundary prevSongInputBoundary = new PrevSongInteractor(new URLSongLoader(), new PrevSongPresenter(new PrevSongViewModel(), viewManagerModel));
-                PrevSongController prevSongController = new PrevSongController(prevSongInputBoundary);
                 try {
                     prevSongController.execute(prevSongInputData);
                 } catch (IOException ex) {
@@ -249,18 +246,26 @@ public class LoadSongsView extends JFrame {
     ActionListener shuffleActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance();
+            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
+            if (musicPlayer.getQueue().shuffled()) {
+                ShuffleButton.setText("˙ᵕ˙");
+            }
+            else {
+                ShuffleButton.setText("◡̈");
+            }
             musicPlayer.toggleShuffle();
         }
     };
 
-    WindowListener BackButton2 = new WindowAdapter() {
+    WindowListener ghettoBackButton = new WindowAdapter() {
 
         @Override
         public void windowClosing(WindowEvent e) {
             if (PlayPauseButton.getSongPlaybackState() != null) {
                 PlayPauseButton.getSongPlaybackState().getMusicPlayer().stop();
             }
+            MusicPlayerFacade musicPlayer = MusicPlayerFacade.getInstance(LoadSongsView.this.getAlbumName());
+            musicPlayer.removeInstance();
         }
     };
 
@@ -291,11 +296,11 @@ public class LoadSongsView extends JFrame {
         SongListPanel.add(SongPanel, BorderLayout.WEST);
         SongListPanel.add(AddToQueuePanel, BorderLayout.EAST);
         PreviousSongButton = new SongPlaybackButton(null);
-        PreviousSongButton.setText("⏮"); // previous button
+        PreviousSongButton.setText("⏮");
         PlayPauseButton = new SongPlaybackButton(null);
-        PlayPauseButton.setText("▶"); //play button
+        PlayPauseButton.setText("▶");
         NextSongButton = new SongPlaybackButton(null);
-        NextSongButton.setText("⏭"); // next button
+        NextSongButton.setText("⏭");
         PlayPauseButton.addActionListener(pauseOrResumeSongActionListener);
         PreviousSongButton.setPreferredSize(new Dimension(50, 50));
         PlayPauseButton.setPreferredSize(new Dimension(100, 50));
@@ -307,11 +312,7 @@ public class LoadSongsView extends JFrame {
         ControlsPanel.add(PreviousSongButton, 0);
         ControlsPanel.add(PlayPauseButton, 1);
         ControlsPanel.add(NextSongButton, 2);
-    }
-
-    private void createUIComponents() {
-        CoverPanel = new LoadAlbumView.ImagePanel("swiftify-frontend/src/pngs/taylor_swift.png");
-        setContentPane(CoverPanel);
-        // The main panel which changes depending on artist, still to be implemented
+        BackButton.addActionListener(backActionListener);
+        CoverPanel.add(new LoadAlbumsView.ImagePanel(LoadAlbumsView.getAlbumCover(this.albumName)));
     }
 }

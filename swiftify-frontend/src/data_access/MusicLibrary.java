@@ -1,4 +1,7 @@
-package entity;
+package data_access;
+
+import entity.Album;
+import entity.Song;
 
 import java.util.List;
 
@@ -32,6 +35,7 @@ public class MusicLibrary {
 
     public int getLength() {return songs.size();}
 
+    /*
     public static void main(String[] args) {
         MusicLibrary library = MusicLibrary.getInstance();
         List<Song> songs = library.getSongs();
@@ -48,4 +52,6 @@ public class MusicLibrary {
             }
         }
     }
+
+     */
 }
