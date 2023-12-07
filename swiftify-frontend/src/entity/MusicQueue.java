@@ -52,6 +52,26 @@ public class MusicQueue implements Iterable<Integer> {
     }
 
     /**
+     * Gets the albumName of the MusicQueue object.
+     *
+     * @return Return the String albumName of the given MusicQueue.
+     */
+
+    public String getAlbumName() {
+        return this.albumName;
+    }
+
+    /**
+     * Gets the discographyLength of the MusicQueue object.
+     *
+     * @return Return the int discographyLength of the given MusicQueue.
+     */
+
+    public int getDiscographyLength() {
+        return this.discographyLength;
+    }
+
+    /**
      * Gets the ID of the currently playing song.
      *
      * @return The ID of the currently playing song, or -1 if no song is playing.

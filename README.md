@@ -1,5 +1,9 @@
 # CSC207 Group 113
 
+This project is organized as a monorepo. The folder "swiftify-frontend" contains the application itself, whereas "swiftify-backend" contains all miscellaneous code (such as the AWS Lambda functions) and is included for completeness. Both are separate Maven applications with their own dependencies.
+
+The application is started by running Main.java inside "swiftify-frontend".
+
 ## 0. Problem Domain
 
 After the brainstorming session in our tutorial, our team has tentatively decided to create a **music player**. 
