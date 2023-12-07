@@ -13,7 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Represents the view for loading albums in the Swiftify application.
+ */
 public class LoadAlbumsView extends JFrame {
 
     private LoadAlbumsViewModel loadAlbumViewModel;
@@ -27,6 +29,11 @@ public class LoadAlbumsView extends JFrame {
     private SongPlaybackButton NextSongButton;
 
     private static LoadSongsController loadSongsController;
+    /**
+     * Constructs a new LoadAlbumsView with the specified LoadSongsController.
+     *
+     * @param loadSongsController The controller responsible for loading songs.
+     */
 
 
     public LoadAlbumsView(LoadSongsController loadSongsController) {
@@ -40,6 +47,9 @@ public class LoadAlbumsView extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+    /**
+     * ActionListener for handling album loading when a button is clicked.
+     */
 
     ActionListener loadSongsActionListener = new ActionListener() {
         @Override
@@ -67,6 +77,11 @@ public class LoadAlbumsView extends JFrame {
     public static void main(String[] args) {
 
     }
+    /**
+     * Loads album panels based on the provided LoadAlbumsState.
+     *
+     * @param loadAlbumState The state containing information about loaded albums.
+     */
 
     public void loadAlbumPanels(LoadAlbumsState loadAlbumState) {
         List<JPanel> panels = new ArrayList<JPanel>();
@@ -100,6 +115,12 @@ public class LoadAlbumsView extends JFrame {
     }
 
      */
+    /**
+     * Retrieves the album cover image path based on the album name.
+     *
+     * @param albumName The name of the album.
+     * @return The path to the album cover image.
+     */
 
     public static String getAlbumCover(String albumName) {
         return switch (albumName) {
@@ -120,6 +141,9 @@ public class LoadAlbumsView extends JFrame {
         AlbumPanel1.setLayout(new GridLayout(5, 1));
         AlbumPanel2.setLayout(new GridLayout(5, 1));
     }
+    /**
+     * Represents a JPanel with a background image.
+     */
 
     static class ImagePanel extends JPanel {
         private Image backgroundImage;
