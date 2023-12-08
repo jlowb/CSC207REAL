@@ -180,6 +180,7 @@ public class PlayerState {
      * Checks if audio is currently playing.
      *
      * @return True if audio is playing, false otherwise.
+     *
      */
 
     public boolean isPlaying() {
@@ -218,5 +219,6 @@ public class PlayerState {
     }
 
      */
+
 }
 
